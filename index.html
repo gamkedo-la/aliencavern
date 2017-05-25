@@ -176,12 +176,12 @@ var brickGrid =
     ridgeRockRightPic.onload = function () {
         shipPicLoaded = true;
     }
-    shipPic.src = "ship.png";
-    wallRockLeftPic.src = "wallRockLeft";
-    wallRockRightPic.src = "wallRockRight.png";
-    ridgeRockMiddlePic.src = "ridgeRockMiddle.png";
-    ridgeRockLeftPic.src = "ridgeRockLeft.png";
-    ridgeRockRightPic.src = "ridgeRockRight.png";
+    shipPic.src = "./ship.png";
+    wallRockLeftPic.src = "./wallRockLeft.png";
+    wallRockRightPic.src = "./wallRockRight.png";
+    ridgeRockMiddlePic.src = "./ridgeRockMiddle.png";
+    ridgeRockLeftPic.src = "./ridgeRockLeft.png";
+    ridgeRockRightPic.src = "./ridgeRockRight.png";
     
       
     initInput();
@@ -202,7 +202,6 @@ var brickGrid =
     } else {
       jumperSpeedX *= AIR_RESISTANCE;
       jumperSpeedY += GRAVITY;
-      console.log(jumperSpeedY);
       if(jumperSpeedY > JUMPER_RADIUS) { // cheap test to ensure can't fall through floor
         jumperSpeedY = JUMPER_RADIUS;
       }
