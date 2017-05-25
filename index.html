@@ -34,13 +34,20 @@
   const JUMP_POWER = 1.0;  
   const GRAVITY = 0.02;
 
- // var jumperX = 75, jumperY = 75;
   var jumperX = 75, jumperY = 75;
-
   var jumperSpeedX = 0, jumperSpeedY = 0;
   var jumperOnGround = false;
   var JUMPER_RADIUS = 10;
-  
+    
+  var shipPic = document.createElement("img");
+  var wallRockLeftPic = document.createElement("img");
+  var wallRockRightPic = document.createElement("img");
+  var ridgeRockMiddlePic = document.createElement("img");
+  var ridgeRockLeftPic = document.createElement("img");
+  var ridgeRockRightPic = document.createElement("img");
+    
+  var shipPicLoaded = false;
+    
   function initInput() {
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", keyReleased);
@@ -166,6 +173,17 @@ var brickGrid =
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     
+    ridgeRockRightPic.onload = function () {
+        shipPicLoaded = true;
+    }
+    shipPic.src = "ship.png";
+    wallRockLeftPic.src = "wallRockLeft";
+    wallRockRightPic.src = "wallRockRight.png";
+    ridgeRockMiddlePic.src = "ridgeRockMiddle.png";
+    ridgeRockLeftPic.src = "ridgeRockLeft.png";
+    ridgeRockRightPic.src = "ridgeRockRight.png";
+    
+      
     initInput();
     
     // these next few lines set up our game logic and render to happen 30 times per second
@@ -300,19 +318,6 @@ var brickGrid =
     canvasContext.fill();
   }
   
-  function drawBricks() {
-    for(var eachCol=0; eachCol<BRICK_COLS; eachCol++) { // in each column...
-      for(var eachRow=0; eachRow<BRICK_ROWS; eachRow++) { // in each row within that col
-      
-        if( isBrickAtTileCoord(eachCol, eachRow) ) {
-          var brickLeftEdgeX = eachCol * BRICK_W;
-          var brickTopEdgeY = eachRow * BRICK_H;
-          colorRect(brickLeftEdgeX, brickTopEdgeY,
-                   BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'blue' );
-        } // end of isBrickAtTileCoord()
-      } // end of for eachRow
-    } // end of for eachCol
-  } // end of drawBricks()
 
   function drawOnlyBricksOnScreen() {
     // what are the top-left most col and row visible on canvas?
@@ -335,8 +340,9 @@ var brickGrid =
         if( isBrickAtTileCoord(eachCol, eachRow) ) {
           var brickLeftEdgeX = eachCol * BRICK_W;
           var brickTopEdgeY = eachRow * BRICK_H;
-          colorRect(brickLeftEdgeX, brickTopEdgeY,
-                   BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'brown' );
+          canvasContext.drawImage(wallRockLeftPic,brickLeftEdgeX,brickTopEdgeY);
+//            colorRect(brickLeftEdgeX, brickTopEdgeY,
+//                   BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'brown' );
         } // end of isBrickAtTileCoord()
       } // end of for eachRow
     } // end of for eachCol
@@ -357,7 +363,10 @@ var brickGrid =
     //drawBricks();
     drawOnlyBricksOnScreen();
     
-    colorCircle(jumperX, jumperY, 10, 'yellow');
+    if (shipPicLoaded){
+        canvasContext.drawImage(shipPic, jumperX - shipPic.width, jumperY - shipPic.height);
+    }
+    //colorCircle(jumperX, jumperY, 10, 'yellow');
 
     canvasContext.restore(); // undoes the .translate() used for cam scroll
 
