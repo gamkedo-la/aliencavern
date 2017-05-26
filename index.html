@@ -191,11 +191,15 @@ var brickGrid =
     setInterval(function() {
         moveEverything();
         drawEverything();
+        //debug();
       }, 1000/framesPerSecond);
     jumperReset();
   }
   
-    
+  function debug() {
+    //console.log("jumperSpeedX = " + jumperSpeedX);
+  }
+
   function jumperMove() {
    if(jumperOnGround) {
       jumperSpeedX *= GROUND_FRICTION;
