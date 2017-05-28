@@ -23,18 +23,7 @@ function updateAll() {
     drawAll();
 //
 }
-//
-//function clearScreen(){
-//    colorRect(0,0, canvas.width,canvas.height, 'gray'); // clear screen
-//}
-//
-//function drawAll() {
-//	// clearScreen();
-//	drawTracks();
-//    blueCar.draw();
-//    greenCar.draw();
-//    // drawCar();
-//}
+
 
 function drawAll() {
     // drawing black to erase previous frame, doing before .translate() since

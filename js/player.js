@@ -57,8 +57,8 @@ function playerMove() {
     playerY += playerSpeedY; // same as above, but for vertical
     
     // clamp max velocity
-    if (playerSpeedY > 2.5){
-        playerSpeedY = 2.5;
+    if (playerSpeedY > 2.0){
+        playerSpeedY = 2.0;
     }
   }
 
