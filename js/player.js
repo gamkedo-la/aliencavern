@@ -1,13 +1,19 @@
 const GROUND_FRICTION = 0.01;
 const AIR_RESISTANCE = 1;
-const RUN_SPEED = 2.0; // org 4.0
-const JUMP_POWER = 1.0;  
 const GRAVITY = 0.08;
+const RUN_SPEED = 2.0; // org 4.0
+const JUMP_POWER = 4.0;
+const JETPACK_UPTHRUST = 0.10;
+const JETPACK_CONSUMPTION = 0.05;
+const JETPACK_BASE_REGEN = 0.025;
+const JETPACK_MAX_FUEL = 10;
 
 var playerX = 75, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
 var player_RADIUS = 8;
+
+var jetpackFuel = JETPACK_MAX_FUEL;
 
 
 function playerReset() {
@@ -15,9 +21,36 @@ function playerReset() {
     playerY = 20;
 }
 
+function groundPlayer() {
+
+    playerOnGround = true;
+    jumping = false;
+    usingJetpack = false;
+
+}
+
+function checkFuel() { //Is there enough fuel for this frame? Felt like making this a full function... :P
+    var fuelCheck = jetpackFuel - JETPACK_CONSUMPTION;
+    if (fuelCheck <= 0) {
+        jetpackFuel = 0;
+        return false
+    }
+    else {
+        return true;
+    }
+}
+
+function fuelRegen(regenAmount) { //made it a function for eventual regen power-ups
+    jetpackFuel += regenAmount;
+    if (jetpackFuel > JETPACK_MAX_FUEL){ //clamp max fuel
+        jetpackFuel = JETPACK_MAX_FUEL;
+    }
+}
+
 function playerMove() {
    if(playerOnGround) {
-      playerSpeedX *= GROUND_FRICTION;
+       playerSpeedX *= GROUND_FRICTION;
+       fuelRegen(JETPACK_BASE_REGEN); //taken straight from Super Smash's R.O.B ;) feel free to change for a perma-regen
     } else {
       playerSpeedX *= AIR_RESISTANCE;
       playerSpeedY += GRAVITY;
@@ -40,7 +73,7 @@ function playerMove() {
     
     if(playerSpeedY > 0 && isBrickAtPixelCoord(playerX, playerY + player_RADIUS) > 0) {
       playerY = (1+Math.floor( playerY / BRICK_H )) * BRICK_H - player_RADIUS;
-      playerOnGround = true;
+      groundPlayer();
       playerSpeedY = 0;
     } else if(isBrickAtPixelCoord(playerX,playerY+player_RADIUS+2) == 0) {
       playerOnGround = false;
@@ -53,12 +86,23 @@ function playerMove() {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
     }
     
-    playerX += playerSpeedX; // move the player based on its current horizontal speed 
-    playerY += playerSpeedY; // same as above, but for vertical
-    
+    playerX += playerSpeedX; // move the player based on its current horizontal speed
+
+    //Handle variations regarding Y speed
+    if (jumping) {
+        playerSpeedY -= JUMP_POWER;
+        jumping = false;
+        playerOnGround = false;
+    }
+    else if (usingJetpack && checkFuel()) {
+        playerSpeedY -= JETPACK_UPTHRUST;
+        jetpackFuel -= JETPACK_CONSUMPTION; //floating point numbers shouldn't be an issue here
+    }
     // clamp max velocity
     if (playerSpeedY > 2.0){
         playerSpeedY = 2.0;
     }
-  }
+    playerY += playerSpeedY;
+    //console.log(jetpackFuel);
+}
 

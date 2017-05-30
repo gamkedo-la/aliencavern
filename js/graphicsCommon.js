@@ -1,3 +1,4 @@
+
 function drawBitmapWithRotation(useBitmap, atX, atY, withAng) {
     
     canvasContext.save();

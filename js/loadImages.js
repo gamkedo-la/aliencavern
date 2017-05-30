@@ -13,8 +13,6 @@
     var ridgeRockLeftPic = document.createElement("img");
     var ridgeRockRightPic = document.createElement("img");
 
-    var picsToLoad = 0; // set with imageList
-
     function countLoadedImagesAndLaunchIfReady(){
         picsToLoad-- ;
         console.log(picsToLoad);
