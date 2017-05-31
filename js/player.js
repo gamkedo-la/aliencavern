@@ -79,7 +79,7 @@ function playerMove() {
       playerOnGround = false;
     }
     
-    if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS, playerY) > 0) {
+    if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS - BRICK_W, playerY) > 0) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
     }
     if(playerSpeedX > 0 && isBrickAtPixelCoord(playerX+player_RADIUS, playerY) > 0) {
