@@ -27,6 +27,8 @@ function groundPlayer() {
     jumping = false;
     usingJetpack = false;
 
+    Sound.play("ground");
+
 }
 
 function checkFuel() { //Is there enough fuel for this frame? Felt like making this a full function... :P
@@ -98,6 +100,9 @@ function playerMove() {
     else if (usingJetpack && checkFuel()) {
         playerSpeedY -= JETPACK_UPTHRUST;
         jetpackFuel -= JETPACK_CONSUMPTION; //floating point numbers shouldn't be an issue here
+
+        if (!Sound.isPlaying("thrust")) Sound.play("thrust"); // FIXME: should be looped and we change the volume
+
     }
     // clamp max velocity
     if (playerSpeedY > 2.0){
