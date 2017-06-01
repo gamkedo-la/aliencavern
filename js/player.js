@@ -50,6 +50,7 @@ function fuelRegen(regenAmount) { //made it a function for eventual regen power-
 function playerMove() {
    if(playerOnGround) {
        playerSpeedX *= GROUND_FRICTION;
+       console.log(playerSpeedX);
        fuelRegen(JETPACK_BASE_REGEN); //taken straight from Super Smash's R.O.B ;) feel free to change for a perma-regen
     } else {
       playerSpeedX *= AIR_RESISTANCE;
