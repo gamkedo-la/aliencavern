@@ -101,8 +101,11 @@ function playerMove() {
         playerSpeedY -= JETPACK_UPTHRUST;
         jetpackFuel -= JETPACK_CONSUMPTION; //floating point numbers shouldn't be an issue here
 
-        if (!Sound.isPlaying("thrust")) Sound.play("thrust"); // FIXME: should be looped and we change the volume
+        if (!Sound.isPlaying("thrust")) Sound.play("thrust", true, 0.4); // FIXME: should be looped and we change the volume
 
+    }
+    if(!usingJetpack) {
+         if (Sound.isPlaying("thrust")) Sound.stop("thrust")
     }
     // clamp max velocity
     if (playerSpeedY > 2.0){
