@@ -1,0 +1,1 @@
+const FPS = 30;
