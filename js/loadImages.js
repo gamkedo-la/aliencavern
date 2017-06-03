@@ -7,6 +7,7 @@
   var alienPlantPic = document.createElement("img");
   var crewPic = document.createElement("img");
   var shipPartPic = document.createElement("img");
+  var cavernTileSheet = document.createElement("img");
 
     var cavernPics = []; // loading all pics in to an array
 
@@ -43,6 +44,7 @@
             {varName: alienPlantPic, theFile: "./graphics/alienPlant.png"},
             {varName: crewPic, theFile: "./graphics/crew1.png"},
             {varName: shipPartPic, theFile: "./graphics/shipPart1.png"},
+            {varName: cavernTileSheet,theFile: "./graphics/alien-cavern-tile-sheet.png"},
             {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock.png"},
             {cavernType: WALL_ROCK_R, theFile: "./graphics/wallRockRight.png"},
             {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
