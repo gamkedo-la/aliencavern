@@ -13,6 +13,12 @@ window.onload = function() {
 function startGame(){
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
+
+    loadGameObjects(aliens, alienPic ,ALIEN);
+    loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
+    loadGameObjects(crew, crewPic, CREW);
+    loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+
     initInput();
     playerReset();    
 }
@@ -42,8 +48,13 @@ function drawAll() {
     //     canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
     // }
     //colorCircle(playerX, playerY, 10, 'yellow');
+    drawGameObjects(aliens);
+    drawGameObjects(alienPlants);
+    drawGameObjects(crew);
     canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
+    console.log(playerX + " x y " + playerY);
+    
     canvasContext.restore(); // undoes the .translate() used for cam scroll
 
     // doing this after .restore() so it won't scroll with the camera pan

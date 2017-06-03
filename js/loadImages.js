@@ -3,7 +3,10 @@
     
   var picsToLoad = 0; // set with imageList
   var shipPic = document.createElement("img");
-    //var car2Pic = document.createElement("img");
+  var alienPic = document.createElement("img");
+  var alienPlantPic = document.createElement("img");
+  var crewPic = document.createElement("img");
+  var shipPartPic = document.createElement("img");
 
     var cavernPics = []; // loading all pics in to an array
 
@@ -36,16 +39,20 @@
 
         var imageList = [
             {varName: shipPic, theFile: "./graphics/ship.png"},
+            {varName: alienPic, theFile: "./graphics/alien1.png"},
+            {varName: alienPlantPic, theFile: "./graphics/alienPlant.png"},
+            {varName: crewPic, theFile: "./graphics/crew1.png"},
+            {varName: shipPartPic, theFile: "./graphics/shipPart1.png"},
             {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock.png"},
             {cavernType: WALL_ROCK_R, theFile: "./graphics/wallRockRight.png"},
             {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
             {cavernType: RIDGE_ROCK_R, theFile: "./graphics/ridgeRockRight.png"},
             {cavernType: RIDGE_ROCK_L, theFile: "./graphics/ridgeRockLeft.png"},
             {cavernType: WALL_ROCK_L, theFile: "./graphics/wallRockLeft.png"},
-            {cavernType: ALIEN, theFile: "./graphics/alien1.png"},
-            {cavernType: ALIEN_PLANT, theFile: "./graphics/alienPlant.png"},
-            {cavernType: CREW, theFile: "./graphics/crew1.png"},
-            {cavernType: SHIP_PART, theFile: "./graphics/shipPart1.png"}
+ //           {cavernType: ALIEN, theFile: "./graphics/alien1.png"},
+ //           {cavernType: ALIEN_PLANT, theFile: "./graphics/alienPlant.png"},
+ //           {cavernType: CREW, theFile: "./graphics/crew1.png"},
+ //           {cavernType: SHIP_PART, theFile: "./graphics/shipPart1.png"}
             ];
         
         picsToLoad = imageList.length;

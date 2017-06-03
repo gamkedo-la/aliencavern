@@ -11,7 +11,7 @@ const JETPACK_MAX_FUEL = 10;
 var playerX = 75, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
-var player_RADIUS = 8;
+var player_RADIUS = 11;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
@@ -52,7 +52,7 @@ function fuelRegen(regenAmount) { //made it a function for eventual regen power-
 function playerMove() {
    if(playerOnGround) {
        playerSpeedX *= GROUND_FRICTION;
-       console.log(playerSpeedX);
+    //    console.log(playerSpeedX);
        fuelRegen(JETPACK_BASE_REGEN); //taken straight from Super Smash's R.O.B ;) feel free to change for a perma-regen
     } else {
       playerSpeedX *= AIR_RESISTANCE;
@@ -105,7 +105,7 @@ function playerMove() {
 
     }
     if(!usingJetpack) {
-         if (Sound.isPlaying("thrust")) Sound.stop("thrust")
+         if (Sound.isPlaying("thrust")) Sound.stop("thrust");
     }
     // clamp max velocity
     if (playerSpeedY > 2.0){
