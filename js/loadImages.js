@@ -48,11 +48,7 @@
             {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
             {cavernType: RIDGE_ROCK_R, theFile: "./graphics/ridgeRockRight.png"},
             {cavernType: RIDGE_ROCK_L, theFile: "./graphics/ridgeRockLeft.png"},
-            {cavernType: WALL_ROCK_L, theFile: "./graphics/wallRockLeft.png"},
- //           {cavernType: ALIEN, theFile: "./graphics/alien1.png"},
- //           {cavernType: ALIEN_PLANT, theFile: "./graphics/alienPlant.png"},
- //           {cavernType: CREW, theFile: "./graphics/crew1.png"},
- //           {cavernType: SHIP_PART, theFile: "./graphics/shipPart1.png"}
+            {cavernType: WALL_ROCK_L, theFile: "./graphics/wallRockLeft.png"}
             ];
         
         picsToLoad = imageList.length;

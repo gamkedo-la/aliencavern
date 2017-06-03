@@ -1,7 +1,7 @@
 const GROUND_FRICTION = 0.01;
 const AIR_RESISTANCE = 1;
 const GRAVITY = 0.08;
-const RUN_SPEED = 2.0; // org 4.0
+const RUN_SPEED = 4.0; // org 4.0
 const JUMP_POWER = 4.0;
 const JETPACK_UPTHRUST = 0.10;
 const JETPACK_CONSUMPTION = 0.05;
@@ -11,7 +11,7 @@ const JETPACK_MAX_FUEL = 10;
 var playerX = 75, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
-var player_RADIUS = 11;
+var player_RADIUS = 10;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
@@ -69,6 +69,9 @@ function playerMove() {
       playerSpeedX = RUN_SPEED;
     }
     
+    // testing collision detection
+    checkEveryCollision (crew);
+
     if(playerSpeedY < 0 && isBrickAtPixelCoord(playerX,playerY - player_RADIUS) > 0) {
       playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS;
       playerSpeedY = 0.0;
