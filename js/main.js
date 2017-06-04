@@ -68,5 +68,6 @@ function drawAll() {
     //canvasContext.fillText("Arrow keys to slide, scrolling demo",8,14);
 
     draw_particles(camPanX,camPanY);
+    //debug shootProjectile(200, 30, canvas.width / 2, canvas.height / 2, 20, 2, 5, 100);
 
 }
