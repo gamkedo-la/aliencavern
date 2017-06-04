@@ -31,12 +31,8 @@ function updateAll() {
     }
 
     if(editorScreen) {
-        drawEditor();
+        drawLevelEditor();
     }
-}
-
-function drawEditor() {
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
 }
 
 

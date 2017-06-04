@@ -39,6 +39,7 @@ function setKeyHoldState(thisKey, setTo) {
     }
   } 
   if(thisKey === F1) {
+    window.location.reload() // Find better way to reset game after exit from editor
     gameScreen = true;
     editorScreen = false;
   }
