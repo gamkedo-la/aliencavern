@@ -65,6 +65,7 @@ function checkEveryCollision(objectArray){
         if(checkCollision(element)){
             element.alive = false;
             console.log("picked up crew");
+            Sound.play("rescue", false, 0.5);
         }
     });
 }
