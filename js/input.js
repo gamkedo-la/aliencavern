@@ -45,6 +45,7 @@ function setKeyHoldState(thisKey, setTo) {
   }
 
   if(thisKey === F2) {
+    levelEditorInitialization();
     gameScreen = false;
     editorScreen = true;
   }
