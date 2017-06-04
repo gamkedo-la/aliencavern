@@ -1,4 +1,5 @@
 var canvas, canvasContext;
+var framesPerSecond = 30;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -11,7 +12,6 @@ window.onload = function() {
 }
 
 function startGame(){
-	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 
     loadGameObjects(aliens, alienPic ,ALIEN);
@@ -24,10 +24,19 @@ function startGame(){
 }
 
 function updateAll() {
-    playerMove();
-    cameraFollow();
-    drawAll();
-//
+    if(gameScreen) {
+        playerMove();
+        cameraFollow();
+        drawAll();
+    }
+
+    if(editorScreen) {
+        drawEditor();
+    }
+}
+
+function drawEditor() {
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
 }
 
 
