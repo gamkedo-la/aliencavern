@@ -35,7 +35,7 @@ function loadGameObjects(objectArray, objectPic, gameObjectType){
 function drawGameObjects(gameObject){
     this.gameObject = gameObject;
     this.gameObject.forEach(function(element) {
-        if (element.alive){
+        if (element && element.alive){
             canvasContext.drawImage(element.pic, element.x, element.y);
         }
     });
