@@ -1,3 +1,5 @@
+var USE_PARALLAX_BACKGROUND = true;
+
 function brickTileToIndex(tileCol, tileRow) {
   return (tileCol + BRICK_COLS*tileRow);
 }
@@ -26,6 +28,10 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
 }
 
 function drawOnlyCavernOnScreen() {
+    
+    if (USE_PARALLAX_BACKGROUND)
+      drawParallaxBackground();
+    
     // what are the top-left most col and row visible on canvas?
     var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
     var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
@@ -48,7 +54,8 @@ function drawOnlyCavernOnScreen() {
           }
           else
           {
-            canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
+            if (!USE_PARALLAX_BACKGROUND)
+              canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
           }
 //          canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
 
@@ -56,3 +63,16 @@ function drawOnlyCavernOnScreen() {
       } // end of for eachRow
     } // end of for eachCol
   } // end of drawBricks()
+
+function drawParallaxBackground() {
+  var parallax_ratio = 0.5; // half speed
+  var offsetX = Math.round(camPanX * parallax_ratio) % BRICK_H; // one tile worth only, then modulo loops 
+  var offsetY = Math.round(camPanY * parallax_ratio) % BRICK_W;
+  var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W);
+  var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H) + 2;
+  for (var tileX=0; tileX<colsThatFitOnScreen; tileX++) {
+    for (var tileY=0; tileY<rowsThatFitOnScreen; tileY++) {
+      canvasContext.drawImage(cavernPics[BKGND_ROCK], camPanX+(tileX*BRICK_W)-offsetX, camPanY+(tileY*BRICK_H)-offsetY);
+    }
+  }
+}  
