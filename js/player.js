@@ -11,7 +11,7 @@ const JETPACK_MAX_FUEL = 10;
 var playerX = 75, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
-var player_RADIUS = 10;
+var player_RADIUS = 5;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 

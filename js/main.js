@@ -18,7 +18,7 @@ function startGame(){
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
-
+    Sound.play("cavernambient", true, 0.4);
     initInput();
     playerReset();    
 }
@@ -51,6 +51,7 @@ function drawAll() {
     drawGameObjects(aliens);
     drawGameObjects(alienPlants);
     drawGameObjects(crew);
+    drawGameObjects(shipParts);
     canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
     canvasContext.restore(); // undoes the .translate() used for cam scroll

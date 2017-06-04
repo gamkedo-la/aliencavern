@@ -45,12 +45,12 @@
             {varName: crewPic, theFile: "./graphics/crew1.png"},
             {varName: shipPartPic, theFile: "./graphics/shipPart1.png"},
             {varName: cavernTileSheet,theFile: "./graphics/alien-cavern-tile-sheet.png"},
-            {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock.png"},
-            {cavernType: WALL_ROCK_R, theFile: "./graphics/wallRockRight.png"},
-            {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
-            {cavernType: RIDGE_ROCK_R, theFile: "./graphics/ridgeRockRight.png"},
-            {cavernType: RIDGE_ROCK_L, theFile: "./graphics/ridgeRockLeft.png"},
-            {cavernType: WALL_ROCK_L, theFile: "./graphics/wallRockLeft.png"}
+            {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock.png"}
+            // {cavernType: WALL_ROCK_R, theFile: "./graphics/wallRockRight.png"},
+            // {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
+            // {cavernType: RIDGE_ROCK_R, theFile: "./graphics/ridgeRockRight.png"},
+            // {cavernType: RIDGE_ROCK_L, theFile: "./graphics/ridgeRockLeft.png"},
+            // {cavernType: WALL_ROCK_L, theFile: "./graphics/wallRockLeft.png"}
             ];
         
         picsToLoad = imageList.length;

@@ -36,17 +36,23 @@ function drawOnlyCavernOnScreen() {
     // the +1 and + 2 on each pushes the new tile popping in off visible area
     // +2 for columns since BRICK_W doesn't divide evenly into canvas.width
     var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 1;
-    var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen ; // -> removed becuase of exception +1 FIXME: need to show bottom row
+    var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 2 ; 
     for(var eachCol=cameraLeftMostCol; eachCol<cameraRightMostCol; eachCol++) {
       for(var eachRow=cameraTopMostRow; eachRow<cameraBottomMostRow; eachRow++) {                   
           var brickLeftEdgeX = eachCol * BRICK_W;
           var brickTopEdgeY = eachRow * BRICK_H;
           var tileKindHere = cavernGrid[brickTileToIndex(eachCol, eachRow)];
           var useImg = cavernPics[tileKindHere];
-          if (useImg == undefined){
-            console.log ("problems at row " + cameraBottomMostRow);
+          if (tileKindHere != BKGND_ROCK){          
+            canvasContext.drawImage(cavernTileSheet, (tileKindHere -1) * BRICK_W, 0, BRICK_W, BRICK_H, brickLeftEdgeX, brickTopEdgeY, BRICK_W, BRICK_H);
           }
-          canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
+          else
+          {
+            canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
+          }
+//          canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
+
+// MDN        void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       } // end of for eachRow
     } // end of for eachCol
   } // end of drawBricks()
