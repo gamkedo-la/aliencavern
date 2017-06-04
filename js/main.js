@@ -43,7 +43,6 @@ function drawEditor() {
 function drawAll() {
     // drawing black to erase previous frame, doing before .translate() since
     // its coordinates are not supposed to scroll when the camera view does
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
     canvasContext.save(); // needed to undo this .translate() used for scroll
     // this next line is like subtracting camPanX and camPanY from every
     // canvasContext draw operation up until we call canvasContext.restore
