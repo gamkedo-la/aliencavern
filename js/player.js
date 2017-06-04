@@ -30,7 +30,10 @@ function groundPlayer() {
     Sound.play("ground");
 
     // spawn a spritesheet particle - work in progress!
-    party(playerX-32,playerY-64); // TODO define different types of particles like dust cloud
+    party(playerX-32,playerY-64); // TODO define different types of particles
+
+    // rattle the screen a little
+    screenshake(10);
 
 }
 

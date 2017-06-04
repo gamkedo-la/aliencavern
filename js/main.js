@@ -27,7 +27,8 @@ function startGame(){
 
 function updateAll() {
     if(gameScreen) {
-        updateParticles();
+        updateScreenshake(); // "juice it...
+        updateParticles(); // ...or lose it!" =)
         playerMove();
         cameraFollow();
         drawAll();
