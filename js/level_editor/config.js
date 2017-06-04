@@ -1,1 +1,0 @@
-const FPS = 30;
