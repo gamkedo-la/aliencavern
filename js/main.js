@@ -26,6 +26,7 @@ function startGame(){
 }
 
 function updateAll() {
+    // Press F1 to restart game
     if(gameScreen) {
         updateScreenshake(); // "juice it...
         updateParticles(); // ...or lose it!" =)
@@ -34,6 +35,7 @@ function updateAll() {
         drawAll();
     }
 
+    // Press F2 to launch editor
     if(editorScreen) {
         drawLevelEditor();
     }

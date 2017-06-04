@@ -5,17 +5,29 @@ function levelEditorInitialization() {
     colorRect(0,0, screen.width,screen.height, 'black');
     setDefaultCavern();
     setCamera();
-}
-
-function drawLevelEditor() {
     loadGameObjects(aliens, alienPic ,ALIEN);
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+    aliens = [];
+    alienPlants = [];
+    crew = [];
+    shipParts = [];
+}
+
+function drawLevelEditor() {
+ 
     drawOnlyCavernOnScreen();
+    drawGameObjects(aliens);
+    drawGameObjects(alienPlants);
+    drawGameObjects(crew);
+    drawGameObjects(shipParts);
     highlightTile();
     drawHighlightRect(current_row, current_column);
-
+    loadGameObjects(aliens, alienPic ,ALIEN);
+    loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
+    loadGameObjects(crew, crewPic, CREW);
+    loadGameObjects(shipParts, shipPartPic, SHIP_PART);
 }
 
 function setCamera() {
@@ -62,12 +74,20 @@ function highlightTile() {
 }
 
 function change_tile() {
+    anyCharacterOnBrick()
     var tileCol = current_column / BRICK_H;
     var tileRow = current_row / BRICK_W;
-
     var brickIndex = brickTileToIndex(tileRow, tileCol);
     if(cavernGrid[brickIndex] < 8) {
         cavernGrid[brickIndex] = cavernGrid[brickIndex] + 1;
+    }else if(cavernGrid[brickIndex] === 8) {
+        cavernGrid[brickIndex] = 20;
+    } else if(cavernGrid[brickIndex] === 20) {
+        cavernGrid[brickIndex] = 21;
+    } else if(cavernGrid[brickIndex] === 21) {
+        cavernGrid[brickIndex] = 30;
+    } else if(cavernGrid[brickIndex] === 30) {
+        cavernGrid[brickIndex] = 31;
     } else {
         cavernGrid[brickIndex] = 0;
     }
@@ -101,3 +121,10 @@ function debounce(func, wait, immediate) {
 		if (callNow) func.apply(context, args);
 	};
 };
+
+function anyCharacterOnBrick() {
+    console.log(aliens);
+    // aliens.map(function(alien){
+    //     console.log(alien);
+    // });
+}
