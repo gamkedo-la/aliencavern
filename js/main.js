@@ -9,6 +9,8 @@ window.onload = function() {
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
     loadImages();
+
+    init_particles();
 }
 
 function startGame(){
@@ -25,6 +27,7 @@ function startGame(){
 
 function updateAll() {
     if(gameScreen) {
+        updateParticles();
         playerMove();
         cameraFollow();
         drawAll();
@@ -63,4 +66,7 @@ function drawAll() {
     // doing this after .restore() so it won't scroll with the camera pan
     canvasContext.fillStyle = 'white';
     //canvasContext.fillText("Arrow keys to slide, scrolling demo",8,14);
+
+    draw_particles(camPanX,camPanY);
+
 }
