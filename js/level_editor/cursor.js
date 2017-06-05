@@ -1,7 +1,0 @@
-function cursor() {
-    
-}
-
-cursor.prototype = {
-
-}

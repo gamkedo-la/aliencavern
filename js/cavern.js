@@ -29,7 +29,7 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
 
 function drawOnlyCavernOnScreen() {
     
-    if (USE_PARALLAX_BACKGROUND)
+    if (USE_PARALLAX_BACKGROUND) // render background first underneath
       drawParallaxBackground();
     
     // what are the top-left most col and row visible on canvas?
@@ -54,7 +54,7 @@ function drawOnlyCavernOnScreen() {
           }
           else
           {
-            if (!USE_PARALLAX_BACKGROUND)
+            if (!USE_PARALLAX_BACKGROUND) // leave it blank so the background shows through
               canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
           }
 //          canvasContext.drawImage(useImg, brickLeftEdgeX, brickTopEdgeY);
@@ -66,9 +66,12 @@ function drawOnlyCavernOnScreen() {
 
 function drawParallaxBackground() {
   var parallax_ratio = 0.5; // half speed
-  var offsetX = Math.round(camPanX * parallax_ratio) % BRICK_H; // one tile worth only, then modulo loops 
+  // offsets drawing by up to one tile worth only
+  // then modulo (%) resets the offset to 0
+  // this gives appearence the bg scrolls at half speed
+  var offsetX = Math.round(camPanX * parallax_ratio) % BRICK_H; 
   var offsetY = Math.round(camPanY * parallax_ratio) % BRICK_W;
-  var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W);
+  var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W) +2;
   var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H) + 2;
   for (var tileX=0; tileX<colsThatFitOnScreen; tileX++) {
     for (var tileY=0; tileY<rowsThatFitOnScreen; tileY++) {

@@ -1,4 +1,5 @@
 var canvas, canvasContext;
+var framesPerSecond = 30;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -8,10 +9,11 @@ window.onload = function() {
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
     loadImages();
+
+    init_particles();
 }
 
 function startGame(){
-	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 
     loadGameObjects(aliens, alienPic ,ALIEN);
@@ -24,17 +26,25 @@ function startGame(){
 }
 
 function updateAll() {
-    playerMove();
-    cameraFollow();
-    drawAll();
-//
+    // Press F1 to restart game
+    if(gameScreen) {
+        updateScreenshake(); // "juice it...
+        updateParticles(); // ...or lose it!" =)
+        playerMove();
+        cameraFollow();
+        drawAll();
+    }
+
+    // Press F2 to launch editor
+    if(editorScreen) {
+        drawLevelEditor();
+    }
 }
 
 
 function drawAll() {
     // drawing black to erase previous frame, doing before .translate() since
     // its coordinates are not supposed to scroll when the camera view does
-    colorRect(0, 0, canvas.width, canvas.height, 'black');
     canvasContext.save(); // needed to undo this .translate() used for scroll
     // this next line is like subtracting camPanX and camPanY from every
     // canvasContext draw operation up until we call canvasContext.restore
@@ -59,4 +69,8 @@ function drawAll() {
     // doing this after .restore() so it won't scroll with the camera pan
     canvasContext.fillStyle = 'white';
     //canvasContext.fillText("Arrow keys to slide, scrolling demo",8,14);
+
+    draw_particles(camPanX,camPanY);
+    //debug shootProjectile(200, 30, canvas.width / 2, canvas.height / 2, 20, 2, 5, 100);
+
 }

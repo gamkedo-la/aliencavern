@@ -29,6 +29,12 @@ function groundPlayer() {
 
     Sound.play("ground");
 
+    // spawn a spritesheet particle - work in progress!
+    party(playerX-32,playerY-64); // TODO define different types of particles
+
+    // rattle the screen a little
+    screenshake(10);
+
 }
 
 function checkFuel() { //Is there enough fuel for this frame? Felt like making this a full function... :P
