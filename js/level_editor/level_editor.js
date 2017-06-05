@@ -1,6 +1,7 @@
 var current_row;
 var current_column;
 var mouse_up = true;
+var selectedBrickIndex;
 function levelEditorInitialization() {
     colorRect(0, 0, screen.width, screen.height, 'black');
     setDefaultCavern();
@@ -9,6 +10,7 @@ function levelEditorInitialization() {
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+    initKeybindings();
     aliens = [];
     alienPlants = [];
     crew = [];
@@ -59,6 +61,9 @@ function highlightTile() {
 
         current_row = tile_x * BRICK_W;
         current_column = tile_y * BRICK_H;
+        var tileCol = current_column / BRICK_H;
+        var tileRow = current_row / BRICK_W;
+        selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
     });
 
     canvas.addEventListener('mousedown', function (evt) {
@@ -73,23 +78,25 @@ function highlightTile() {
     });
 }
 
-function change_tile() {
+function change_tile(changeTo) {
     removeImgFromBrick();
-    var tileCol = current_column / BRICK_H;
-    var tileRow = current_row / BRICK_W;
-    var brickIndex = brickTileToIndex(tileRow, tileCol);
-    if (cavernGrid[brickIndex] < 8) {
-        cavernGrid[brickIndex] = cavernGrid[brickIndex] + 1;
-    } else if (cavernGrid[brickIndex] === 8) {
-        cavernGrid[brickIndex] = 20;
-    } else if (cavernGrid[brickIndex] === 20) {
-        cavernGrid[brickIndex] = 21;
-    } else if (cavernGrid[brickIndex] === 21) {
-        cavernGrid[brickIndex] = 30;
-    } else if (cavernGrid[brickIndex] === 30) {
-        cavernGrid[brickIndex] = 31;
+    if(changeTo) {
+        cavernGrid[selectedBrickIndex] = changeTo;
+        return;
+    }
+
+    if (cavernGrid[selectedBrickIndex] < 8) {
+        cavernGrid[selectedBrickIndex] = cavernGrid[selectedBrickIndex] + 1;
+    } else if (cavernGrid[selectedBrickIndex] === 8) {
+        cavernGrid[selectedBrickIndex] = 20;
+    } else if (cavernGrid[selectedBrickIndex] === 20) {
+        cavernGrid[selectedBrickIndex] = 21;
+    } else if (cavernGrid[selectedBrickIndex] === 21) {
+        cavernGrid[selectedBrickIndex] = 30;
+    } else if (cavernGrid[selectedBrickIndex] === 30) {
+        cavernGrid[selectedBrickIndex] = 31;
     } else {
-        cavernGrid[brickIndex] = 0;
+        cavernGrid[selectedBrickIndex] = 0;
     }
 }
 
