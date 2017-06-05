@@ -79,12 +79,12 @@ function playerMove() {
     checkEveryCollision (crew);
 
     if(playerSpeedY < 0 && isBrickAtPixelCoord(playerX,playerY - player_RADIUS) > 0) {
-      playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS;
+      //playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS;
       playerSpeedY = 0.0;
     }
     
     if(playerSpeedY > 0 && isBrickAtPixelCoord(playerX, playerY + player_RADIUS) > 0) {
-      playerY = (1+Math.floor( playerY / BRICK_H )) * BRICK_H - player_RADIUS;
+      //playerY = (1+Math.floor( playerY / BRICK_H )) * BRICK_H - player_RADIUS;
       groundPlayer();
       playerSpeedY = 0;
     } else if(isBrickAtPixelCoord(playerX,playerY+player_RADIUS+2) == 0) {
@@ -92,10 +92,12 @@ function playerMove() {
     }
     
     if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS - BRICK_W, playerY) > 0) {
-      playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
+      //playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
+       playerSpeedX = 0;
     }
     if(playerSpeedX > 0 && isBrickAtPixelCoord(playerX+player_RADIUS, playerY) > 0) {
-      playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
+      //playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
+       playerSpeedX = 0;
     }
     
     playerX += playerSpeedX; // move the player based on its current horizontal speed

@@ -1,3 +1,4 @@
+const shift = 16;
 const key_0 = 48;
 const key_1 = 49;
 const key_2 = 50;
@@ -16,10 +17,11 @@ const key_t = 84;
 const key_y = 89;
 
 function initKeybindings() {
-    document.addEventListener('keydown', bindings);
+    document.addEventListener('keydown', keyDownBindings);
+    document.addEventListener('keyup', keyUpBindings)
 }
 
-function bindings(evt) {
+function keyDownBindings(evt) {
     var key = evt.keyCode;
     console.log(key);
     switch(key) {
@@ -58,6 +60,19 @@ function bindings(evt) {
             return;
         case key_r:
             change_tile(31);
+            return;
+        case shift:
+            moveMode = true;
+            return;
+    }
+}
+
+function keyUpBindings(evt) {
+    var key = evt.keyCode;
+
+    switch(key) {
+        case shift:
+            moveMode = false;
             return;
     }
 }

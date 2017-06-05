@@ -2,6 +2,8 @@ var current_row;
 var current_column;
 var mouse_up = true;
 var selectedBrickIndex;
+var moveMode = false;
+var draggedY = 0;
 function levelEditorInitialization() {
     colorRect(0, 0, screen.width, screen.height, 'black');
     setDefaultCavern();
@@ -18,18 +20,27 @@ function levelEditorInitialization() {
 }
 
 function drawLevelEditor() {
-
     drawOnlyCavernOnScreen();
     drawGameObjects(aliens);
     drawGameObjects(alienPlants);
     drawGameObjects(crew);
     drawGameObjects(shipParts);
     highlightTile();
-    drawHighlightRect(current_row, current_column);
     loadGameObjects(aliens, alienPic, ALIEN);
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+
+    if(moveMode && !mouse_up) {
+       
+    } else if(moveMode) {
+
+    } else {
+            var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
+    var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
+        drawHighlightRect(current_row+camPanY, current_column+camPanX);
+    }
+
 }
 
 function setCamera() {
@@ -55,6 +66,29 @@ function drawBoundries() {
 
 function highlightTile() {
     canvas.addEventListener('mousemove', function (evt) {
+
+        if(!mouse_up && moveMode) {
+            scrollCamera(draggedY - getMousePosition(canvas, evt).y)
+        } else if(!moveMode) {
+            setCursorPosition(evt);
+        }
+    });
+
+    canvas.addEventListener('mousedown', function (evt) {
+        if (mouse_up) {
+            mouse_up = false;
+            change_tile();
+        }
+        draggedY = getMousePosition(canvas, evt).y;
+    });
+
+    canvas.addEventListener('mouseup', function (evt) {
+        mouse_up = true;
+        draggedY = 0;
+    });
+}
+
+function setCursorPosition(evt) {
         mousePosition = getMousePosition(canvas, evt);
         var tile_x = Math.floor(mousePosition.x / BRICK_W);
         var tile_y = Math.floor(mousePosition.y / BRICK_H);
@@ -64,18 +98,6 @@ function highlightTile() {
         var tileCol = current_column / BRICK_H;
         var tileRow = current_row / BRICK_W;
         selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
-    });
-
-    canvas.addEventListener('mousedown', function (evt) {
-        if (mouse_up) {
-            mouse_up = false;
-            change_tile();
-        }
-    });
-
-    canvas.addEventListener('mouseup', function (evt) {
-        mouse_up = true;
-    });
 }
 
 function change_tile(changeTo) {

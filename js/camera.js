@@ -46,3 +46,11 @@ function cameraFollow() {
         camPanY = maxPanTop;
     }
 }
+
+function scrollCamera(y) {
+    canvasContext.save();
+    camPanX = 0;
+    camPanY = y;
+    canvasContext.translate(-camPanX, -camPanY);
+    canvasContext.restore();
+}
