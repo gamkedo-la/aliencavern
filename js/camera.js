@@ -50,6 +50,14 @@ function cameraFollow() {
 function scrollCamera(y) {
     y = y/3000
     camPanX = 0;
+   
+    var levelHeight = (cavernGrid.length / 14 * BRICK_H) - canvas.height
+    console.log(levelHeight)
+    if(camPanY > levelHeight) {
+        camPanY -= y;
+        canvasContext.translate(-camPanX, -camPanY);
+        return;
+    }
     camPanY += y;
     if(camPanY > 0) {
         canvasContext.translate(-camPanX, -y);
