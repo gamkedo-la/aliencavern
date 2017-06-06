@@ -41,7 +41,10 @@ function checkFuel() { //Is there enough fuel for this frame? Felt like making t
     var fuelCheck = jetpackFuel - JETPACK_CONSUMPTION;
     if (fuelCheck <= 0) {
         jetpackFuel = 0;
-        return false
+
+        if (!Sound.isPlaying('outoffuel')) Sound.play('outoffuel');
+
+        return false;
     }
     else {
         return true;
