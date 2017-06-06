@@ -60,7 +60,23 @@ function playerMove() {
        playerSpeedX *= GROUND_FRICTION;
     //    console.log(playerSpeedX);
        fuelRegen(JETPACK_BASE_REGEN); //taken straight from Super Smash's R.O.B ;) feel free to change for a perma-regen
-    } else {
+
+    // scrape sound effect (if moving)
+    if (Math.abs(playerSpeedX)<0.001)  
+    {
+        if (Sound.isPlaying('scrape')) Sound.stop('scrape');
+    }
+    else // moving
+    {
+        if (!Sound.isPlaying('scrape'))
+            Sound.play('scrape',true,0.05); // looped and super quiet
+    }
+
+
+    } else { // not on the ground
+      
+      if (Sound.isPlaying('scrape')) Sound.stop('scrape');
+      
       playerSpeedX *= AIR_RESISTANCE;
       playerSpeedY += GRAVITY;
       if(playerSpeedY > player_RADIUS) { // cheap test to ensure can't fall through floor
