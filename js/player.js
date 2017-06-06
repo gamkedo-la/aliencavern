@@ -99,7 +99,7 @@ function playerMove() {
 
     if(playerSpeedY < 0 && isBrickAtPixelCoord(playerX,playerY - player_RADIUS) > 0) {
       playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS;
-      playerSpeedY = 0.0;
+      playerSpeedY = 0;
     }
     
     if(playerSpeedY > 0 && isBrickAtPixelCoord(playerX, playerY + player_RADIUS) > 0) {
@@ -113,11 +113,13 @@ function playerMove() {
     if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS - BRICK_W, playerY) > 0) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+	  playerSpeedX = 0;
     }
 
     if(playerSpeedX > 0 && isBrickAtPixelCoord(playerX+player_RADIUS, playerY) > 0) {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+	  playerSpeedX = 0;
     }
     
     playerX += playerSpeedX; // move the player based on its current horizontal speed
