@@ -31,14 +31,14 @@ function drawLevelEditor() {
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
 
-    if(moveMode && !mouse_up) {
-       
-    } else if(moveMode) {
+    if (moveMode && !mouse_up) {
+
+    } else if (moveMode) {
 
     } else {
         var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
         var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
-        drawHighlightRect(current_row+camPanY, current_column+camPanX);
+        drawHighlightRect(current_row, current_column);
     }
 
 }
@@ -67,9 +67,9 @@ function drawBoundries() {
 function highlightTile() {
     canvas.addEventListener('mousemove', function (evt) {
 
-        if(!mouse_up && moveMode) {
+        if (!mouse_up && moveMode) {
             scrollCamera(draggedY - getMousePosition(canvas, evt).y)
-        } else if(!moveMode) {
+        } else if (!moveMode) {
             setCursorPosition(evt);
         }
     });
@@ -86,23 +86,63 @@ function highlightTile() {
         mouse_up = true;
         draggedY = 0;
     });
+
+    if (window.addEventListener)
+        /** DOMMouseScroll is for mozilla. */
+        window.addEventListener('DOMMouseScroll', wheel, false);
+    /** IE/Opera. */
+    window.onmousewheel = document.onmousewheel = wheel;
 }
 
-function setCursorPosition(evt) {
-        mousePosition = getMousePosition(canvas, evt);
-        var tile_x = Math.floor(mousePosition.x / BRICK_W);
-        var tile_y = Math.floor(mousePosition.y / BRICK_H);
+function handle(delta) {
+    console.log(delta);
+    scrollCamera(-(delta * SCROLL_SPEED * 15));
+}
 
-        current_row = tile_x * BRICK_W;
-        current_column = tile_y * BRICK_H;
-        var tileCol = current_column / BRICK_H;
-        var tileRow = current_row / BRICK_W;
-        selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
+/** Event handler for mouse wheel event.
+ */
+function wheel(event) {
+    var delta = 0;
+    if (!event) /* For IE. */
+        event = window.event;
+    if (event.wheelDelta) { /* IE/Opera. */
+        delta = event.wheelDelta / 120;
+    } else if (event.detail) { /** Mozilla case. */
+        /** In Mozilla, sign of delta is different than in IE.
+         * Also, delta is multiple of 3.
+         */
+        delta = -event.detail / 3;
+    }
+    /** If delta is nonzero, handle it.
+     * Basically, delta is now positive if wheel was scrolled up,
+     * and negative, if wheel was scrolled down.
+     */
+        handle(delta);
+    /** Prevent default actions caused by mouse wheel.
+     * That might be ugly, but we handle scrolls somehow
+     * anyway, so don't bother here..
+     */
+    if (event.preventDefault)
+        event.preventDefault();
+    event.returnValue = false;
+}
+
+
+function setCursorPosition(evt) {
+    mousePosition = getMousePosition(canvas, evt);
+    var tile_x = Math.floor(mousePosition.x / BRICK_W);
+    var tile_y = Math.floor(mousePosition.y / BRICK_H);
+
+    current_row = Math.ceil(tile_x * BRICK_W+camPanX);
+    current_column = Math.ceil(tile_y * BRICK_H+camPanY);
+    var tileCol = Math.ceil(current_column / BRICK_H);
+    var tileRow = Math.ceil(current_row / BRICK_W);
+    selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
 }
 
 function change_tile(changeTo) {
     removeImgFromBrick();
-    if(changeTo) {
+    if (changeTo) {
         cavernGrid[selectedBrickIndex] = changeTo;
         return;
     }

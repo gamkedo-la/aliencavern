@@ -2,6 +2,7 @@ var camPanX = 30.0;
 var camPanY = 30.0;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 75;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 50;
+const SCROLL_SPEED = 3000;
 //  const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 150;
 //  const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
   
@@ -48,16 +49,9 @@ function cameraFollow() {
 }
 
 function scrollCamera(y) {
-    y = y/3000
+    y = y / SCROLL_SPEED
     camPanX = 0;
-   
-    var levelHeight = (cavernGrid.length / 14 * BRICK_H) - canvas.height
-    console.log(levelHeight)
-    if(camPanY > levelHeight) {
-        camPanY -= y;
-        canvasContext.translate(-camPanX, -camPanY);
-        return;
-    }
+
     camPanY += y;
     if(camPanY > 0) {
         canvasContext.translate(-camPanX, -y);
