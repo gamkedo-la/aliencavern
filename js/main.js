@@ -1,5 +1,5 @@
 var canvas, canvasContext;
-var framesPerSecond = 30;
+var framesPerSecond = 60;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
