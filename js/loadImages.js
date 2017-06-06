@@ -40,7 +40,7 @@
     function loadImages(){
 
         var imageList = [
-            {varName: shipPic, theFile: "./graphics/ship.png"},
+            {varName: shipPic, theFile: "./graphics/alternateship.png"},
             {varName: alienPic, theFile: "./graphics/alien1.png"},
             {varName: alienPlantPic, theFile: "./graphics/alienPlant.png"},
             {varName: crewPic, theFile: "./graphics/crew1.png"},
