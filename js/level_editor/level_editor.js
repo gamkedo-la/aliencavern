@@ -36,8 +36,8 @@ function drawLevelEditor() {
     } else if(moveMode) {
 
     } else {
-            var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
-    var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
+        var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
+        var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
         drawHighlightRect(current_row+camPanY, current_column+camPanX);
     }
 
