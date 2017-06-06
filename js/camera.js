@@ -48,9 +48,13 @@ function cameraFollow() {
 }
 
 function scrollCamera(y) {
-    canvasContext.save();
+    y = y/3000
     camPanX = 0;
-    camPanY = y;
-    canvasContext.translate(-camPanX, -camPanY);
-    canvasContext.restore();
+    camPanY += y;
+    if(camPanY > 0) {
+        canvasContext.translate(-camPanX, -y);
+    } else {
+        camPanY = 0;
+        canvasContext.translate(-camPanX, -camPanY);
+    }
 }
