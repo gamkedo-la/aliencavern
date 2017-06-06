@@ -27,7 +27,7 @@ function groundPlayer() {
     jumping = false;
     usingJetpack = false;
 
-    Sound.play("ground");
+    Sound.play("ground",false,0.5);
 
     // spawn a spritesheet particle - work in progress!
     party(playerX-32,playerY-64); // TODO define different types of particles
@@ -42,7 +42,7 @@ function checkFuel() { //Is there enough fuel for this frame? Felt like making t
     if (fuelCheck <= 0) {
         jetpackFuel = 0;
 
-        if (!Sound.isPlaying('outoffuel')) Sound.play('outoffuel');
+        if (!Sound.isPlaying('outoffuel')) Sound.play('outoffuel',false,0.4);
 
         return false;
     }
@@ -112,9 +112,12 @@ function playerMove() {
     
     if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS - BRICK_W, playerY) > 0) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
+      if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
     }
+
     if(playerSpeedX > 0 && isBrickAtPixelCoord(playerX+player_RADIUS, playerY) > 0) {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
+      if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
     }
     
     playerX += playerSpeedX; // move the player based on its current horizontal speed
