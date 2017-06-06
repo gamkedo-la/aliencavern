@@ -131,12 +131,12 @@ function wheel(event) {
 function setCursorPosition(evt) {
     mousePosition = getMousePosition(canvas, evt);
     var tile_x = Math.floor(mousePosition.x / BRICK_W);
-    var tile_y = Math.floor(mousePosition.y / BRICK_H);
+    var tile_y = Math.floor((mousePosition.y+camPanY) / BRICK_H);
 
-    current_row = Math.ceil(tile_x * BRICK_W+camPanX);
-    current_column = Math.ceil(tile_y * BRICK_H+camPanY);
-    var tileCol = Math.ceil(current_column / BRICK_H);
-    var tileRow = Math.ceil(current_row / BRICK_W);
+    current_row = Math.floor(tile_x * BRICK_W);
+    current_column = Math.floor(tile_y * BRICK_H);
+    var tileCol = Math.floor(current_column / BRICK_H);
+    var tileRow = Math.floor(current_row / BRICK_W);
     selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
 }
 
