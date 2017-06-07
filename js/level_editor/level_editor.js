@@ -72,7 +72,15 @@ function highlightTile() {
     canvas.addEventListener('mousemove', function (evt) {
 
         if (!mouse_up && moveMode) {
-            scrollCamera(draggedY - getMousePosition(canvas, evt).y)
+            var delta = draggedY - getMousePosition(canvas, evt).y;
+            console.log('delta', delta);
+            console.log('camPanY', camPanY)
+            if(camPanY < 2586+250) {
+                scrollCamera(delta)
+            } else if(camPanY > 2586+250 && delta < 0) {
+                scrollCamera(-80)
+            }
+
         } else if (!moveMode) {
             setCursorPosition(evt);
         }
@@ -101,8 +109,13 @@ function highlightTile() {
 }
 
 function handle(delta) {
+    delta = delta * 256;
     console.log(delta);
-    scrollCamera(-(delta * SCROLL_SPEED * 15));
+    if(camPanY + delta < 2586) {
+        scrollCamera(-(delta * 256));
+    } else if(camPanY >= 2586-256) {
+        scrollCamera(-(Math.abs(delta) * 256));
+    }
 }
 
 /** Event handler for mouse wheel event.
