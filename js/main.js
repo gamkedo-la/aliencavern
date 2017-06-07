@@ -2,6 +2,9 @@ var canvas, canvasContext;
 var framesPerSecond = 60;
 
 window.onload = function() {
+    if (cheatsOn){
+        console.log("cheats on . fuel infinate");
+    }
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 
@@ -21,6 +24,7 @@ function startGame(){
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
     Sound.play("cavernambient", true, 0.4);
+    Sound.play("shipengine",true,0.3);
     initInput();
     playerReset();    
 }
@@ -62,7 +66,7 @@ function drawAll() {
     drawGameObjects(alienPlants);
     drawGameObjects(crew);
     drawGameObjects(shipParts);
-    canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
+    canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
     canvasContext.restore(); // undoes the .translate() used for cam scroll
 

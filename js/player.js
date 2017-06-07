@@ -11,7 +11,7 @@ const JETPACK_MAX_FUEL = 10;
 var playerX = 75, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
-var player_RADIUS = 5;
+var player_RADIUS = 30;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
@@ -30,7 +30,7 @@ function groundPlayer() {
     Sound.play("ground",false,0.5);
 
     // spawn a spritesheet particle - work in progress!
-    party(playerX-32,playerY-64); // TODO define different types of particles
+    party(playerX, playerY - player_RADIUS); // TODO define different types of particles
 
     // rattle the screen a little
     screenshake(10);
@@ -59,6 +59,9 @@ function fuelRegen(regenAmount) { //made it a function for eventual regen power-
 }
 
 function playerMove() {
+   if (cheatsOn){
+       jetpackFuel = JETPACK_MAX_FUEL;
+   }
    if(playerOnGround) {
        playerSpeedX *= GROUND_FRICTION;
     //    console.log(playerSpeedX);
@@ -97,8 +100,8 @@ function playerMove() {
     // testing collision detection
     checkEveryCollision (crew);
 
-    if(playerSpeedY < 0 && isBrickAtPixelCoord(playerX,playerY - player_RADIUS) > 0) {
-      playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS;
+    if(isBrickAtPixelCoord(playerX, playerY - player_RADIUS) > 0) {
+      playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS + 2;
       playerSpeedY = 0;
     }
     
@@ -110,7 +113,7 @@ function playerMove() {
       playerOnGround = false;
     }
     
-    if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS - BRICK_W, playerY) > 0) {
+    if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS, playerY) > 0) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
 	  playerSpeedX = 0;
@@ -121,7 +124,7 @@ function playerMove() {
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
 	  playerSpeedX = 0;
     }
-    
+  
     playerX += playerSpeedX; // move the player based on its current horizontal speed
 
     //Handle variations regarding Y speed
