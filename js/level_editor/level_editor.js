@@ -31,11 +31,15 @@ function drawLevelEditor() {
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
 
+    if (showControlPanel) {
+        new initControlPanel(50, 50 + camPanY);
+    }
+
     if (moveMode && !mouse_up) {
 
     } else if (moveMode) {
 
-    } else {
+    } else if (!showControlPanel) {
         var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
         var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
         drawHighlightRect(current_row, current_column);
@@ -117,7 +121,7 @@ function wheel(event) {
      * Basically, delta is now positive if wheel was scrolled up,
      * and negative, if wheel was scrolled down.
      */
-        handle(delta);
+    handle(delta);
     /** Prevent default actions caused by mouse wheel.
      * That might be ugly, but we handle scrolls somehow
      * anyway, so don't bother here..
@@ -131,7 +135,7 @@ function wheel(event) {
 function setCursorPosition(evt) {
     mousePosition = getMousePosition(canvas, evt);
     var tile_x = Math.floor(mousePosition.x / BRICK_W);
-    var tile_y = Math.floor((mousePosition.y+camPanY) / BRICK_H);
+    var tile_y = Math.floor((mousePosition.y + camPanY) / BRICK_H);
 
     current_row = Math.floor(tile_x * BRICK_W);
     current_column = Math.floor(tile_y * BRICK_H);

@@ -1,3 +1,4 @@
+const tab = 9;
 const shift = 16;
 const key_0 = 48;
 const key_1 = 49;
@@ -64,6 +65,9 @@ function keyDownBindings(evt) {
         case shift:
             moveMode = true;
             return;
+        case tab: 
+            showControlPanel = true;
+            return;
     }
 }
 
@@ -74,5 +78,7 @@ function keyUpBindings(evt) {
         case shift:
             moveMode = false;
             return;
+        case tab:
+            showControlPanel = false;
     }
 }
