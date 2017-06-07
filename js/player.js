@@ -113,13 +113,16 @@ function playerMove() {
       playerOnGround = false;
     }
     
-    if(playerSpeedX < 0 && isBrickAtPixelCoord(playerX-player_RADIUS, playerY) > 0) {
+    var sideCollisionVertSpread = 15;
+    if(playerSpeedX < 0 && (isBrickAtPixelCoord(playerX-player_RADIUS, playerY - sideCollisionVertSpread) > 0
+     || isBrickAtPixelCoord(playerX-player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
 	  playerSpeedX = 0;
     }
 
-    if(playerSpeedX > 0 && isBrickAtPixelCoord(playerX+player_RADIUS, playerY) > 0) {
+    if(playerSpeedX > 0 && (isBrickAtPixelCoord(playerX+player_RADIUS, playerY - sideCollisionVertSpread) > 0
+     || isBrickAtPixelCoord(playerX+player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
 	  playerSpeedX = 0;
