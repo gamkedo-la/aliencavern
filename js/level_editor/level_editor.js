@@ -89,7 +89,7 @@ function highlightTile() {
     canvas.addEventListener('mousedown', function (evt) {
         if (mouse_up) {
             mouse_up = false;
-            if(!showControlPanel) {
+            if(!showControlPanel && !moveMode) {
                 change_tile();
             }
         }
