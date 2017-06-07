@@ -81,7 +81,9 @@ function highlightTile() {
     canvas.addEventListener('mousedown', function (evt) {
         if (mouse_up) {
             mouse_up = false;
-            change_tile();
+            if(!showControlPanel) {
+                change_tile();
+            }
         }
         draggedY = getMousePosition(canvas, evt).y;
     });
