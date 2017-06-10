@@ -22,7 +22,7 @@ initControlPanel.prototype = {
         canvasContext.globalAlpha = 1;
         canvasContext.font = "48px Comic Sans MS";
         canvasContext.fillStyle = "white";
-        canvasContext.fillText("What do you need captin?", x, y);
+        canvasContext.fillText("Control panel", x, y);
     },
     drawLevelHeightControl: function () {
         var x = this.x + 20
