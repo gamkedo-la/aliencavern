@@ -68,11 +68,11 @@ function mouseEvenets() {
 
 function handle(delta) {
     delta = delta * 256;
-    var heightOfLevel =
+    var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height
         console.log(delta);
-    if (camPanY + delta < 2586) {
+    if (camPanY + delta < heightOfLevel) {
         scrollCamera(-(delta * 256));
-    } else if (camPanY >= 2586 - 256) {
+    } else if (camPanY >= heightOfLevel - 256) {
         scrollCamera(-(Math.abs(delta) * 256));
     }
 }
