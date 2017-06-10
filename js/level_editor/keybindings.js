@@ -24,7 +24,6 @@ function initKeybindings() {
 
 function keyDownBindings(evt) {
     var key = evt.keyCode;
-    console.log(key);
     switch(key) {
         case key_0:
             change_tile(0);
