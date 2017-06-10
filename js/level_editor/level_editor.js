@@ -5,6 +5,7 @@ var selectedBrickIndex;
 var moveMode = false;
 var draggedY = 0;
 function levelEditorInitialization() {
+    preventRightClickToDisplayContextMenu();
     colorRect(0, 0, screen.width, screen.height, 'black');
     setDefaultCavern();
     setCamera();
@@ -17,6 +18,7 @@ function levelEditorInitialization() {
     alienPlants = [];
     crew = [];
     shipParts = [];
+
 }
 
 function drawLevelEditor() {
@@ -151,4 +153,10 @@ function decreaseLevelHeight() {
 function increaseLevelHeight() {
     var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
     cavernGrid = cavernGrid.concat(row);
+}
+
+function preventRightClickToDisplayContextMenu(){
+    canvas.oncontextmenu = function (e) {
+        e.preventDefault();
+    };
 }
