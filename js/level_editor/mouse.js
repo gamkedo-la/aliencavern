@@ -1,5 +1,7 @@
 var currentMousePos;
 var iconActionToTake;
+const LEFT_CLICK = 0;
+const RIGHT_CLICK = 2;
 
 function getMousePosition(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -10,8 +12,8 @@ function getMousePosition(canvas, evt) {
 }
 
 function onIconClick(x, y, width, height, callback) {
-    if(currentMousePos.x > x && currentMousePos.x < x + width &&
-    currentMousePos.y > y && currentMousePos.y < y + height) {
+    if (currentMousePos.x > x && currentMousePos.x < x + width &&
+        currentMousePos.y > y && currentMousePos.y < y + height) {
         iconActionToTake = callback
     }
 }
@@ -34,18 +36,22 @@ function mouseEvenets() {
     });
 
     canvas.addEventListener('mousedown', function (evt) {
+        if (evt.button === LEFT_CLICK) {
+            if (mouse_up) {
+                mouse_up = false;
+                if (!showControlPanel && !moveMode) {
+                    change_tile();
+                } else if (showControlPanel && iconActionToTake) {
+                    iconActionToTake();
 
-
-        if (mouse_up) {
-            mouse_up = false;
-            if (!showControlPanel && !moveMode) {
-                change_tile();
-            } else if (showControlPanel && iconActionToTake) {
-                iconActionToTake();
-
+                }
             }
+            draggedY = currentMousePos.y;
         }
-        draggedY = currentMousePos.y;
+
+        if (evt.button === RIGHT_CLICK) {
+            change_tile(0);
+        }
     });
 
     canvas.addEventListener('mouseup', function (evt) {
@@ -62,7 +68,8 @@ function mouseEvenets() {
 
 function handle(delta) {
     delta = delta * 256;
-    console.log(delta);
+    var heightOfLevel =
+        console.log(delta);
     if (camPanY + delta < 2586) {
         scrollCamera(-(delta * 256));
     } else if (camPanY >= 2586 - 256) {
@@ -110,4 +117,11 @@ function setCursorPosition(evt) {
     var tileCol = Math.floor(current_column / BRICK_H);
     var tileRow = Math.floor(current_row / BRICK_W);
     selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
+}
+
+
+function preventRightClickToDisplayContextMenu(){
+    canvas.oncontextmenu = function (e) {
+        e.preventDefault();
+    };
 }

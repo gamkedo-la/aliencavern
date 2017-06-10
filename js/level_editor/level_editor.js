@@ -73,7 +73,7 @@ function drawBoundries() {
 
 function change_tile(changeTo) {
     removeImgFromBrick();
-    if (changeTo) {
+    if (typeof changeTo !== 'undefined')  {
         cavernGrid[selectedBrickIndex] = changeTo;
         return;
     }
@@ -153,10 +153,4 @@ function decreaseLevelHeight() {
 function increaseLevelHeight() {
     var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
     cavernGrid = cavernGrid.concat(row);
-}
-
-function preventRightClickToDisplayContextMenu(){
-    canvas.oncontextmenu = function (e) {
-        e.preventDefault();
-    };
 }
