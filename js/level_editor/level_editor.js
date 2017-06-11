@@ -161,3 +161,7 @@ function drawHint() {
         canvasContext.fillStyle = "white";
         canvasContext.fillText("Press TAB to show control panel", 5, 15 + camPanY);
 }
+
+function copyLevel() {
+       window.prompt("Your level:", JSON.stringify(cavernGrid));
+}

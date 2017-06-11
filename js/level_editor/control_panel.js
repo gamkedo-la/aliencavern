@@ -8,6 +8,7 @@ function initControlPanel(x, y) {
     this.drawTitle();
     this.drawLevelHeightControl().draw();
     this.drawKeysDescription().draw();
+    this.drawCopyLevelControl().draw();
 }
 
 initControlPanel.prototype = {
@@ -25,27 +26,6 @@ initControlPanel.prototype = {
         canvasContext.fillStyle = "white";
         canvasContext.fillText("Control panel", x, y);
     },
-    drawKeysDescription: function () {
-        var x = this.drawLevelHeightControl().x + this.drawLevelHeightControl().width + 100;
-        var y = this.y + 110;
-
-        return {
-            x: x,
-            y: y,
-            elem_height: 24,
-            bottom_margin: 5,
-            draw: function () {
-                var keys = keysDescription();
-                keys.map(function (key, index) {
-                    var margin = index > 0 ? this.bottom_margin : 0;
-                    canvasContext.font = this.elem_height + "px Comic Sans MS";
-                    canvasContext.fillStyle = "white";
-                    canvasContext.fillText(key, x, y + index * this.elem_height + margin);
-                }.bind(this));
-            }
-        }
-    },
-
     drawLevelHeightControl: function () {
         var x = this.x + 20
         var y = this.y + 110
@@ -53,6 +33,7 @@ initControlPanel.prototype = {
         var height = 50;
         var leftMargin = 5;
         var topMargin = 5
+        var bottomMargin = 10;
 
         return {
             x: x,
@@ -61,6 +42,7 @@ initControlPanel.prototype = {
             height: height,
             leftMargin: leftMargin,
             topMargin: topMargin,
+            bottomMargin: bottomMargin,
             draw: function () {
                 drawLabel().draw()
                 drawBorder()
@@ -135,5 +117,56 @@ initControlPanel.prototype = {
                 }
             }
         }
-    }
+    },
+    drawCopyLevelControl: function () {
+        var x = this.drawLevelHeightControl().x;
+        var y = this.drawLevelHeightControl().y + this.drawLevelHeightControl().height + this.drawLevelHeightControl().bottomMargin + 50;
+        var width = 120;
+        var height = 50;
+        function drawBorder() {
+            canvasContext.rect(x, y, width, height);
+            canvasContext.stroke()
+        }
+
+        return {
+            elem_x: x,
+            elem_y: y,
+            elem_width: width,
+            elem_height: height,
+            elem_height: 22,
+            onClick: function () {
+                onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, copyLevel);
+            },
+            draw: function() {
+                drawBorder();
+                canvasContext.font = this.elem_height + "px Comic Sans MS";
+                canvasContext.fillStyle = "red";
+                canvasContext.fillText("GET", this.elem_x + this.elem_width / 5 + 10, this.elem_y + 22);
+                canvasContext.fillText("LEVEL", this.elem_x + this.elem_width / 5, this.elem_y + 22 + this.elem_height);
+                this.onClick()
+            }
+        }
+    },
+    drawKeysDescription: function () {
+        var x = this.drawLevelHeightControl().x + this.drawLevelHeightControl().width + 100;
+        var y = this.y + 110;
+
+        return {
+            x: x,
+            y: y,
+            elem_height: 24,
+            bottom_margin: 5,
+            draw: function () {
+                var keys = keysDescription();
+                keys.map(function (key, index) {
+                    var margin = index > 0 ? this.bottom_margin : 0;
+                    canvasContext.font = this.elem_height + "px Comic Sans MS";
+                    canvasContext.fillStyle = "white";
+                    canvasContext.fillText(key, x, y + index * this.elem_height + margin);
+                }.bind(this));
+            }
+        }
+    },
+
+
 }
