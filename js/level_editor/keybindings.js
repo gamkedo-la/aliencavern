@@ -81,3 +81,17 @@ function keyUpBindings(evt) {
             showControlPanel = false;
     }
 }
+
+function keysDescription() {
+    return [
+        "Left click: change tile",
+        "Right click: remove tile",
+        "Mouse wheel up: scroll level up",
+        "Mouse wheel down: scroll level down",
+        "Keys from 1 to 7: change tile type",
+        "Q: monster",
+        "W: plant",
+        "E: crew",
+        "R: jetpack"
+    ]
+}

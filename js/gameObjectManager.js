@@ -20,14 +20,17 @@ function loadGameObjects(objectArray, objectPic, gameObjectType){
     this.gameObjectType = gameObjectType;
     for (var i = 0;  i < BRICK_ROWS * BRICK_COLS; i++ ){
         if (cavernGrid[i] == gameObjectType){
+            if(gameScreen) {
+                cavernGrid[i] = BKGND_ROCK;
+            }
             this.objectArray.push(new GameObject());
-            // cavernGrid[i] = BKGND_ROCK;
             var pos = this.objectArray.length - 1;
             var row = Math.floor(i / BRICK_COLS);
             var col = i % BRICK_COLS;
             this.objectArray[pos].x = col * BRICK_W;
             this.objectArray[pos].y = row * BRICK_H;
             this.objectArray[pos].pic = this.objectPic;
+
         }
     }
 }

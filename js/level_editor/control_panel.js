@@ -6,7 +6,8 @@ function initControlPanel(x, y) {
 
     this.drawPanel();
     this.drawTitle();
-    this.drawLevelHeightControl()
+    this.drawLevelHeightControl().draw();
+    this.drawKeysDescription().draw();
 }
 
 initControlPanel.prototype = {
@@ -24,6 +25,25 @@ initControlPanel.prototype = {
         canvasContext.fillStyle = "white";
         canvasContext.fillText("Control panel", x, y);
     },
+    drawKeysDescription: function () {
+        var x = this.drawLevelHeightControl().x + this.drawLevelHeightControl().width;
+        var y = this.y + 110;
+
+        return {
+            x: x,
+            y: y,
+            elem_height: 24,
+            draw: function () {
+                var keys = keysDescription();
+                keys.map(function (key, index) {
+                    canvasContext.font = this.elem_height + "px Comic Sans MS";
+                    canvasContext.fillStyle = "white";
+                    canvasContext.fillText(key, x, y + index * this.elem_height);
+                });
+            }
+        }
+    },
+
     drawLevelHeightControl: function () {
         var x = this.x + 20
         var y = this.y + 110
@@ -32,12 +52,27 @@ initControlPanel.prototype = {
         var leftMargin = 5;
         var topMargin = 5
 
+        return {
+            x: x,
+            y: y,
+            width: width,
+            height: height,
+            leftMargin: leftMargin,
+            topMargin: topMargin,
+            draw: function () {
+                drawLabel().draw()
+                drawBorder()
+                drawLeftButton().draw()
+                drawCounter().draw()
+                drawRightButton().draw()
+            }
+        }
         function drawLabel() {
             return {
                 elem_x: x,
                 elem_y: y,
                 elem_height: 24,
-                draw: function() {
+                draw: function () {
                     canvasContext.font = this.elem_height + "px Comic Sans MS";
                     canvasContext.fillStyle = "white";
                     canvasContext.fillText("Level height:", this.elem_x, this.elem_y);
@@ -57,7 +92,7 @@ initControlPanel.prototype = {
                 elem_y: y + topMargin + drawLabel().elem_height,
                 elem_width: 24,
                 elem_height: 40,
-                onClick: function() {
+                onClick: function () {
                     onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, decreaseLevelHeight);
                 },
                 draw: function () {
@@ -83,14 +118,12 @@ initControlPanel.prototype = {
         }
 
         function drawRightButton() {
-
-
             return {
                 elem_x: drawLeftButton().elem_x + drawLeftButton().elem_width + drawCounter().elem_width,
                 elem_y: y + topMargin + drawLabel().elem_height,
                 elem_width: 24,
                 elem_height: 40,
-                onClick: function() {
+                onClick: function () {
                     onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, increaseLevelHeight);
                 },
                 draw: function () {
@@ -100,10 +133,5 @@ initControlPanel.prototype = {
                 }
             }
         }
-        drawLabel().draw()
-        drawBorder()
-        drawLeftButton().draw()
-        drawCounter().draw()
-        drawRightButton().draw()
     }
 }

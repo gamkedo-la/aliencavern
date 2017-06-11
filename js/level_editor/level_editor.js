@@ -3,6 +3,7 @@ var current_column;
 var mouse_up = true;
 var selectedBrickIndex;
 var moveMode = false;
+var showControlPanel = false;
 var draggedY = 0;
 function levelEditorInitialization() {
     preventRightClickToDisplayContextMenu();
