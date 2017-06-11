@@ -51,6 +51,7 @@ function mouseEvenets() {
 
         if (evt.button === RIGHT_CLICK) {
             change_tile(0);
+            iconActionToTake = null;
         }
     });
 
