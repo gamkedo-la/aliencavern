@@ -24,10 +24,11 @@ function mouseEvenets() {
     canvas.addEventListener('mousemove', function (evt) {
         currentMousePos = getMousePosition(canvas, evt);
         if (!mouse_up && moveMode) {
+            var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252
             var delta = draggedY - currentMousePos.y;
-            if (camPanY < 2586 + 250) {
+            if (camPanY < heightOfLevel + 250) {
                 scrollCamera(delta)
-            } else if (camPanY > 2586 + 250 && delta < 0) {
+            } else if (camPanY > heightOfLevel + 250 && delta < 0) {
                 scrollCamera(-80)
             }
 
@@ -70,7 +71,7 @@ function mouseEvenets() {
 
 function handle(delta) {
     delta = delta * 256;
-    var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252 // TODO 
+    var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252; // TODO 
         console.log(delta);
     if (camPanY + delta < heightOfLevel) {
         scrollCamera(-(delta * 256));
