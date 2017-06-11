@@ -12,6 +12,7 @@ function getMousePosition(canvas, evt) {
 }
 
 function onIconClick(x, y, width, height, callback) {
+    y = y - camPanY;
     if (currentMousePos.x > x && currentMousePos.x < x + width &&
         currentMousePos.y > y && currentMousePos.y < y + height) {
         iconActionToTake = callback
@@ -51,13 +52,13 @@ function mouseEvenets() {
 
         if (evt.button === RIGHT_CLICK) {
             change_tile(0);
-            iconActionToTake = null;
         }
     });
 
     canvas.addEventListener('mouseup', function (evt) {
         mouse_up = true;
         draggedY = 0;
+        iconActionToTake = null;
     });
 
     if (window.addEventListener)
@@ -69,7 +70,7 @@ function mouseEvenets() {
 
 function handle(delta) {
     delta = delta * 256;
-    var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height
+    var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252 // TODO 
         console.log(delta);
     if (camPanY + delta < heightOfLevel) {
         scrollCamera(-(delta * 256));
