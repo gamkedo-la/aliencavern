@@ -12,10 +12,12 @@ function getMousePosition(canvas, evt) {
 }
 
 function onIconClick(x, y, width, height, callback) {
-    y = y - camPanY;
-    if (currentMousePos.x > x && currentMousePos.x < x + width &&
-        currentMousePos.y > y && currentMousePos.y < y + height) {
-        iconActionToTake = callback
+    if (currentMousePos) {
+        y = y - camPanY;
+        if (currentMousePos.x > x && currentMousePos.x < x + width &&
+            currentMousePos.y > y && currentMousePos.y < y + height) {
+            iconActionToTake = callback
+        }
     }
 }
 
@@ -72,7 +74,7 @@ function mouseEvenets() {
 function handle(delta) {
     delta = delta * 256;
     var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252; // TODO 
-        console.log(delta);
+    console.log(delta);
     if (camPanY + delta < heightOfLevel) {
         scrollCamera(-(delta * 256));
     } else if (camPanY >= heightOfLevel - 256) {
@@ -123,7 +125,7 @@ function setCursorPosition(evt) {
 }
 
 
-function preventRightClickToDisplayContextMenu(){
+function preventRightClickToDisplayContextMenu() {
     canvas.oncontextmenu = function (e) {
         e.preventDefault();
     };
