@@ -33,6 +33,7 @@ function drawLevelEditor() {
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+    drawHint();
     if (showControlPanel) {
         new initControlPanel(50, 50 + camPanY);
     }
@@ -153,4 +154,10 @@ function decreaseLevelHeight() {
 function increaseLevelHeight() {
     var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
     cavernGrid = cavernGrid.concat(row);
+}
+
+function drawHint() {
+        canvasContext.font = "12px Comic Sans MS";
+        canvasContext.fillStyle = "white";
+        canvasContext.fillText("Press TAB to show control panel", 5, 15 + camPanY);
 }
