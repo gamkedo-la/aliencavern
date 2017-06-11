@@ -26,20 +26,22 @@ initControlPanel.prototype = {
         canvasContext.fillText("Control panel", x, y);
     },
     drawKeysDescription: function () {
-        var x = this.drawLevelHeightControl().x + this.drawLevelHeightControl().width;
+        var x = this.drawLevelHeightControl().x + this.drawLevelHeightControl().width + 100;
         var y = this.y + 110;
 
         return {
             x: x,
             y: y,
             elem_height: 24,
+            bottom_margin: 5,
             draw: function () {
                 var keys = keysDescription();
                 keys.map(function (key, index) {
+                    var margin = index > 0 ? this.bottom_margin : 0;
                     canvasContext.font = this.elem_height + "px Comic Sans MS";
                     canvasContext.fillStyle = "white";
-                    canvasContext.fillText(key, x, y + index * this.elem_height);
-                });
+                    canvasContext.fillText(key, x, y + index * this.elem_height + margin);
+                }.bind(this));
             }
         }
     },

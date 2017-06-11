@@ -84,11 +84,13 @@ function keyUpBindings(evt) {
 
 function keysDescription() {
     return [
+        "Tab: show control panel",
         "Left click: change tile",
         "Right click: remove tile",
         "Mouse wheel up: scroll level up",
         "Mouse wheel down: scroll level down",
-        "Keys from 1 to 7: change tile type",
+        "Shift + mouse move: scroll up and down",
+        "Keys from 1 to 7: change background tile type",
         "Q: monster",
         "W: plant",
         "E: crew",

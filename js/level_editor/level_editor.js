@@ -33,7 +33,6 @@ function drawLevelEditor() {
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
-
     if (showControlPanel) {
         new initControlPanel(50, 50 + camPanY);
     }
