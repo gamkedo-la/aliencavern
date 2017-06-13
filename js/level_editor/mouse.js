@@ -3,6 +3,19 @@ var iconActionToTake;
 const LEFT_CLICK = 0;
 const RIGHT_CLICK = 2;
 
+function mouseEvenets() {
+    onMouseMove();
+    onMouseDown();
+    onMouseUp();
+    onScroll();
+}
+
+function resetMouse() {
+    mouse_up = true;
+    draggedY = 0;
+    iconActionToTake = null;
+}
+
 function getMousePosition(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return {
@@ -21,35 +34,21 @@ function onIconClick(x, y, width, height, callback) {
     }
 }
 
-
-function mouseEvenets() {
+function onMouseMove() {
     canvas.addEventListener('mousemove', function (evt) {
         currentMousePos = getMousePosition(canvas, evt);
         if (!mouse_up && moveMode) {
-            var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252
-            var delta = draggedY - currentMousePos.y;
-            if (camPanY < heightOfLevel + 250) {
-                scrollCamera(delta)
-            } else if (camPanY > heightOfLevel + 250 && delta < 0) {
-                scrollCamera(-80)
-            }
-
+            dragScrollLevel();
         } else if (!moveMode) {
             setCursorPosition(evt);
         }
     });
+}
 
+function onMouseDown() {
     canvas.addEventListener('mousedown', function (evt) {
-        if (evt.button === LEFT_CLICK) {
-            if (mouse_up) {
-                mouse_up = false;
-                if (!showControlPanel && !moveMode) {
-                    change_tile();
-                } else if (showControlPanel && iconActionToTake) {
-                    iconActionToTake();
-
-                }
-            }
+        if (evt.button === LEFT_CLICK && mouse_up) {
+            LeftMouseActions();
             draggedY = currentMousePos.y;
         }
 
@@ -57,24 +56,39 @@ function mouseEvenets() {
             change_tile(0);
         }
     });
-
-    canvas.addEventListener('mouseup', function (evt) {
-        mouse_up = true;
-        draggedY = 0;
-        iconActionToTake = null;
-    });
-
-    if (window.addEventListener)
-        /** DOMMouseScroll is for mozilla. */
-        window.addEventListener('DOMMouseScroll', wheel, false);
-    /** IE/Opera. */
-    window.onmousewheel = document.onmousewheel = wheel;
 }
 
-function handle(delta) {
+
+function onMouseUp() {
+    canvas.addEventListener('mouseup', function (evt) {
+        resetMouse();
+    });
+}
+
+function onScroll() {
+    window.addEventListener('DOMMouseScroll', function (evt) {
+        var delta = 0;
+        evt.preventDefault();
+        wheelScrollLevel(delta);
+        setCursorPosition(evt);
+        evt.returnValue = false;
+    }, false);
+}
+
+function dragScrollLevel() {
+    var heightOfLevel = getVisibleLevelHeightInPx();
+    var delta = draggedY - currentMousePos.y;
+
+    if (camPanY < heightOfLevel + 250) {
+        scrollCamera(delta)
+    } else if (camPanY > heightOfLevel + 250 && delta < 0) {
+        scrollCamera(-80)
+    }
+}
+
+function wheelScrollLevel(delta) {
     delta = delta * 256;
-    var heightOfLevel = (cavernGrid.length / 14 * 64) - canvas.height - 252; // TODO 
-    console.log(delta);
+    var heightOfLevel = getVisibleLevelHeightInPx();
     if (camPanY + delta < heightOfLevel) {
         scrollCamera(-(delta * 256));
     } else if (camPanY >= heightOfLevel - 256) {
@@ -82,35 +96,14 @@ function handle(delta) {
     }
 }
 
-/** Event handler for mouse wheel event.
- */
-function wheel(event) {
-    var delta = 0;
-    if (!event) /* For IE. */
-        event = window.event;
-    if (event.wheelDelta) { /* IE/Opera. */
-        delta = event.wheelDelta / 120;
-    } else if (event.detail) { /** Mozilla case. */
-        /** In Mozilla, sign of delta is different than in IE.
-         * Also, delta is multiple of 3.
-         */
-        delta = -event.detail / 3;
+function LeftMouseActions() {
+    mouse_up = false;
+    if (!showControlPanel && !moveMode) {
+        change_tile();
+    } else if (showControlPanel && iconActionToTake) {
+        iconActionToTake();
     }
-    /** If delta is nonzero, handle it.
-     * Basically, delta is now positive if wheel was scrolled up,
-     * and negative, if wheel was scrolled down.
-     */
-    handle(delta);
-    /** Prevent default actions caused by mouse wheel.
-     * That might be ugly, but we handle scrolls somehow
-     * anyway, so don't bother here..
-     */
-    if (event.preventDefault)
-        event.preventDefault();
-    event.returnValue = false;
-    setCursorPosition(event);
 }
-
 
 function setCursorPosition(evt) {
     mousePosition = getMousePosition(canvas, evt);
@@ -123,7 +116,6 @@ function setCursorPosition(evt) {
     var tileRow = Math.floor(current_row / BRICK_W);
     selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
 }
-
 
 function preventRightClickToDisplayContextMenu() {
     canvas.oncontextmenu = function (e) {
