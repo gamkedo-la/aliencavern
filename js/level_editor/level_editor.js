@@ -165,3 +165,10 @@ function drawHint() {
 function copyLevel() {
        window.prompt("Your level:", JSON.stringify(cavernGrid));
 }
+
+function loadLevel() {
+    var level = window.prompt("Past your level below:");
+    if(level) {
+        cavernGrid = JSON.parse(level);
+    }
+}

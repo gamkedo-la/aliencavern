@@ -9,6 +9,7 @@ function initControlPanel(x, y) {
     this.drawLevelHeightControl().draw();
     this.drawKeysDescription().draw();
     this.drawCopyLevelControl().draw();
+    this.drawLoadLevelControl().draw();
 }
 
 initControlPanel.prototype = {
@@ -36,13 +37,13 @@ initControlPanel.prototype = {
         var bottomMargin = 10;
 
         return {
-            x: x,
-            y: y,
-            width: width,
-            height: height,
-            leftMargin: leftMargin,
-            topMargin: topMargin,
-            bottomMargin: bottomMargin,
+            elem_x: x,
+            elem_y: y,
+            elem_width: width,
+            elem_height: height,
+            elem_leftMargin: leftMargin,
+            elem_topMargin: topMargin,
+            elem_bottomMargin: bottomMargin,
             draw: function () {
                 drawLabel().draw()
                 drawBorder()
@@ -119,8 +120,38 @@ initControlPanel.prototype = {
         }
     },
     drawCopyLevelControl: function () {
-        var x = this.drawLevelHeightControl().x;
-        var y = this.drawLevelHeightControl().y + this.drawLevelHeightControl().height + this.drawLevelHeightControl().bottomMargin + 50;
+        var x = this.drawLevelHeightControl().elem_x;
+        var y = this.drawLevelHeightControl().elem_y + this.drawLevelHeightControl().elem_height + this.drawLevelHeightControl().elem_bottomMargin + 50;
+        var width = 120;
+        var height = 50;
+        function drawBorder() {
+            canvasContext.rect(x, y, width, height);
+            canvasContext.stroke()
+        }
+
+        return {
+            elem_x: x,
+            elem_y: y,
+            elem_width: width,
+            elem_height: height,
+            elem_height: 22,
+            elem_bottomMargin: 10,
+            onClick: function () {
+                onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, copyLevel);
+            },
+            draw: function() {
+                drawBorder();
+                canvasContext.font = this.elem_height + "px Comic Sans MS";
+                canvasContext.fillStyle = "red";
+                canvasContext.fillText("GET", this.elem_x + this.elem_width / 5 + 10, this.elem_y + 22);
+                canvasContext.fillText("LEVEL", this.elem_x + this.elem_width / 5, this.elem_y + 22 + this.elem_height);
+                this.onClick()
+            }
+        }
+    },
+    drawLoadLevelControl: function () {
+        var x = this.drawCopyLevelControl().elem_x;
+        var y = this.drawCopyLevelControl().elem_y + this.drawCopyLevelControl().elem_height + this.drawCopyLevelControl().elem_bottomMargin + 50;
         var width = 120;
         var height = 50;
         function drawBorder() {
@@ -135,20 +166,20 @@ initControlPanel.prototype = {
             elem_height: height,
             elem_height: 22,
             onClick: function () {
-                onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, copyLevel);
+                onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, loadLevel);
             },
             draw: function() {
                 drawBorder();
                 canvasContext.font = this.elem_height + "px Comic Sans MS";
                 canvasContext.fillStyle = "red";
-                canvasContext.fillText("GET", this.elem_x + this.elem_width / 5 + 10, this.elem_y + 22);
+                canvasContext.fillText("LOAD", this.elem_x + this.elem_width / 5 + 2, this.elem_y + 22);
                 canvasContext.fillText("LEVEL", this.elem_x + this.elem_width / 5, this.elem_y + 22 + this.elem_height);
                 this.onClick()
             }
         }
     },
     drawKeysDescription: function () {
-        var x = this.drawLevelHeightControl().x + this.drawLevelHeightControl().width + 100;
+        var x = this.drawLevelHeightControl().elem_x + this.drawLevelHeightControl().elem_width + 100;
         var y = this.y + 110;
 
         return {
