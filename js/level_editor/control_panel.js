@@ -10,6 +10,7 @@ function initControlPanel(x, y) {
     this.drawKeysDescription().draw();
     this.drawCopyLevelControl().draw();
     this.drawLoadLevelControl().draw();
+    this.drawResetLevelControl().draw();
 }
 
 initControlPanel.prototype = {
@@ -165,6 +166,7 @@ initControlPanel.prototype = {
             elem_width: width,
             elem_height: height,
             elem_height: 22,
+            elem_bottomMargin: 10,
             onClick: function () {
                 onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, loadLevel);
             },
@@ -173,6 +175,35 @@ initControlPanel.prototype = {
                 canvasContext.font = this.elem_height + "px Comic Sans MS";
                 canvasContext.fillStyle = "red";
                 canvasContext.fillText("LOAD", this.elem_x + this.elem_width / 5 + 2, this.elem_y + 22);
+                canvasContext.fillText("LEVEL", this.elem_x + this.elem_width / 5, this.elem_y + 22 + this.elem_height);
+                this.onClick()
+            }
+        }
+    },
+    drawResetLevelControl: function () {
+        var x = this.drawLoadLevelControl().elem_x;
+        var y = this.drawLoadLevelControl().elem_y + this.drawLoadLevelControl().elem_height + this.drawLoadLevelControl().elem_bottomMargin + 50;
+        var width = 120;
+        var height = 50;
+        function drawBorder() {
+            canvasContext.rect(x, y, width, height);
+            canvasContext.stroke()
+        }
+
+        return {
+            elem_x: x,
+            elem_y: y,
+            elem_width: width,
+            elem_height: height,
+            elem_height: 22,
+            onClick: function () {
+                onIconClick(this.elem_x, this.elem_y, this.elem_width, this.elem_height, resetLevel);
+            },
+            draw: function() {
+                drawBorder();
+                canvasContext.font = this.elem_height + "px Comic Sans MS";
+                canvasContext.fillStyle = "red";
+                canvasContext.fillText("RESET", this.elem_x + this.elem_width / 5 , this.elem_y + 22);
                 canvasContext.fillText("LEVEL", this.elem_x + this.elem_width / 5, this.elem_y + 22 + this.elem_height);
                 this.onClick()
             }

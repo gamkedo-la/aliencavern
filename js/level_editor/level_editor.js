@@ -172,3 +172,11 @@ function loadLevel() {
         cavernGrid = JSON.parse(level);
     }
 }
+
+function resetLevel() {
+    setDefaultCavern();
+    aliens = [];
+    alienPlants = [];
+    crew = [];
+    shipParts = [];
+}
