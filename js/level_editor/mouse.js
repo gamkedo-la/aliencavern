@@ -66,8 +66,8 @@ function onMouseUp() {
 }
 
 function onScroll() {
-    window.addEventListener('DOMMouseScroll', function (evt) {
-        var delta = 0;
+    canvas.addEventListener('mousewheel', function (evt) {
+        var delta = -evt.deltaY / 20;
         evt.preventDefault();
         wheelScrollLevel(delta);
         setCursorPosition(evt);
@@ -87,7 +87,7 @@ function dragScrollLevel() {
 }
 
 function wheelScrollLevel(delta) {
-    delta = delta * 256;
+    delta = delta;
     var heightOfLevel = getVisibleLevelHeightInPx();
     if (camPanY + delta < heightOfLevel) {
         scrollCamera(-(delta * 256));
