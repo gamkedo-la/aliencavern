@@ -5,7 +5,11 @@ const KEY_LEFT_ARROW = 37;
 const KEY_UP_ARROW = 38;
 const KEY_RIGHT_ARROW = 39;
 const KEY_DOWN_ARROW = 40;
-const KEY_SPACE = 32;    
+const KEY_SPACE = 32;
+const KEY_M = 77; //fire
+const KEY_Z = 90; //left
+const KEY_X = 88; //right
+
 var holdLeft = false;
 var holdRight = false;
 var holdUp = false;
@@ -23,10 +27,10 @@ function initInput() {
 }
 
 function setKeyHoldState(thisKey, setTo) {
-  if(thisKey === KEY_LEFT_ARROW) {
+  if(thisKey === KEY_LEFT_ARROW || thisKey ===KEY_Z) {
     holdLeft = setTo;
   }
-  if(thisKey === KEY_RIGHT_ARROW) {
+  if(thisKey === KEY_RIGHT_ARROW || thisKey === KEY_X) {
     holdRight = setTo;
   }
   if (thisKey === KEY_UP_ARROW || thisKey === KEY_SPACE) {
@@ -37,7 +41,12 @@ function setKeyHoldState(thisKey, setTo) {
     else if (playerOnGround === false) {
       usingJetpack = setTo; //if mid-fall, use jetpack!
     }
-  } 
+  }
+  if (thisKey === KEY_M && !missileFired) { // fire missile
+    missileFired = true;     
+    fireMissle();  
+  }
+
   if(thisKey === F1) {
     window.location.reload() // Find better way to reset game after exit from editor
     gameScreen = true;
@@ -49,6 +58,8 @@ function setKeyHoldState(thisKey, setTo) {
     gameScreen = false;
     editorScreen = true;
   }
+
+
 }
 
 function keyPressed(evt) {

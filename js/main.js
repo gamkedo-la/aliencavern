@@ -68,6 +68,7 @@ function drawAll() {
     drawGameObjects(shipParts);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
+    
     canvasContext.restore(); // undoes the .translate() used for cam scroll
 
     // doing this after .restore() so it won't scroll with the camera pan
