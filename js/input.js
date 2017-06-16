@@ -44,7 +44,7 @@ function setKeyHoldState(thisKey, setTo) {
   }
   if (thisKey === KEY_M && !missileFired) { // fire missile
     missileFired = true;     
-    fireMissle();  
+    fireMissile();  
   }
 
   if(thisKey === F1) {
