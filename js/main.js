@@ -34,6 +34,7 @@ function updateAll() {
     if(gameScreen) {
         updateScreenshake(); // "juice it...
         updateParticles(); // ...or lose it!" =)
+        updateAliens();
         playerMove();
         cameraFollow();
         drawAll();
