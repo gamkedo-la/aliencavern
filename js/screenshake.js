@@ -35,7 +35,7 @@ function updateScreenshake()
 		//console.log('screen_shakes:'+screen_shakes);
 
 		// about to finish? return to where we were when we started
-		if (screen_shakes<1)
+		if (screen_shakes < 1)
 		{
 			//console.log('screenshakes done. going back to original position.')
 			screen_shake_me.style.margin = "0";

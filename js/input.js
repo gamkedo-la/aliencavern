@@ -42,9 +42,9 @@ function setKeyHoldState(thisKey, setTo) {
       usingJetpack = setTo; //if mid-fall, use jetpack!
     }
   }
-  if (thisKey === KEY_M && !missileFired) { // fire missile
-    missileFired = true;     
-    fireMissile();  
+  if (thisKey === KEY_M && !projectiles[0].alive) { // fire missile
+    projectiles[0].alive = true;     
+    fireMissile();
   }
 
   if(thisKey === F1) {

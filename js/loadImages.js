@@ -8,7 +8,7 @@
   var crewPic = document.createElement("img");
   var shipPartPic = document.createElement("img");
   var cavernTileSheet = document.createElement("img");
-  var projectile = document.createElement("img");
+  var projectilePic = document.createElement("img");
 
     var cavernPics = []; // loading all pics in to an array
 
@@ -47,7 +47,7 @@
             {varName: shipPartPic, theFile: "./graphics/shipPart1.png"},
             {varName: cavernTileSheet,theFile: "./graphics/alien-cavern-tile-sheet.png"},
             {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock.png"},
-            {varName: projectile, theFile: "./graphics/basicProjectileSheet.png"}
+            {varName: projectilePic, theFile: "./graphics/missile1.png"}
             // {cavernType: WALL_ROCK_R, theFile: "./graphics/wallRockRight.png"},
             // {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
             // {cavernType: RIDGE_ROCK_R, theFile: "./graphics/ridgeRockRight.png"},

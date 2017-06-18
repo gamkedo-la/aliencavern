@@ -2,6 +2,7 @@ var aliens = [];
 var alienPlants = [];
 var crew = [];
 var shipParts = [];
+var projectiles = [];
 
 function GameObject(){
     this.pic = document.createElement("img");
@@ -71,4 +72,44 @@ function checkEveryCollision(objectArray){
             Sound.play("rescue", false, 0.5);
         }
     });
+}
+
+function checkMissleCollisions(){
+ //   check collsion aliens, plants, crews
+    aliens.forEach(function(element){
+        var dx = projectiles[0].x - (element.x + element.radius);
+        var dy = projectiles[0].y - (element.y + element.radius);
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < projectiles[0].radius + element.radius && element.alive) {
+            console.log("hit object");
+            projectiles[0].alive= false;
+            element.alive = false;
+        }
+    });
+
+    alienPlants.forEach(function(element){
+        var dx = projectiles[0].x - (element.x + element.radius);
+        var dy = projectiles[0].y - (element.y + element.radius);
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < projectiles[0].radius + element.radius && element.alive) {
+            console.log("hit object");
+            projectiles[0].alive= false;
+            element.alive = false;
+        }
+    });
+
+    crew.forEach(function(element){
+        var dx = projectiles[0].x - (element.x + element.radius);
+        var dy = projectiles[0].y - (element.y + element.radius);
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < projectiles[0].radius + element.radius && element.alive) {
+            console.log("hit object");
+            projectiles[0].alive= false;
+            element.alive = false;
+        }
+    });
+
+    
+
+    
 }

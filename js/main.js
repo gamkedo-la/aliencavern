@@ -12,7 +12,6 @@ window.onload = function() {
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
     loadImages();
-
     init_particles();
 }
 
@@ -23,6 +22,8 @@ function startGame(){
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+    initMissile();
+//    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
     Sound.play("cavernambient", true, 0.4);
     Sound.play("shipengine",true,0.3);
     initInput();
@@ -37,6 +38,11 @@ function updateAll() {
         updateAliens();
         playerMove();
         cameraFollow();
+        console.log(projectiles[0]);
+        if (projectiles[0].alive){
+            checkMissleCollisions();
+            moveMissile();
+        }
         drawAll();
     }
 
@@ -68,10 +74,11 @@ function drawAll() {
     drawGameObjects(crew);
     drawGameObjects(shipParts);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
+    drawGameObjects(projectiles);
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
-    
+    colorText("Z and X to move, M to fire, space for boosters", 20, 10, "white");
     canvasContext.restore(); // undoes the .translate() used for cam scroll
-
+    
     // doing this after .restore() so it won't scroll with the camera pan
     canvasContext.fillStyle = 'white';
     //canvasContext.fillText("Arrow keys to slide, scrolling demo",8,14);
