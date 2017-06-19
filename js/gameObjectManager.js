@@ -74,42 +74,27 @@ function checkEveryCollision(objectArray){
     });
 }
 
+//compare collisions between two objects and kill both objects
+function twoArrayCollisionDetect(objArr1, objArr2){
+    this.objArr1 = objArr1;
+    this.objArr2 = objArr2;
+    this.objArr2.forEach(function(element){
+        var dx = this.objArr1[0].x - (element.x + element.radius);
+        var dy = this.objArr1[0].y - (element.y + element.radius);
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < objArr1[0].radius + element.radius && element.alive) {
+            console.log("hit object");
+            objArr1[0].alive= false;
+            element.alive = false;
+        }
+    });
+}
+
 function checkMissleCollisions(){
  //   check collsion aliens, plants, crews
-    aliens.forEach(function(element){
-        var dx = projectiles[0].x - (element.x + element.radius);
-        var dy = projectiles[0].y - (element.y + element.radius);
-        var distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < projectiles[0].radius + element.radius && element.alive) {
-            console.log("hit object");
-            projectiles[0].alive= false;
-            element.alive = false;
-        }
-    });
-
-    alienPlants.forEach(function(element){
-        var dx = projectiles[0].x - (element.x + element.radius);
-        var dy = projectiles[0].y - (element.y + element.radius);
-        var distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < projectiles[0].radius + element.radius && element.alive) {
-            console.log("hit object");
-            projectiles[0].alive= false;
-            element.alive = false;
-        }
-    });
-
-    crew.forEach(function(element){
-        var dx = projectiles[0].x - (element.x + element.radius);
-        var dy = projectiles[0].y - (element.y + element.radius);
-        var distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < projectiles[0].radius + element.radius && element.alive) {
-            console.log("hit object");
-            projectiles[0].alive= false;
-            element.alive = false;
-        }
-    });
-
-    
-
+ 
+    twoArrayCollisionDetect(projectiles, aliens);
+    twoArrayCollisionDetect(projectiles, alienPlants);
+    twoArrayCollisionDetect(projectiles, crew);
     
 }

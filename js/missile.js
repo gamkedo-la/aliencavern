@@ -1,4 +1,4 @@
-var missileSpeedX = 4;
+var missileSpeedX = 15;
 
 function initMissile(){
     projectiles[0] = new GameObject();
@@ -17,7 +17,7 @@ function fireMissile(){
     }
     else
     {
-        projectiles[0].speed = 4; // hack until I figure out a neater way of doing this
+        projectiles[0].speed = missileSpeedX;
     }
 }
 
