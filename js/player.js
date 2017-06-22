@@ -29,8 +29,9 @@ function groundPlayer() {
 
     Sound.play("ground",false,0.5);
 
-    // spawn a spritesheet particle - work in progress!
-    party(playerX, playerY - player_RADIUS); // TODO define different types of particles
+    // particles where the lander feet hit the ground
+    party(playerX-24, playerY, PARTICLE_DUST); // left
+    party(playerX+24, playerY, PARTICLE_DUST); // right
 
     // rattle the screen a little
     screenshake(10);
@@ -92,9 +93,11 @@ function playerMove() {
   
     if(holdLeft) {
       playerSpeedX = -RUN_SPEED;
+      party(playerX+60,playerY+6,PARTICLE_BOOST_L);
     }
     if(holdRight) {
       playerSpeedX = RUN_SPEED;
+      party(playerX-60,playerY+6,PARTICLE_BOOST_R);
     }
     
     // testing collision detection
@@ -141,6 +144,10 @@ function playerMove() {
         jetpackFuel -= JETPACK_CONSUMPTION; //floating point numbers shouldn't be an issue here
 
         if (!Sound.isPlaying("thrust")) Sound.play("thrust", true, 0.4); // FIXME: should be looped and we change the volume
+
+        // thruster particles w wobble
+        party(playerX+28+(Math.random()*2-1),playerY+26+(Math.random()*2-1),PARTICLE_THRUST); // right
+        party(playerX-28+(Math.random()*2-1),playerY+26+(Math.random()*2-1),PARTICLE_THRUST); // left
 
     }
     if(!usingJetpack) {

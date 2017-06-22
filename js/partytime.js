@@ -7,16 +7,23 @@
  *
  */
  
+// game-specific particles.png row numbers
+const PARTICLE_DUST = 0;
+const PARTICLE_PLANT = 1;
+const PARTICLE_THRUST = 2;
+const PARTICLE_BOOST_L = 3;
+const PARTICLE_BOOST_R = 4;
+
 var particles_enabled = true;
 var particle_timestamp = (new Date()).getTime();
 var particles = []; // a SpriteList containing all of them
 var particle_w = 64;
 var particle_h = 64;
-var particle_scale = 2; // double the pixels?
+var particle_scale = 1; // double the pixels?
 var particle_offsetx = -1 * Math.round(particle_w/2) * particle_scale;
 var particle_offsety = -1 * Math.round(particle_h/2) * particle_scale;
 var particle_spritesheet_framecount = 16; // spritesheet frames per anim
-var PARTICLE_FPS = 24;
+var PARTICLE_FPS = 60; //24;
 var PARTICLE_FRAME_MS = 1000/PARTICLE_FPS; // 15 = 60fps - looks fine much slower too
 var FAR_AWAY = -999999;
 
@@ -66,7 +73,7 @@ function party(x, y, particleType, destX, destY, delayFrames) {
 		p.particle_type = particleType;
 		p.delayFrames = delayFrames; // MS3 - can be delayed by a number of frames
 		p.inactive = false;
-		p.anim_frame = particleType * particle_spritesheet_framecount;
+		p.anim_frame = 0;//particleType * particle_spritesheet_framecount;
 		p.anim_start_frame = particleType * particle_spritesheet_framecount;
 		p.anim_end_frame = p.anim_start_frame + particle_spritesheet_framecount;
 		p.anim_last_tick = particle_timestamp;
@@ -170,8 +177,16 @@ function draw_particles(camerax,cameray)
 			{
 				if (window.canvasContext) // sanity check
 				{
+					if (p.particle_type)
+					{
+						console.log('particle type ' + p.particle_type +
+						' sx:' + (p.anim_frame * particle_w) +
+						' sy:' + (p.particle_type * particle_h) +
+						' wh:' + (particle_w) + ',' + (particle_h) +
+						' xy:' + (p.x - camerax) + ',' + (p.y - cameray) + 
+						' sc:' + (particle_w * p.scale) + ',' + (particle_h * p.scale));
+					} 
 					canvasContext.drawImage(spritesheet_image,
-					// FIXME: account for spritesheet ROWS
 					p.anim_frame * particle_w,
 					p.particle_type * particle_h,
 					particle_w, particle_h,

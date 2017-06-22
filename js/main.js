@@ -38,7 +38,7 @@ function updateAll() {
         updateAliens();
         playerMove();
         cameraFollow();
-        console.log(projectiles[0]);
+        //console.log(projectiles[0]);
         if (projectiles[0].alive){
             checkMissleCollisions();
             moveMissile();
