@@ -65,6 +65,8 @@ function drawAll() {
     //drawBricks();
     drawOnlyCavernOnScreen();
 
+    draw_particles(camPanX,camPanY); // rendered early so they are underneath other tiles
+
     // if (shipPicLoaded){
     //     canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
     // }
@@ -83,7 +85,6 @@ function drawAll() {
     canvasContext.fillStyle = 'white';
     //canvasContext.fillText("Arrow keys to slide, scrolling demo",8,14);
 
-    draw_particles(camPanX,camPanY);
     //debug shootProjectile(200, 30, canvas.width / 2, canvas.height / 2, 20, 2, 5, 100);
 
 }
