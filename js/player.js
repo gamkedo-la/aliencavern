@@ -146,8 +146,8 @@ function playerMove() {
         if (!Sound.isPlaying("thrust")) Sound.play("thrust", true, 0.4); // FIXME: should be looped and we change the volume
 
         // thruster particles w wobble
-        party(playerX+28+(Math.random()*2-1),playerY+26+(Math.random()*2-1),PARTICLE_THRUST); // right
-        party(playerX-28+(Math.random()*2-1),playerY+26+(Math.random()*2-1),PARTICLE_THRUST); // left
+        party(playerX+28+(Math.random()*4-2),playerY+26+(Math.random()*4-2),PARTICLE_THRUST); // right
+        party(playerX-28+(Math.random()*4-2),playerY+26+(Math.random()*4-2),PARTICLE_THRUST); // left
 
     }
     if(!usingJetpack) {
