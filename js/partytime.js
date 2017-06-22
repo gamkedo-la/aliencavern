@@ -7,6 +7,8 @@
  *
  */
  
+const DEBUG_PARTICLES = false;
+
 // game-specific particles.png row numbers
 const PARTICLE_DUST = 0;
 const PARTICLE_PLANT = 1;
@@ -37,7 +39,7 @@ var spritesheet_image_finished_loading = false;
  */
 function party(x, y, particleType, destX, destY, delayFrames) {
 
-	console.log('party ' + x + ',' + y);
+	//console.log('party ' + x + ',' + y);
 
 	if (!particles_enabled) return;
 	if (!spritesheet_image_finished_loading) return;
@@ -59,7 +61,7 @@ function party(x, y, particleType, destX, destY, delayFrames) {
 	// we need a new particle!
 	if (!p || !p.inactive)
 	{
-		console.log('No inactive particles. Adding particle #' + pcount);
+		if (DEBUG_PARTICLES) console.log('No inactive particles. Adding particle #' + pcount);
 
 		var particle = { x : FAR_AWAY, y : FAR_AWAY, inactive : true };
 		// remember this new particle in our system and reuse
@@ -98,7 +100,7 @@ function party(x, y, particleType, destX, destY, delayFrames) {
 }
 
 function clearParticles() {
-	console.log('clearParticles');
+	if (DEBUG_PARTICLES) console.log('clearParticles');
 	particles.forEach(function (p) {
 		p.x = p.y = FAR_AWAY; // throw offscreen
 		p.inactive = true;
@@ -141,7 +143,7 @@ function updateParticles()
 				}
 
 				if (p.anim_frame >= p.anim_end_frame) {
-					//console.log('particle anim ended');
+					if (DEBUG_PARTICLES) console.log('particle anim ended');
 					p.x = p.y = FAR_AWAY; // throw offscreen
 					p.inactive = true;
 				} else {
@@ -159,7 +161,7 @@ function updateParticles()
 	if ((active_particle_count >0)
 		&& (prev_active_particle_count != active_particle_count))
 	{
-		console.log('Active particles: ' + active_particle_count);
+		if (DEBUG_PARTICLES) console.log('Active particles: ' + active_particle_count);
 		prev_active_particle_count = active_particle_count;
 	}
 }
@@ -167,7 +169,7 @@ var prev_active_particle_count = 0;
 
 function draw_particles(camerax,cameray)
 {
-	//console.log('draw_particles');
+	// if (DEBUG_PARTICLES) console.log('draw_particles');
 	if (!camerax) camerax = 0;
 	if (!cameray) cameray = 0;
 
@@ -179,12 +181,14 @@ function draw_particles(camerax,cameray)
 				{
 					if (p.particle_type)
 					{
-						console.log('particle type ' + p.particle_type +
-						' sx:' + (p.anim_frame * particle_w) +
-						' sy:' + (p.particle_type * particle_h) +
-						' wh:' + (particle_w) + ',' + (particle_h) +
-						' xy:' + (p.x - camerax) + ',' + (p.y - cameray) + 
-						' sc:' + (particle_w * p.scale) + ',' + (particle_h * p.scale));
+						if (DEBUG_PARTICLES) {
+							console.log('particle type ' + p.particle_type +
+							' sx:' + (p.anim_frame * particle_w) +
+							' sy:' + (p.particle_type * particle_h) +
+							' wh:' + (particle_w) + ',' + (particle_h) +
+							' xy:' + (p.x - camerax) + ',' + (p.y - cameray) + 
+							' sc:' + (particle_w * p.scale) + ',' + (particle_h * p.scale));
+						}
 					} 
 					canvasContext.drawImage(spritesheet_image,
 					p.anim_frame * particle_w,
@@ -200,14 +204,14 @@ function draw_particles(camerax,cameray)
 
 function init_particles()
 {
-	console.log('init_particles...');
+	if (DEBUG_PARTICLES) console.log('init_particles...');
 	spritesheet_image = new Image();
 	spritesheet_image.src = 'graphics/particles.png';
 	spritesheet_image.onload = function()	{
-		console.log('particle_image loaded.');
+		if (DEBUG_PARTICLES) console.log('particle_image loaded.');
 		spritesheet_image_finished_loading = true;
 	}
 	spritesheet_image.onerror = function() {
-		console.log('Failed to download particle_image.');
+		if (DEBUG_PARTICLES) console.log('Failed to download particle_image.');
 	}
 }
