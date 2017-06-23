@@ -65,7 +65,7 @@ function drawAll() {
     //drawBricks();
     drawOnlyCavernOnScreen();
 
-    draw_particles(camPanX,camPanY); // rendered early so they are underneath other tiles
+    draw_particles(0,0); // rendered early so they are underneath other tiles
 
     // if (shipPicLoaded){
     //     canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
