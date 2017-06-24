@@ -20,7 +20,7 @@ function startGame(){
 
     loadGameObjects(aliens, alienPic ,ALIEN);
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
-    loadGameObjects(crew, crewPic, CREW);
+    loadGameObjects(crew, crewPic, CREW, 4, 4 , 64, 64);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
     initMissile();
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
@@ -32,6 +32,12 @@ function startGame(){
 
 function updateAll() {
     // Press F1 to restart game
+
+    frameCounter++;
+    if (frameCounter > framesPerSecond){
+        frameCounter = 1;
+    }
+
     if(gameScreen) {
         updateScreenshake(); // "juice it...
         updateParticles(); // ...or lose it!" =)

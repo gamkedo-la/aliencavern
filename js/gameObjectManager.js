@@ -3,6 +3,7 @@ var alienPlants = [];
 var crew = [];
 var shipParts = [];
 var projectiles = [];
+var frameCounter = 1;
 
 function GameObject(){
     this.pic = document.createElement("img");
@@ -12,13 +13,40 @@ function GameObject(){
     this.y = 0;
     this.speed = 0;
     this.radius = 30;
+    this.frames = 1;
+    this.frameNum = 1;
+    this.frameTicks = 0;
+    this.frameWidth = 64;
+    this.frameHeight = 64;
+    this.fps = 0;
+}
+
+function manageAnimation(spriteObj){
+//    if the frame ticks are greater than the frames per sec 
+    this.gameObj = spriteObj;
+    // if more than zero ticks then animate
+    // so if ticks is one then advance the frame
+    this.gameObj.frameTicks--;
+    if (this.gameObj.frameTicks == 0){
+        this.gameObj.frameTicks = Math.round(framesPerSecond / this.gameObj.fps);
+        this.gameObj.frameNum++;
+        if (this.gameObj.frameNum > this.gameObj.frames){
+            this.gameObj.frameNum = 1;
+        }
+    }
+
 }
 
 // loads any game object from the level / cavern array
-function loadGameObjects(objectArray, objectPic, gameObjectType){
+function loadGameObjects(objectArray, objectPic, gameObjectType, noFrames, fps, frameW, frameH){
     this.objectArray = objectArray;
     this.objectPic = objectPic;
     this.gameObjectType = gameObjectType;
+    this.noFrames = noFrames;
+    this.fps = fps;
+    this.frameW = frameW;
+    this.frameH = frameH;
+
     for (var i = 0;  i < BRICK_ROWS * BRICK_COLS; i++ ){
         if (cavernGrid[i] == gameObjectType){
             if(gameScreen) {
@@ -30,17 +58,28 @@ function loadGameObjects(objectArray, objectPic, gameObjectType){
             var col = i % BRICK_COLS;
             this.objectArray[pos].x = col * BRICK_W;
             this.objectArray[pos].y = row * BRICK_H;
-            this.objectArray[pos].pic = this.objectPic;
-
+            this.objectArray[pos].pic = this.objectPic;           
+            // Set frame information if passed otherwise use default;
+            if (arguments.length > 3){
+                this.objectArray[pos].frames = this.noFrames;
+                this.objectArray[pos].fps = this.fps;
+                this.objectArray[pos].frameTicks = Math.round(framesPerSecond / this.objectArray[pos].fps);
+                this.objectArray[pos].frameHeight = this.frameH;
+                this.objectArray[pos].frameWidth = this.frameW;
+            }
         }
     }
 }
 
-function drawGameObjects(gameObject){
-    this.gameObject = gameObject;
-    this.gameObject.forEach(function(element) {
+function drawGameObjects(gameObjArr){
+    this.gameObjArr = gameObjArr;
+    this.gameObjArr.forEach(function(element) {
         if (element && element.alive){
-            canvasContext.drawImage(element.pic, element.x, element.y);
+//            canvasContext.drawImage(element.pic, element.x, element.y);
+            if (element.frameTicks){
+                manageAnimation(element);
+            }
+            canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
         }
     });
 }
