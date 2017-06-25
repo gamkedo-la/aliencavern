@@ -29,8 +29,9 @@ function startGame(){
 
     initMissile();
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
-    Sound.play("cavernambient", true, 0.4);
-    Sound.play("shipengine",true,0.3);
+// Sound.play("cavernambient", true, 0.4);
+    Sound.play("shipengine",true, 0.3);
+    Sound.play("aliencavern1", true, 0.4);
     initInput();
     playerReset();    
 }
