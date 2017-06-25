@@ -6,6 +6,7 @@ function initMissile(){
     projectiles[0].speed = missileSpeedX;
     projectiles[0].alive = false;
     projectiles[0].radius = 15;
+    projectiles[0].solid = false;
 }
 
 function fireMissile(){
@@ -19,6 +20,7 @@ function fireMissile(){
     {
         projectiles[0].speed = missileSpeedX;
     }
+    Sound.play("weaponFire", false, 0.1);
 }
 
 function moveMissile(){

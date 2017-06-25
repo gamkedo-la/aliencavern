@@ -18,20 +18,20 @@ window.onload = function() {
 function startGame(){
 	setInterval(updateAll, 1000/framesPerSecond);
 
-    loadGameObjects(aliens, alienPic ,ALIEN);
-    loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
-    loadGameObjects(crew, crewPic, CREW, 4, 4 , 64, 64);
-    loadGameObjects(shipParts, shipPartPic, SHIP_PART);
-    loadGameObjects(geysers, geyserPic, GEYSERS, 8, 8, 64, 64);
-    loadGameObjects(lava, lavaPic,LAVA,2,10,64,64);
-    loadGameObjects(spikes, spikePic, SPIKES);
-    loadGameObjects(fuelCans, fuelPic, FUEL);
+    loadGameObjects(aliens, alienPic ,ALIEN, false);
+    loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT, false);
+    loadGameObjects(crew, crewPic, CREW, false, 4, 4 , 64, 64);
+    loadGameObjects(shipParts, shipPartPic, SHIP_PART, false);
+    loadGameObjects(geysers, geyserPic, GEYSERS, true,  8, 8, 64, 64);
+    loadGameObjects(lava, lavaPic,LAVA, true, 2,10,64,64);
+    loadGameObjects(spikes, spikePic, SPIKES, true);
+    loadGameObjects(fuelCans, fuelPic, FUEL, true);
 
-    console.log(geysers);
     initMissile();
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
-    Sound.play("cavernambient", true, 0.4);
-    Sound.play("shipengine",true,0.3);
+// Sound.play("cavernambient", true, 0.4);
+    Sound.play("shipengine",true, 0.3);
+    Sound.play("aliencavern1", true, 0.4);
     initInput();
     playerReset();    
 }

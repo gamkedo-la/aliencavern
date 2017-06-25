@@ -25,6 +25,7 @@ function GameObject(){
     this.frameWidth = 64;
     this.frameHeight = 64;
     this.fps = 0;
+    this.solid = false;
 }
 
 function manageAnimation(spriteObj){
@@ -44,7 +45,7 @@ function manageAnimation(spriteObj){
 }
 
 // loads any game object from the level / cavern array
-function loadGameObjects(objectArray, objectPic, gameObjectType, noFrames, fps, frameW, frameH){
+function loadGameObjects(objectArray, objectPic, gameObjectType, solid ,noFrames, fps, frameW, frameH){
     this.objectArray = objectArray;
     this.objectPic = objectPic;
     this.gameObjectType = gameObjectType;
@@ -52,6 +53,7 @@ function loadGameObjects(objectArray, objectPic, gameObjectType, noFrames, fps, 
     this.fps = fps;
     this.frameW = frameW;
     this.frameH = frameH;
+    this.solid = solid;
 
     for (var i = 0;  i < BRICK_ROWS * BRICK_COLS; i++ ){
         if (cavernGrid[i] == gameObjectType){
@@ -64,9 +66,11 @@ function loadGameObjects(objectArray, objectPic, gameObjectType, noFrames, fps, 
             var col = i % BRICK_COLS;
             this.objectArray[pos].x = col * BRICK_W;
             this.objectArray[pos].y = row * BRICK_H;
-            this.objectArray[pos].pic = this.objectPic;           
+            this.objectArray[pos].pic = this.objectPic;
+            this.objectArray[pos].solid = this.solid;
+         
             // Set frame information if passed otherwise use default;
-            if (arguments.length > 3){
+            if (arguments.length > 4){
                 this.objectArray[pos].frames = this.noFrames;
                 this.objectArray[pos].fps = this.fps;
                 this.objectArray[pos].frameTicks = Math.round(framesPerSecond / this.objectArray[pos].fps);
@@ -129,8 +133,12 @@ function twoArrayCollisionDetect(objArr1, objArr2){
         var distance = Math.sqrt(dx * dx + dy * dy);
         if (distance < objArr1[0].radius + element.radius && element.alive) {
             console.log("hit object");
-            objArr1[0].alive= false;
-            element.alive = false;
+            if (!objArr1[0].solid){ 
+                    objArr1[0].alive= false;
+            }
+            if (!element.solid){
+                element.alive = false;
+            }
         }
     });
 }
@@ -141,5 +149,9 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, aliens);
     twoArrayCollisionDetect(projectiles, alienPlants);
     twoArrayCollisionDetect(projectiles, crew);
-    
+    if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
+        Sound.play("explosion", false, 0.1)
+        screenshake(10);
+        projectiles[0].alive = false;
+    }
 }
