@@ -79,7 +79,6 @@ function playerMove() {
             Sound.play('scrape',true,0.05); // looped and super quiet
     }
 
-
     } else { // not on the ground
       
       if (Sound.isPlaying('scrape')) Sound.stop('scrape');
@@ -102,6 +101,8 @@ function playerMove() {
     
     // testing collision detection
     checkEveryCollision (crew);
+    checkEveryCollision (fuelCans);
+    checkEveryCollision (shipParts);
 
     if(isBrickAtPixelCoord(playerX, playerY - player_RADIUS) > 0) {
       playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS + 2;
