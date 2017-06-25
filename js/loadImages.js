@@ -46,7 +46,7 @@
 
         var imageList = [
             {varName: shipPic, theFile: "./graphics/alternateship.png"},
-            {varName: alienPic, theFile: "./graphics/alien1.png"},
+            {varName: alienPic, theFile: "./graphics/squiddie.png"},
             {varName: alienPlantPic, theFile: "./graphics/alienPlant1.png"},
             {varName: alienPlantPic2, theFile: "./graphics/alienPlant2.png"},
             {varName: crewPic, theFile: "./graphics/crewNeedsHelp.png"},
