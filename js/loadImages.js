@@ -5,18 +5,23 @@
   var shipPic = document.createElement("img");
   var alienPic = document.createElement("img");
   var alienPlantPic = document.createElement("img");
+  var alienPlantPic2 = document.createElement("img");
   var crewPic = document.createElement("img");
   var shipPartPic = document.createElement("img");
   var cavernTileSheet = document.createElement("img");
   var projectilePic = document.createElement("img");
+  var fuelPic = document.createElement("img");
+  var spikePic = document.createElement("img");
+  var lavaPic = document.createElement("img");
+  var geyserPic = document.createElement("img");
 
     var cavernPics = []; // loading all pics in to an array
 
-    var wallRockLeftPic = document.createElement("img");
-    var wallRockRightPic = document.createElement("img");
-    var ridgeRockMiddlePic = document.createElement("img");
-    var ridgeRockLeftPic = document.createElement("img");
-    var ridgeRockRightPic = document.createElement("img");
+    // var wallRockLeftPic = document.createElement("img");
+    // var wallRockRightPic = document.createElement("img");
+    // var ridgeRockMiddlePic = document.createElement("img");
+    // var ridgeRockLeftPic = document.createElement("img");
+    // var ridgeRockRightPic = document.createElement("img");
 
     function countLoadedImagesAndLaunchIfReady(){
         picsToLoad-- ;
@@ -42,17 +47,17 @@
         var imageList = [
             {varName: shipPic, theFile: "./graphics/alternateship.png"},
             {varName: alienPic, theFile: "./graphics/alien1.png"},
-            {varName: alienPlantPic, theFile: "./graphics/alienPlant2.png"},
+            {varName: alienPlantPic, theFile: "./graphics/alienPlant1.png"},
+            {varName: alienPlantPic2, theFile: "./graphics/alienPlant2.png"},
             {varName: crewPic, theFile: "./graphics/crewNeedsHelp.png"},
-            {varName: shipPartPic, theFile: "./graphics/shipPart1.png"},
-            {varName: cavernTileSheet,theFile: "./graphics/alien-cavern-tile-sheet.png"},
-            {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock.png"},
-            {varName: projectilePic, theFile: "./graphics/missile1.png"}
-            // {cavernType: WALL_ROCK_R, theFile: "./graphics/wallRockRight.png"},
-            // {cavernType: RIDGE_ROCK_M, theFile: "./graphics/ridgeRockMiddle.png"},
-            // {cavernType: RIDGE_ROCK_R, theFile: "./graphics/ridgeRockRight.png"},
-            // {cavernType: RIDGE_ROCK_L, theFile: "./graphics/ridgeRockLeft.png"},
-            // {cavernType: WALL_ROCK_L, theFile: "./graphics/wallRockLeft.png"}
+            {varName: shipPartPic, theFile: "./graphics/rocketpart.png"},
+            {varName: cavernTileSheet,theFile: "./graphics/alien-cavern-tile-sheetV2.png"},
+            {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock2.png"},
+            {varName: projectilePic, theFile: "./graphics/missile1.png"},
+            {varName: fuelPic, theFile: "./graphics/fuelCan.png"},
+            {varName: spikePic, theFile: "./graphics/spikes.png"},
+            {varName: lavaPic, theFile: "./graphics/lava.png"},
+            {varName: geyserPic, theFile: "./graphics/steam-geyserNoBgnd.png"}
             ];
         
         picsToLoad = imageList.length;

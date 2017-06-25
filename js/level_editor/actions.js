@@ -29,7 +29,7 @@ function change_tile(changeTo) {
     
     if (typeof changeTo !== 'undefined') {
         cavernGrid[selectedBrickIndex] = changeTo;
-        return;
+        return;     
     }
 
     if (cavernGrid[selectedBrickIndex] < 8) {

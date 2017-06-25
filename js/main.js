@@ -22,6 +22,12 @@ function startGame(){
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW, 4, 4 , 64, 64);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
+    loadGameObjects(geysers, geyserPic, GEYSERS, 8, 8, 64, 64);
+    loadGameObjects(lava, lavaPic,LAVA,2,10,64,64);
+    loadGameObjects(spikes, spikePic, SPIKES);
+    loadGameObjects(fuelCans, fuelPic, FUEL);
+
+    console.log(geysers);
     initMissile();
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
     Sound.play("cavernambient", true, 0.4);
@@ -44,7 +50,6 @@ function updateAll() {
         updateAliens();
         playerMove();
         cameraFollow();
-        //console.log(projectiles[0]);
         if (projectiles[0].alive){
             checkMissleCollisions();
             moveMissile();
@@ -81,6 +86,10 @@ function drawAll() {
     drawGameObjects(alienPlants);
     drawGameObjects(crew);
     drawGameObjects(shipParts);
+    drawGameObjects(geysers);
+    drawGameObjects(lava);
+    drawGameObjects(spikes);
+    drawGameObjects(fuelCans);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");

@@ -3,6 +3,12 @@ var alienPlants = [];
 var crew = [];
 var shipParts = [];
 var projectiles = [];
+var geysers = [];
+var spikes = [];
+var lava = [];
+var fuelCans = [];
+
+
 var frameCounter = 1;
 
 function GameObject(){
