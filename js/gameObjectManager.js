@@ -151,6 +151,7 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, crew);
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
         Sound.play("explosion", false, 0.1)
+        screenshake(10);
         projectiles[0].alive = false;
     }
 }
