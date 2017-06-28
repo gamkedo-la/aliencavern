@@ -15,10 +15,17 @@ var player_RADIUS = 30;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
+const MAX_HEALTH = 500;
+const DAMAGE_SCRAPE = 1;
+const DAMAGE_PLANT = 25;
+const DAMAGE_SPIKE = 25;
+const DAMAGE_LAVA = 25;
+var playerHealth = MAX_HEALTH;
 
 function playerReset() {
     playerX = canvas.width/2;
     playerY = 20;
+    playerHealth = MAX_HEALTH;
 }
 
 function groundPlayer() {
@@ -59,6 +66,23 @@ function fuelRegen(regenAmount) { //made it a function for eventual regen power-
     }
 }
 
+function playerDie()
+{
+    console.log("Player DIED!");
+    playerReset();
+}
+
+function takeDamage(amount)
+{
+    if (!amount) return;
+    console.log("Taking damage: " + amount);
+
+    playerHealth -= amount;
+    if (playerHealth<1)
+        playerDie();
+
+}
+
 function playerMove() {
    if (cheatsOn){
        jetpackFuel = JETPACK_MAX_FUEL;
@@ -77,6 +101,8 @@ function playerMove() {
     {
         if (!Sound.isPlaying('scrape'))
             Sound.play('scrape',true,0.05); // looped and super quiet
+
+        takeDamage(DAMAGE_SCRAPE);
     }
 
     } else { // not on the ground

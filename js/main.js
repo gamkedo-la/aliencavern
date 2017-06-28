@@ -92,7 +92,11 @@ function drawAll() {
     drawGameObjects(fuelCans);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
-    colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
+    
+    // FIXME: turn into proper GUI elements
+    colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
+    colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
+    
     colorText("Z and X to move, M to fire, space for boosters", 20, 10, "white");
     canvasContext.restore(); // undoes the .translate() used for cam scroll
     
