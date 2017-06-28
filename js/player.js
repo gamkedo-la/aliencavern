@@ -15,11 +15,14 @@ var player_RADIUS = 30;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
-const MAX_HEALTH = 500;
+const MAX_HEALTH = 1000;
 const DAMAGE_SCRAPE = 1;
 const DAMAGE_PLANT = 25;
 const DAMAGE_SPIKE = 25;
 const DAMAGE_LAVA = 25;
+const DAMAGE_CREW = -150; // you GAIN some health! =)
+const DAMAGE_GROUND = 5;
+const DAMAGE_BUMP = 1;
 var playerHealth = MAX_HEALTH;
 
 function playerReset() {
@@ -42,6 +45,8 @@ function groundPlayer() {
 
     // rattle the screen a little
     screenshake(10);
+    
+    takeDamage(DAMAGE_GROUND);
 
 }
 
@@ -78,8 +83,12 @@ function takeDamage(amount)
     console.log("Taking damage: " + amount);
 
     playerHealth -= amount;
+    if (playerHealth>MAX_HEALTH)
+        playerHealth=MAX_HEALTH;
+
     if (playerHealth<1)
         playerDie();
+
 
 }
 
@@ -148,6 +157,7 @@ function playerMove() {
      || isBrickAtPixelCoord(playerX-player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+      takeDamage(DAMAGE_BUMP);
 	  playerSpeedX = 0;
     }
 
@@ -155,6 +165,7 @@ function playerMove() {
      || isBrickAtPixelCoord(playerX+player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+      takeDamage(DAMAGE_BUMP);
 	  playerSpeedX = 0;
     }
   
