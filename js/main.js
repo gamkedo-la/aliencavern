@@ -7,7 +7,7 @@ window.onload = function() {
     }
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-
+    setupMouseEvents();
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');

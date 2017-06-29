@@ -16,6 +16,8 @@ const key_e = 69;
 const key_r = 82;
 const key_t = 84;
 const key_y = 89;
+const key_up_arrow = 38;
+const key_down_arrow = 40;
 
 function initKeybindings() {
     document.addEventListener('keydown', keyDownBindings);
@@ -67,6 +69,13 @@ function keyDownBindings(evt) {
         case tab: 
             showControlPanel = true;
             return;
+        case key_up_arrow:
+            scrollCamera(-500000);
+            return;
+        case key_down_arrow:
+            scrollCamera(500000);
+            return;
+        
     }
 }
 

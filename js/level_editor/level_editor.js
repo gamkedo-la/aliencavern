@@ -5,6 +5,7 @@ var selectedBrickIndex;
 var moveMode = false;
 var showControlPanel = false;
 var draggedY = 0;
+//mouseEvenets();
 
 function levelEditorInitialization() {
     preventRightClickToDisplayContextMenu();
@@ -16,14 +17,23 @@ function levelEditorInitialization() {
 }
 
 function drawLevelEditor() {
+    canvasContext.save();
+    canvasContext.translate(-camPanX, -camPanY);
     drawOnlyCavernOnScreen();
     drawObjects();
     drawHint();
-
-    mouseEvenets();
-
-    showControlPanel ? new initControlPanel(50, 50 + camPanY) :
+    if (showControlPanel == false){
         drawHighlightRect(current_row, current_column);
+    }
+    canvasContext.restore();
+    if (showControlPanel) {
+        new initControlPanel(50, 50);
+    }
+
+    
+
+
+        
 }
 
 
@@ -57,9 +67,14 @@ function drawHighlightRect(x, y) {
 }
 
 function drawHint() {
-    canvasContext.font = "12px Comic Sans MS";
+    canvasContext.font = "20px Comic Sans MS";
     canvasContext.fillStyle = "white";
     canvasContext.fillText("Press TAB to show control panel", 5, 15 + camPanY);
+    var heightOfLevel = getVisibleLevelHeightInPx();
+    var percDepth = Math.floor(100* camPanY / heightOfLevel);
+    var tileDepth = Math.floor(camPanY / BRICK_H);
+    canvasContext.fillText("Tile depth row " + tileDepth + " " + percDepth + "%", 5, 30 + camPanY);
+    
 }
 
 
