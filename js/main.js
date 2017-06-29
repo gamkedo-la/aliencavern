@@ -109,5 +109,15 @@ function drawAll() {
     colorRect(10,canvas.height-40,canvas.width-20,30,"rgba(66,00,00,0.4)"); // border
     colorRect(15,canvas.height-35,(canvas.width-30)*(playerHealth/MAX_HEALTH),20,"rgba(255,00,00,0.4)"); // hp
 
+    // draw the astronaut rescue counter
+    for (var crewloop=0; crewloop<RESCUES_REQUIRED; crewloop++)
+    {
+        if (rescueCounter > crewloop)
+            crewfill = "rgba(255,255,255,0.5)";
+        else
+            crewfill = "rgba(255,0,0,0.2)";
+       
+        colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+    }
 
 }

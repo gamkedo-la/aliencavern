@@ -119,7 +119,8 @@ function checkEveryCollision(objectArray){
             element.alive = false;
             console.log("picked up crew");
             Sound.play("rescue", false, 0.5);
-            takeDamage(DAMAGE_CREW);
+            takeDamage(DAMAGE_CREW); // gain health
+            rescueAstronaut();
         }
     });
 }

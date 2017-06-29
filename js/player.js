@@ -25,10 +25,14 @@ const DAMAGE_GROUND = 5;
 const DAMAGE_BUMP = 1;
 var playerHealth = MAX_HEALTH;
 
+const RESCUES_REQUIRED = 6; // to complete level
+var rescueCounter = 0; // how many crew rescued?
+
 function playerReset() {
     playerX = canvas.width/2;
     playerY = 20;
     playerHealth = MAX_HEALTH;
+    rescueCounter = 0;
 }
 
 function groundPlayer() {
@@ -77,6 +81,21 @@ function playerDie()
     playerReset();
 }
 
+function rescueAstronaut()
+{
+    rescueCounter++;
+
+    console.log("rescueAstronaut " + rescueCounter + " of " + RESCUES_REQUIRED);
+
+    if (rescueCounter>=RESCUES_REQUIRED)
+    {
+        // TODO: win the game? finish the level? GAME OVER?
+        console.log("Crew rescued! Level complete!")
+        playerReset();
+    }
+
+}
+
 function takeDamage(amount)
 {
     if (!amount) return;
@@ -88,7 +107,6 @@ function takeDamage(amount)
 
     if (playerHealth<1)
         playerDie();
-
 
 }
 
