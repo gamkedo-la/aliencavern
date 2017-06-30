@@ -69,6 +69,8 @@ function loadGameObjects(objectArray, objectPic, gameObjectType, solid ,noFrames
             this.objectArray[pos].y = row * BRICK_H;
             this.objectArray[pos].pic = this.objectPic;
             this.objectArray[pos].solid = this.solid;
+            // remember what kind of thing we are
+            this.gameObjectType = gameObjectType;
          
             // Set frame information if passed otherwise use default;
             if (arguments.length > 4){

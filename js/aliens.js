@@ -5,13 +5,17 @@ const ALIEN_MOVE_SPEED = 16; // pixels per second
 const ALIEN_MOVE_RANGE = 32; // pixels back and forth
 
 var ai_timestamp = 0;
+var ai_prev_timestamp = 0;
+var ai_time_since_last_update = 0; // in seconds
 
 function updateAliens()
 {
 	if (!window.squiddies && !window.biters) return; // sanity check
-	
+
 	ai_timestamp = performance.now();
-	
+	ai_time_since_last_update = ai_timestamp - ai_prev_timestamp;
+	ai_prev_timestamp = ai_timestamp;
+
 	squiddies.forEach(alienAI);
 	biters.forEach(alienAI);
 }
