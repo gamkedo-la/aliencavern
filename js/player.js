@@ -15,10 +15,24 @@ var player_RADIUS = 30;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
+const MAX_HEALTH = 1000;
+const DAMAGE_SCRAPE = 1;
+const DAMAGE_PLANT = 25;
+const DAMAGE_SPIKE = 25;
+const DAMAGE_LAVA = 25;
+const DAMAGE_CREW = -150; // you GAIN some health! =)
+const DAMAGE_GROUND = 5;
+const DAMAGE_BUMP = 1;
+var playerHealth = MAX_HEALTH;
+
+const RESCUES_REQUIRED = 6; // to complete level
+var rescueCounter = 0; // how many crew rescued?
 
 function playerReset() {
     playerX = canvas.width/2;
     playerY = 20;
+    playerHealth = MAX_HEALTH;
+    rescueCounter = 0;
 }
 
 function groundPlayer() {
@@ -35,6 +49,8 @@ function groundPlayer() {
 
     // rattle the screen a little
     screenshake(10);
+    
+    takeDamage(DAMAGE_GROUND);
 
 }
 
@@ -59,6 +75,41 @@ function fuelRegen(regenAmount) { //made it a function for eventual regen power-
     }
 }
 
+function playerDie()
+{
+    console.log("Player DIED!");
+    playerReset();
+}
+
+function rescueAstronaut()
+{
+    rescueCounter++;
+
+    console.log("rescueAstronaut " + rescueCounter + " of " + RESCUES_REQUIRED);
+
+    if (rescueCounter>=RESCUES_REQUIRED)
+    {
+        // TODO: win the game? finish the level? GAME OVER?
+        console.log("Crew rescued! Level complete!")
+        playerReset();
+    }
+
+}
+
+function takeDamage(amount)
+{
+    if (!amount) return;
+    console.log("Taking damage: " + amount);
+
+    playerHealth -= amount;
+    if (playerHealth>MAX_HEALTH)
+        playerHealth=MAX_HEALTH;
+
+    if (playerHealth<1)
+        playerDie();
+
+}
+
 function playerMove() {
    if (cheatsOn){
        jetpackFuel = JETPACK_MAX_FUEL;
@@ -77,6 +128,8 @@ function playerMove() {
     {
         if (!Sound.isPlaying('scrape'))
             Sound.play('scrape',true,0.05); // looped and super quiet
+
+        takeDamage(DAMAGE_SCRAPE);
     }
 
     } else { // not on the ground
@@ -122,6 +175,7 @@ function playerMove() {
      || isBrickAtPixelCoord(playerX-player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+      takeDamage(DAMAGE_BUMP);
 	  playerSpeedX = 0;
     }
 
@@ -129,6 +183,7 @@ function playerMove() {
      || isBrickAtPixelCoord(playerX+player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
       if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+      takeDamage(DAMAGE_BUMP);
 	  playerSpeedX = 0;
     }
   

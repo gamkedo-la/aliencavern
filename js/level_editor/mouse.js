@@ -3,11 +3,11 @@ var iconActionToTake;
 const LEFT_CLICK = 0;
 const RIGHT_CLICK = 2;
 
-function mouseEvenets() {
+function setupMouseEvents() {
     onMouseMove();
     onMouseDown();
     onMouseUp();
-    onScroll();
+    // onScroll();
 }
 
 function resetMouse() {
@@ -65,11 +65,12 @@ function onMouseUp() {
     });
 }
 
+// NOTE - not currently being used
 function onScroll() {
     canvas.addEventListener('mousewheel', function (evt) {
         var delta = -evt.deltaY / 20;
         evt.preventDefault();
-        wheelScrollLevel(delta);
+        // scrollLevelCamera(delta); // NOW USE camera.js scrollcamera()
         setCursorPosition(evt);
         evt.returnValue = false;
     }, false);
@@ -83,16 +84,6 @@ function dragScrollLevel() {
         scrollCamera(delta)
     } else if (camPanY > heightOfLevel + 250 && delta < 0) {
         scrollCamera(-80)
-    }
-}
-
-function wheelScrollLevel(delta) {
-    delta = delta;
-    var heightOfLevel = getVisibleLevelHeightInPx();
-    if (camPanY + delta < heightOfLevel) {
-        scrollCamera(-(delta * 256));
-    } else if (camPanY >= heightOfLevel - 256) {
-        scrollCamera(-(Math.abs(delta) * 256));
     }
 }
 

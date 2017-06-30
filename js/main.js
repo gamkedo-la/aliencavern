@@ -7,7 +7,7 @@ window.onload = function() {
     }
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-
+    setupMouseEvents();
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
@@ -64,7 +64,6 @@ function updateAll() {
     }
 }
 
-
 function drawAll() {
     // drawing black to erase previous frame, doing before .translate() since
     // its coordinates are not supposed to scroll when the camera view does
@@ -94,7 +93,11 @@ function drawAll() {
     drawGameObjects(fuelCans);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
-    colorText("Fuel: "+jetpackFuel.toFixed(2), playerX, playerY+10, "white");
+    
+    // FIXME: turn into proper GUI elements
+    colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
+    colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
+    
     colorText("Z and X to move, M to fire, space for boosters", 20, 10, "white");
     canvasContext.restore(); // undoes the .translate() used for cam scroll
     
@@ -103,5 +106,20 @@ function drawAll() {
     //canvasContext.fillText("Arrow keys to slide, scrolling demo",8,14);
 
     //debug shootProjectile(200, 30, canvas.width / 2, canvas.height / 2, 20, 2, 5, 100);
+
+    // draw the health bar
+    colorRect(10,canvas.height-40,canvas.width-20,30,"rgba(66,00,00,0.4)"); // border
+    colorRect(15,canvas.height-35,(canvas.width-30)*(playerHealth/MAX_HEALTH),20,"rgba(255,00,00,0.4)"); // hp
+
+    // draw the astronaut rescue counter
+    for (var crewloop=0; crewloop<RESCUES_REQUIRED; crewloop++)
+    {
+        if (rescueCounter > crewloop)
+            crewfill = "rgba(255,255,255,0.5)";
+        else
+            crewfill = "rgba(255,0,0,0.2)";
+       
+        colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+    }
 
 }
