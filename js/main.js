@@ -18,7 +18,8 @@ window.onload = function() {
 function startGame(){
 	setInterval(updateAll, 1000/framesPerSecond);
 
-    loadGameObjects(aliens, alienPic ,ALIEN, false);
+    loadGameObjects(squiddies, alienSquidPic , ALIEN_SQUID, false, 2, 3, 64, 64);
+	loadGameObjects(biters, alienBiterPic, ALIEN_BITER, false, 2, 3, 64, 64);
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT, false);
     loadGameObjects(crew, crewPic, CREW, false, 4, 4 , 64, 64);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART, false);
@@ -82,7 +83,8 @@ function drawAll() {
     //     canvasContext.drawImage(shipPic, playerX - shipPic.width, playerY - shipPic.height);
     // }
     //colorCircle(playerX, playerY, 10, 'yellow');
-    drawGameObjects(aliens);
+    drawGameObjects(squiddies);
+	drawGameObjects(biters);
     drawGameObjects(alienPlants);
     drawGameObjects(crew);
     drawGameObjects(shipParts);

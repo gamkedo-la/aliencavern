@@ -3,7 +3,8 @@
     
   var picsToLoad = 0; // set with imageList
   var shipPic = document.createElement("img");
-  var alienPic = document.createElement("img");
+  var alienSquidPic = document.createElement("img");
+  var alienBiterPic = document.createElement("img");
   var alienPlantPic = document.createElement("img");
   var alienPlantPic2 = document.createElement("img");
   var crewPic = document.createElement("img");
@@ -46,7 +47,8 @@
 
         var imageList = [
             {varName: shipPic, theFile: "./graphics/alternateship.png"},
-            {varName: alienPic, theFile: "./graphics/squiddie.png"},
+            {varName: alienSquidPic, theFile: "./graphics/squidSheet.png"},
+			{varName: alienBiterPic, theFile: "./graphics/biterSheet.png"},
             {varName: alienPlantPic, theFile: "./graphics/alienPlant1.png"},
             {varName: alienPlantPic2, theFile: "./graphics/alienPlant2.png"},
             {varName: crewPic, theFile: "./graphics/crewNeedsHelp.png"},

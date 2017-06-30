@@ -8,11 +8,12 @@ var ai_timestamp = 0;
 
 function updateAliens()
 {
-	if (!window.aliens) return; // sanity check
+	if (!window.squiddies && !window.biters) return; // sanity check
 	
 	ai_timestamp = performance.now();
 	
-	aliens.forEach(alienAI);
+	squiddies.forEach(alienAI);
+	biters.forEach(alienAI);
 }
 
 function alienAI(me)

@@ -1,4 +1,5 @@
-var aliens = [];
+var squiddies = [];
+var biters = [];
 var alienPlants = [];
 var crew = [];
 var shipParts = [];
@@ -76,6 +77,15 @@ function loadGameObjects(objectArray, objectPic, gameObjectType, solid ,noFrames
                 this.objectArray[pos].frameTicks = Math.round(framesPerSecond / this.objectArray[pos].fps);
                 this.objectArray[pos].frameHeight = this.frameH;
                 this.objectArray[pos].frameWidth = this.frameW;
+				
+				// Randomize starting frame so the animations aren't all synced
+				switch(gameObjectType) {
+					case ALIEN_SQUID:
+					case ALIEN_BITER:
+					case CREW:
+						this.objectArray[pos].frameNum = 1 + Math.floor(Math.random() * this.noFrames);
+						break;
+				}
             }
         }
     }
