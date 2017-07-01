@@ -2,18 +2,19 @@
 // made for Gamkedo by McFunkypants
 
 const ALIEN_MOVE_SPEED = 16; // pixels per second
-const ALIEN_MOVE_RANGE = 32; // pixels back and forth
+const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
+const AI_SEEK_RANGE = 800; // player must be nearby to be noticed
 
 var ai_timestamp = 0;
 var ai_prev_timestamp = 0;
-var ai_time_since_last_update = 0; // in seconds
+var ai_seconds_since_last_update = 0;
 
 function updateAliens()
 {
 	if (!window.squiddies && !window.biters) return; // sanity check
 
 	ai_timestamp = performance.now();
-	ai_time_since_last_update = ai_timestamp - ai_prev_timestamp;
+	ai_seconds_since_last_update = ai_timestamp - ai_prev_timestamp;
 	ai_prev_timestamp = ai_timestamp;
 
 	squiddies.forEach(alienAI);
@@ -38,6 +39,27 @@ function alienAI(me)
 	var distanceFromHome = dist(me.x,me.y,me.ai_spawnX,me.ai_spawnY);
 	//console.log('AI debug: distanceFromHome='+distanceFromHome)
 
-	// simple sin wave back and forth, with offset so they don't move in phase
-	me.x = me.ai_spawnX + (Math.sin(me.ai_spawnY + (ai_timestamp / 314)) * ALIEN_MOVE_SPEED);
+	var distanceFromPlayer = dist(me.x,me.y,playerX,playerY);
+	//console.log('AI debug: distanceFromPlayer='+distanceFromPlayer)
+
+	if (me.gameObjectType == ALIEN_SQUID)
+	{
+		console.log('AI debug: ALIEN_SQUID wobble!');
+		// simple sin wave back and forth, with offset so they don't move in phase
+		me.x = me.ai_spawnX + (Math.sin(me.ai_spawnY + (ai_timestamp / 314)) * ALIEN_MOVE_SPEED);
+	}
+	else // if (me.gameObjectType == ALIEN_BITER)
+	{
+		// move towards player within a range
+		if ((distanceFromHome < ALIEN_MOVE_RANGE) && (distanceFromPlayer < AI_SEEK_RANGE))
+		{
+			console.log('AI debug: ALIEN_BITER seeking distanceFromPlayer='+distanceFromPlayer+' distanceFromHome='+distanceFromHome);
+			var moveDist = ai_seconds_since_last_update * ALIEN_MOVE_SPEED;
+			if (me.x < playerX) me.x += moveDist;
+			if (me.x > playerX) me.x -= moveDist;
+			if (me.y < playerY) me.y += moveDist;
+			if (me.y > playerY) me.y -= moveDist;
+		}
+		
+	}
 }
