@@ -3,7 +3,7 @@
 
 const ALIEN_MOVE_SPEED = 16; // pixels per second
 const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
-const AI_SEEK_RANGE = 800; // player must be nearby to be noticed
+const AI_SEEK_RANGE = 200; // player must be nearby to be noticed
 
 var ai_timestamp = 0;
 var ai_prev_timestamp = 0;
