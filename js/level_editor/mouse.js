@@ -46,22 +46,24 @@ function onMouseMove() {
 }
 
 function onMouseDown() {
-    canvas.addEventListener('mousedown', function (evt) {
-        if (evt.button === LEFT_CLICK && mouse_up) {
-            LeftMouseActions();
-            draggedY = currentMousePos.y;
-        }
+   	canvas.addEventListener('mousedown', function (evt) {
+		if(window.editorScreen == true) {
+       		if (evt.button === LEFT_CLICK && mouse_up) {
+           		LeftMouseActions();
+           		draggedY = currentMousePos.y;
+       		}
 
-        if (evt.button === RIGHT_CLICK) {
-            change_tile(0);
-        }
-    });
+       		if (evt.button === RIGHT_CLICK) {
+           		change_tile(0);
+       		}
+		}
+   	});
 }
 
 
 function onMouseUp() {
     canvas.addEventListener('mouseup', function (evt) {
-        resetMouse();
+       	if(window.editorScreen == true) resetMouse();
     });
 }
 
