@@ -9,6 +9,14 @@ function drawBitmapWithRotation(useBitmap, atX, atY, withAng) {
     
 }
 
+function flipSprite(sprite) {
+	canvasContext.save();
+	canvasContext.translate(sprite.x + sprite.frameWidth, sprite.y);
+	canvasContext.scale(-1, 1);
+	canvasContext.drawImage(sprite.pic, ((sprite.frameNum - 1) * sprite.frameWidth), 0, sprite.frameWidth, sprite.frameHeight, 0, 0, sprite.frameWidth, sprite.frameHeight);
+	canvasContext.restore();
+}
+
 function colorRect(topLeftX,topLeftY, boxWidth,boxHeight, fillColor) {
 	canvasContext.fillStyle = fillColor;
 	canvasContext.fillRect(topLeftX,topLeftY, boxWidth,boxHeight);

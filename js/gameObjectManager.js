@@ -27,6 +27,7 @@ function GameObject(){
     this.frameHeight = 64;
     this.fps = 0;
     this.solid = false;
+	this.flip = false;
 }
 
 function manageAnimation(spriteObj){
@@ -101,7 +102,8 @@ function drawGameObjects(gameObjArr){
             if (element.frameTicks){
                 manageAnimation(element);
             }
-            canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
+			if(element.flip) flipSprite(element);
+            else canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
         }
     });
 }

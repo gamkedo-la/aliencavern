@@ -46,9 +46,12 @@ function alienAI(me)
 
 	if (me.gameObjectType == ALIEN_SQUID)
 	{
+		var oldX = me.x;
 		// console.log('AI debug: ALIEN_SQUID wobble!');
 		// simple sin wave back and forth, with offset so they don't move in phase
 		me.x = me.ai_spawnX + (Math.sin(me.ai_spawnY + (ai_timestamp / 314)) * ALIEN_MOVE_SPEED);
+		if(me.x < oldX) me.flip = true;
+		else me.flip = false;
 	}
 	else // if (me.gameObjectType == ALIEN_BITER)
 	{
@@ -57,8 +60,14 @@ function alienAI(me)
 		if ((distanceFromHome < ALIEN_MOVE_RANGE) && (distanceFromPlayer < AI_SEEK_RANGE))
 		{
 			//console.log('AI debug: ALIEN_BITER seeking '+distanceFromPlayer+' until '+distanceFromHome);
-			if (me.x < playerX) me.x += moveDist;
-			if (me.x > playerX) me.x -= moveDist;
+			if (me.x < playerX) {
+				me.x += moveDist;
+				me.flip = true;
+			}
+			if (me.x > playerX) {
+				me.x -= moveDist;
+				me.flip = false;
+			}
 			if (me.y < playerY) me.y += moveDist;
 			if (me.y > playerY) me.y -= moveDist;
 		}
