@@ -1,7 +1,13 @@
 function removeImgFromBrick() {
-    aliens = aliens.map(function (alien, index) {
-        if (alien && isInRange(alien)) {
-            aliens.splice(index, 1);
+    squiddies = squiddies.map(function (squid, index) {
+        if (squid && isInRange(squid)) {
+            squiddies.splice(index, 1);
+        }
+    });
+	
+	biters = biters.map(function (biter, index) {
+        if (biter && isInRange(biter)) {
+            biters.splice(index, 1);
         }
     });
 

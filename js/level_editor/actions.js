@@ -37,8 +37,10 @@ function change_tile(changeTo) {
     } else if (cavernGrid[selectedBrickIndex] === 8) {
         cavernGrid[selectedBrickIndex] = 20;
     } else if (cavernGrid[selectedBrickIndex] === 20) {
-        cavernGrid[selectedBrickIndex] = 21;
-    } else if (cavernGrid[selectedBrickIndex] === 21) {
+        cavernGrid[selectedBrickIndex] = 24;
+    } else if(cavernGrid[selectedBrickIndex] === 24) {
+		cavernGrid[selectedBrickIndex] = 21;
+	} else if (cavernGrid[selectedBrickIndex] === 21) {
         cavernGrid[selectedBrickIndex] = 30;
     } else if (cavernGrid[selectedBrickIndex] === 30) {
         cavernGrid[selectedBrickIndex] = 31;

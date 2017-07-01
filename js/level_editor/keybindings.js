@@ -11,6 +11,7 @@ const key_7 = 55;
 const key_8 = 56;
 const key_9 = 57;
 const key_q = 81;
+const key_v = 86;
 const key_w = 87;
 const key_e = 69;
 const key_r = 82;
@@ -54,6 +55,9 @@ function keyDownBindings(evt) {
         case key_q:
             change_tile(20);
             return;
+		case key_v:
+			change_tile(24);
+			return;
         case key_w:
             change_tile(21);
             return;
@@ -100,7 +104,8 @@ function keysDescription() {
         "Mouse wheel down: scroll level down",
         "Shift + mouse move: scroll up and down",
         "Keys from 1 to 7: change background tile type",
-        "Q: monster",
+        "Q: squiddie",
+		"V: biter",
         "W: plant",
         "E: crew",
         "R: jetpack"

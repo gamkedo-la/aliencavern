@@ -38,11 +38,13 @@ function drawLevelEditor() {
 
 
 function drawObjects() {
-    drawGameObjects(aliens);
+	drawGameObjects(squiddies);
+	drawGameObjects(biters);
     drawGameObjects(alienPlants);
     drawGameObjects(crew);
     drawGameObjects(shipParts);
-    loadGameObjects(aliens, alienPic, ALIEN);
+	loadGameObjects(squiddies, alienSquidPic, ALIEN_SQUID);
+	loadGameObjects(biters, alienBiterPic, ALIEN_BITER);
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
     loadGameObjects(crew, crewPic, CREW);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART);
@@ -84,7 +86,8 @@ function setCamera() {
 }
 
 function clearObjects() {
-    aliens = [];
+	squiddies = [];
+	biters = [];
     alienPlants = [];
     crew = [];
     shipParts = [];
