@@ -162,7 +162,8 @@ function twoArrayCollisionDetect(objArr1, objArr2){
 function checkMissleCollisions(){
  //   check collsion aliens, plants, crews
  
-    twoArrayCollisionDetect(projectiles, aliens);
+    twoArrayCollisionDetect(projectiles, squiddies);
+    twoArrayCollisionDetect(projectiles, biters);
     twoArrayCollisionDetect(projectiles, alienPlants);
     twoArrayCollisionDetect(projectiles, crew);
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
