@@ -26,7 +26,7 @@ function startGame(){
     loadGameObjects(geysers, geyserPic, GEYSERS, true,  8, 8, 64, 64);
     loadGameObjects(lava, lavaPic,LAVA, true, 2,10,64,64);
     loadGameObjects(spikes, spikePic, SPIKES, true);
-    loadGameObjects(fuelCans, fuelPic, FUEL, true);
+    loadGameObjects(fuelCans, fuelPic, FUEL, true, 8, 12, 64, 64);
 
     initMissile();
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
@@ -97,8 +97,19 @@ function drawAll() {
     // FIXME: turn into proper GUI elements
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
     colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
-    
-    colorText("Z and X to move, M to fire, space for boosters", 20, 10, "white");
+    canvasContext.font = "24px Comic Sans MS";
+    canvasContext.fillStyle = "RED";
+    canvasContext.fillText("Z and X to move, M to fire, SPACE for boosters", 20, 30);
+    canvasContext.fillStyle = "WHITE";
+    canvasContext.fillText("Z and X to move, M to fire, SPACE for boosters", 22, 32);
+
+    canvasContext.fillStyle = "RED";
+    canvasContext.fillText("Press F2 for level editor", 20, 60);
+    canvasContext.fillStyle = "YELLOW";
+    canvasContext.fillText("Press F2 for level editor", 22, 62);
+
+
+
     canvasContext.restore(); // undoes the .translate() used for cam scroll
     
     // doing this after .restore() so it won't scroll with the camera pan

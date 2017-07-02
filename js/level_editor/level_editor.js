@@ -28,12 +28,7 @@ function drawLevelEditor() {
     canvasContext.restore();
     if (showControlPanel) {
         new initControlPanel(50, 50);
-    }
-
-    
-
-
-        
+    }  
 }
 
 

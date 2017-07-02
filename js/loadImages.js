@@ -56,7 +56,7 @@
             {varName: cavernTileSheet,theFile: "./graphics/alien-cavern-tile-sheetV2.png"},
             {cavernType: BKGND_ROCK, theFile: "./graphics/backgroundRock2.png"},
             {varName: projectilePic, theFile: "./graphics/missile1.png"},
-            {varName: fuelPic, theFile: "./graphics/fuelCan.png"},
+            {varName: fuelPic, theFile: "./graphics/fuel_pickup.png"},
             {varName: spikePic, theFile: "./graphics/spikes.png"},
             {varName: lavaPic, theFile: "./graphics/lava.png"},
             {varName: geyserPic, theFile: "./graphics/steam-geyserNoBgnd.png"}
