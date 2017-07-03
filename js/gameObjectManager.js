@@ -149,7 +149,15 @@ function twoArrayCollisionDetect(objArr1, objArr2){
         var distance = Math.sqrt(dx * dx + dy * dy);
         if (distance < objArr1[0].radius + element.radius && element.alive) {
             console.log("hit object");
-			party(element.x + element.radius, element.y + element.radius, PARTICLE_EXPLOSION);
+			if(element.gameObjectType == ALIEN_SQUID) {
+				party(element.x + element.radius, element.y + element.radius, 
+					PARTICLE_SQUIDDIE_EXPLOSION);
+			}
+			
+			else {
+				party(element.x + element.radius, element.y + element.radius, PARTICLE_EXPLOSION);
+			}
+			
             if (!objArr1[0].solid){ 
                     objArr1[0].alive= false;
             }
