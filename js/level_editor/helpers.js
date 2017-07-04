@@ -36,5 +36,7 @@ function isInRange(object) {
 }
 
 function getVisibleLevelHeightInPx() {
-    return (cavernGrid.length / 14 * 64) - canvas.height - 252;
+    return ((cavernGrid.length / BRICK_COLS) * BRICK_H);
+    // return ((cavernGrid.length / BRICK_COLS) * BRICK_H) - canvas.height;
+//    return (cavernGrid.length / 14 * 64) - canvas.height - 252;
 }

@@ -49,13 +49,13 @@ function cameraFollow() {
 }
 
 function scrollCamera(y) {
-    y = y / SCROLL_SPEED
+    y = y / SCROLL_SPEED;
     camPanX = 0;
     camPanY += y;
+    
     var heightOfLevel = getVisibleLevelHeightInPx();
-
-    if(camPanY > heightOfLevel) {
-        camPanY = heightOfLevel;
+    if(camPanY > (heightOfLevel - canvas.height)) {
+        camPanY = heightOfLevel - canvas.height;
     } else if(camPanY < 0){
         camPanY = 0;
     }

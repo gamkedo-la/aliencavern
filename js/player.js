@@ -1,7 +1,7 @@
 const GROUND_FRICTION = 0.01;
 const AIR_RESISTANCE = 1;
 const GRAVITY = 0.08;
-const RUN_SPEED = 3.0; // org 4.0
+const RUN_SPEED = 5.0; // org 4.0
 const JUMP_POWER = 3.0;  // org 4.0
 const JETPACK_UPTHRUST = 0.10;
 const JETPACK_CONSUMPTION = 0.05;

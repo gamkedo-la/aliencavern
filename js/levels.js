@@ -4,7 +4,6 @@ const BRICK_GAP = 1;
 const BRICK_COLS = 14;
 const BRICK_ROWS = 54;
 
-
 const BKGND_ROCK = 0;
 
 const ALIEN_SQUID = 20;
@@ -23,7 +22,6 @@ const SPIKES = 43;
 
 // Note tiles 0 - 9 are all cavern tiles
 // 0 = Background
-
 // for demo / pitch only
 var cavernGrid = 
 [8,8,8,2,5,0,0,0,7,2,2,2,8,8,

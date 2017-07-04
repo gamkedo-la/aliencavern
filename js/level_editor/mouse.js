@@ -79,14 +79,20 @@ function onScroll() {
 }
 
 function dragScrollLevel() {
-    var heightOfLevel = getVisibleLevelHeightInPx();
-    var delta = draggedY - currentMousePos.y;
+//     var heightOfLevel = getVisibleLevelHeightInPx();
+//     //var delta = draggedY - currentMousePos.y;
 
-    if (camPanY < heightOfLevel + 250) {
-        scrollCamera(delta)
-    } else if (camPanY > heightOfLevel + 250 && delta < 0) {
-        scrollCamera(-80)
-    }
+//     // if (camPanY < heightOfLevel)  { //+ 250
+//     //     scrollCamera(80); //delta
+//     // } else if (camPanY > heightOfLevel) { // + 250 && delta < 0
+//     //     scrollCamera(-80);
+//     // }
+//     if(camPanY > heightOfLevel) {
+//         camPanY = heightOfLevel;
+//     } else if(camPanY < 0){
+//         camPanY = 0;
+//     }
+//     console.log("function drag scroll camera " + heightOfLevel);
 }
 
 function LeftMouseActions() {
@@ -98,6 +104,8 @@ function LeftMouseActions() {
     }
 }
 
+
+// I think part of this is redundant
 function setCursorPosition(evt) {
     mousePosition = getMousePosition(canvas, evt);
     var tile_x = Math.floor(mousePosition.x / BRICK_W);
@@ -107,7 +115,7 @@ function setCursorPosition(evt) {
     current_column = Math.floor(tile_y * BRICK_H);
     var tileCol = Math.floor(current_column / BRICK_H);
     var tileRow = Math.floor(current_row / BRICK_W);
-    selectedBrickIndex = brickTileToIndex(tileRow, tileCol)
+    selectedBrickIndex = brickTileToIndex(tileRow, tileCol);
 }
 
 function preventRightClickToDisplayContextMenu() {

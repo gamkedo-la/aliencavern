@@ -32,7 +32,7 @@ function startGame(){
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
 // Sound.play("cavernambient", true, 0.4);
     Sound.play("shipengine",true, 0.3);
-    Sound.play("aliencavern1", true, 0.4);
+    Sound.play("aliencavern1", true, 0.2);
     initInput();
     playerReset();    
 }
@@ -107,8 +107,6 @@ function drawAll() {
     canvasContext.fillText("Press F2 for level editor", 20, 60);
     canvasContext.fillStyle = "YELLOW";
     canvasContext.fillText("Press F2 for level editor", 22, 62);
-
-
 
     canvasContext.restore(); // undoes the .translate() used for cam scroll
     

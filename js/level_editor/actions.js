@@ -13,7 +13,7 @@ function copyLevel() {
 }
 
 function loadLevel() {
-    var level = window.prompt("Past your level below:");
+    var level = window.prompt("Paste your level below:");
     if (level) {
         cavernGrid = JSON.parse(level);
     }
