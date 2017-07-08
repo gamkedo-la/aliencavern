@@ -7,6 +7,11 @@ window.onload = function() {
     }
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
+    STORY_Y = canvas.height; //intro.js
+    STORY_FONT_SIZE = 30; //intro.js
+    storyText[0].y = STORY_Y; //intro.js
+    STORY_X = canvas.width / 2; //intro.js
+    isIntro = true; //intro.js
     setupMouseEvents();
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
@@ -39,12 +44,16 @@ function startGame(){
 
 function updateAll() {
     // Press F1 to restart game
-
+    
     frameCounter++;
     if (frameCounter > framesPerSecond){
         frameCounter = 1;
     }
-
+    if (isIntro){
+        gameScreen = false;
+        editorScreen = false;
+        introScreen();
+    }
     if(gameScreen) {
         updateScreenshake(); // "juice it...
         updateParticles(); // ...or lose it!" =)
