@@ -32,7 +32,7 @@ const LINE10 = 'you possibly can.  You are their only hope!';
 const LINE11 = '';
 const LINE12 = 'Good luck and godspeed!';
 const LINE_SPACING = 50;
-var STORY_X = 0; //must be initialized in main.js, but is used as a const
+var STORY_X; //must be initialized in main.js, but is used as a const
 
 function storyLineOfText(line){ // Defined as a class.
     this.y = STORY_Y;
@@ -52,6 +52,13 @@ function setStoryFont(size, font, color){
 
 function displayText(text, x, y){
     canvasContext.fillText(text, x, y);
+}
+
+function pressPToSkip(){
+    canvasContext.font = '15px Helvetica';
+    canvasContext.fillStyle = 'WHITE';
+    canvasContext.textAlign = 'start';
+    displayText('(P) SKIP', 0, 15);
 }
 
 function displayStory(){
@@ -80,6 +87,7 @@ function goToGame(){
 
 function introScreen(){
     fillBlackBG();
+    pressPToSkip();
     setStoryFont(STORY_FONT_SIZE, STORY_FONT, STORY_FONT_COLOR);
     storyText[0].line = LINE0;
     storyText[1].line = LINE1;
