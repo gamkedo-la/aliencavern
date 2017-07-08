@@ -17,6 +17,7 @@ const PARTICLE_BOOST_L = 3;
 const PARTICLE_BOOST_R = 4;
 const PARTICLE_EXPLOSION = 5;
 const PARTICLE_SQUIDDIE_EXPLOSION = 6;
+const PARTICLE_SHIP_EXPLOSION = 7;
 
 var particles_enabled = true;
 var particle_timestamp = (new Date()).getTime();
@@ -208,7 +209,7 @@ function init_particles()
 {
 	if (DEBUG_PARTICLES) console.log('init_particles...');
 	spritesheet_image = new Image();
-	spritesheet_image.src = 'graphics/particles3.png';
+	spritesheet_image.src = 'graphics/particles4.png';
 	spritesheet_image.onload = function()	{
 		if (DEBUG_PARTICLES) console.log('particle_image loaded.');
 		spritesheet_image_finished_loading = true;
