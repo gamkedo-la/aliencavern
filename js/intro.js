@@ -71,6 +71,13 @@ function displayStory(){
     console.log('displayStory() ran \n' + storyText[11].line + '\ny = ' + storyText[11].y);
 }
 
+function goToGame(){
+    canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
+    canvasContext.font = "10px Comic Sans MS"; //resets the font size for the game
+    isIntro = false;
+    gameScreen = true;
+}
+
 function introScreen(){
     fillBlackBG();
     setStoryFont(STORY_FONT_SIZE, STORY_FONT, STORY_FONT_COLOR);
@@ -99,10 +106,7 @@ function introScreen(){
         console.log('timeElapsed = ' + timeElapsed);
     }
     if (timeElapsed >= STORY_MAX_TIME && storyText[12].y <= 0){ // Kind of convoluted but it works... for now.
-        canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
-        canvasContext.font = "10px Comic Sans MS"; //resets the font size for the game
-        isIntro = false;
-        gameScreen = true;
+        goToGame();
     }
     if (timeElapsed % 0.5 == 0 && storyText[12].y > 0){
         storyText[0].y-=STORY_MOVEMENT_SPEED;

@@ -9,6 +9,7 @@ const KEY_SPACE = 32;
 const KEY_M = 77; //fire
 const KEY_Z = 90; //left
 const KEY_X = 88; //right
+const KEY_P = 80; //skip intro
 
 var holdLeft = false;
 var holdRight = false;
@@ -57,6 +58,10 @@ function setKeyHoldState(thisKey, setTo) {
     levelEditorInitialization();
     gameScreen = false;
     editorScreen = true;
+  }
+
+  if(isIntro && thisKey === KEY_P) {
+    goToGame();
   }
 
 
