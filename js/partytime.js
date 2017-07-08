@@ -28,8 +28,7 @@ var particle_scale = 1; // double the pixels?
 var particle_offsetx = -1 * Math.round(particle_w/2) * particle_scale;
 var particle_offsety = -1 * Math.round(particle_h/2) * particle_scale;
 var particle_spritesheet_framecount = 16; // spritesheet frames per anim
-var PARTICLE_FPS = 60; //24;
-var PARTICLE_FRAME_MS = 1000/PARTICLE_FPS; // 15 = 60fps - looks fine much slower too
+var PARTICLE_FPS = 60; // only the default
 var FAR_AWAY = -999999;
 
 // one huge spritesheet for all particles
@@ -40,18 +39,19 @@ var spritesheet_image_finished_loading = false;
  * spawns a spritesheet-based particle animation at these coordinates
  * implements a reuse POOL and only makes new objects when required
  */
-function party(x, y, particleType, destX, destY, delayFrames) {
+function party(x, y, particleType, destX, destY, delayFrames, framesPerSecond) {
 
 	//console.log('party ' + x + ',' + y);
 
 	if (!particles_enabled) return;
 	if (!spritesheet_image_finished_loading) return;
 
-	if (!delayFrames) delayFrames = 0; // deal with undefined
+	// deal with undefined
+	if (!delayFrames) delayFrames = 0; 
+	if (!framesPerSecond) framesPerSecond = PARTICLE_FPS;
 
 	var p, pnum, pcount;
 	if (!particleType) particleType = 0;
-	//	particleType = Math.floor(Math.random() * 1.99999); // random cycle between the first two
 
 	for (pnum = 0, pcount = particles.length; pnum < pcount; pnum++)
 	{
@@ -82,7 +82,8 @@ function party(x, y, particleType, destX, destY, delayFrames) {
 		p.anim_start_frame = particleType * particle_spritesheet_framecount;
 		p.anim_end_frame = p.anim_start_frame + particle_spritesheet_framecount;
 		p.anim_last_tick = particle_timestamp;
-		p.next_frame_timestamp = particle_timestamp + PARTICLE_FRAME_MS;
+		p.framerate_timespan = 1000/framesPerSecond;
+		p.next_frame_timestamp = particle_timestamp + p.framerate_timespan;
 		p.anim_sum_tick = 0;
 		p.scale = particle_scale;
 
@@ -153,7 +154,7 @@ function updateParticles()
 
 					if (particle_timestamp >= p.next_frame_timestamp)
 					{
-						p.next_frame_timestamp = particle_timestamp + PARTICLE_FRAME_MS;
+						p.next_frame_timestamp = particle_timestamp + p.framerate_timespan;
 						p.anim_frame++; // TODO: ping pong anims?
 					}
 
