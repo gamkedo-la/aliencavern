@@ -31,8 +31,9 @@ const LINE9 = 'you have been tasked with rescuing as many survivors as';
 const LINE10 = 'you possibly can.  You are their only hope!';
 const LINE11 = '';
 const LINE12 = 'Good luck and godspeed!';
-const LINE_SPACING = 50;
+var LINE_SPACING = 50;
 var STORY_X; //must be initialized in main.js, but is used as a const
+const SIZE_CHANGE = 0.018;
 
 function storyLineOfText(line){ // Defined as a class.
     this.y = STORY_Y;
@@ -62,20 +63,34 @@ function pressPToSkip(){
 }
 
 function displayStory(){
+    setStoryFont(storyText[0].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[0].line, STORY_X, storyText[0].y);
+    setStoryFont(storyText[1].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[1].line, STORY_X, storyText[1].y);
+    setStoryFont(storyText[2].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[2].line, STORY_X, storyText[2].y);
+    setStoryFont(storyText[3].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[3].line, STORY_X, storyText[3].y);
+    setStoryFont(storyText[4].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[4].line, STORY_X, storyText[4].y);
+    setStoryFont(storyText[5].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[5].line, STORY_X, storyText[5].y);
+    setStoryFont(storyText[6].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[6].line, STORY_X, storyText[6].y);
+    setStoryFont(storyText[7].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[7].line, STORY_X, storyText[7].y);
+    setStoryFont(storyText[8].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[8].line, STORY_X, storyText[8].y);
+    setStoryFont(storyText[9].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[9].line, STORY_X, storyText[9].y);
+    setStoryFont(storyText[10].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[10].line, STORY_X, storyText[10].y);
+    setStoryFont(storyText[11].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[11].line, STORY_X, storyText[11].y);
+    setStoryFont(storyText[12].size, STORY_FONT, STORY_FONT_COLOR);
     displayText(storyText[12].line, STORY_X, storyText[12].y);
-    console.log('displayStory() ran \n' + storyText[11].line + '\ny = ' + storyText[11].y);
+    console.log('0 = ' + storyText[0].size);
+    console.log('12 = ' + storyText[12].size);
 }
 
 function goToGame(){
@@ -88,19 +103,31 @@ function goToGame(){
 function introScreen(){
     fillBlackBG();
     pressPToSkip();
-    setStoryFont(STORY_FONT_SIZE, STORY_FONT, STORY_FONT_COLOR);
+    
     storyText[0].line = LINE0;
+    
     storyText[1].line = LINE1;
+    
     storyText[2].line = LINE2;
+    
     storyText[3].line = LINE3;
+    
     storyText[4].line = LINE4;
+    
     storyText[5].line = LINE5;
+    
     storyText[6].line = LINE6;
+    
     storyText[7].line = LINE7;
+    
     storyText[8].line = LINE8;
+    
     storyText[9].line = LINE9;
+    
     storyText[10].line = LINE10;
+    
     storyText[11].line = LINE11;
+    
     storyText[12].line = LINE12;
     for (var i = 1; i <= 12; i++){
         storyText[i].y = storyText[i - 1].y + LINE_SPACING;
@@ -118,7 +145,84 @@ function introScreen(){
     }
     if (timeElapsed % 0.5 == 0 && storyText[12].y > 0){
         storyText[0].y-=STORY_MOVEMENT_SPEED;
+        storyText[0].size-=SIZE_CHANGE;
+        if (storyText[1].y < canvas.height){
+            storyText[1].size-=SIZE_CHANGE;
+        }
+        if (storyText[2].y < canvas.height){
+            storyText[2].size-=SIZE_CHANGE;
+        }
+        if (storyText[3].y < canvas.height){
+            storyText[3].size-=SIZE_CHANGE;
+            LINE_SPACING-=SIZE_CHANGE;
+        }
+        if (storyText[4].y < canvas.height){
+            storyText[4].size-=SIZE_CHANGE;
+        }
+        if (storyText[5].y < canvas.height){
+            storyText[5].size-=SIZE_CHANGE;
+        }
+        if (storyText[6].y < canvas.height){
+            storyText[6].size-=SIZE_CHANGE;
+        }
+        if (storyText[7].y < canvas.height){
+            storyText[7].size-=SIZE_CHANGE;
+        }
+        if (storyText[8].y < canvas.height){
+            storyText[8].size-=SIZE_CHANGE;
+        }
+        if (storyText[9].y < canvas.height){
+            storyText[9].size-=SIZE_CHANGE;
+        }
+        if (storyText[10].y < canvas.height){
+            storyText[10].size-=SIZE_CHANGE;
+        }
+        if (storyText[11].y < canvas.height){
+            storyText[11].size-=SIZE_CHANGE;
+        }
+        if (storyText[12].y < canvas.height){
+            storyText[12].size-=SIZE_CHANGE;
+        }
         console.log('moved text');
+    }
+    if (storyText[0].size < 0){
+        storyText[0].size = 0;
+    }
+    if (storyText[1].size < 0){
+        storyText[1].size = 0;
+    }
+    if (storyText[2].size < 0){
+        storyText[2].size = 0;
+    }
+    if (storyText[3].size < 0){
+        storyText[3].size = 0;
+    }
+    if (storyText[4].size < 0){
+        storyText[4].size = 0;
+    }
+    if (storyText[5].size < 0){
+        storyText[5].size = 0;
+    }
+    if (storyText[6].size < 0){
+        storyText[6].size = 0;
+    }
+    if (storyText[7].size < 0){
+        storyText[7].size = 0;
+    }
+    if (storyText[8].size < 0){
+        storyText[8].size = 0;
+    }
+    if (storyText[9].size < 0){
+        storyText[9].size = 0;
+    }
+    if (storyText[10].size < 0){
+        storyText[10].size = 0;
+    }
+    if (storyText[11].size < 0){
+        storyText[11].size = 0;
+    }
+    if (storyText[12].size < 0){
+        storyText[12].size = 0;
     }
 }
 

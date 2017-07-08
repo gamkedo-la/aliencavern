@@ -12,6 +12,19 @@ window.onload = function() {
     storyText[0].y = STORY_Y; //intro.js
     STORY_X = canvas.width / 2; //intro.js
     isIntro = true; //intro.js
+    storyText[0].size = STORY_FONT_SIZE; //intro.js
+    storyText[1].size = STORY_FONT_SIZE; //intro.js
+    storyText[2].size = STORY_FONT_SIZE; //intro.js
+    storyText[3].size = STORY_FONT_SIZE; //intro.js
+    storyText[4].size = STORY_FONT_SIZE; //intro.js
+    storyText[5].size = STORY_FONT_SIZE; //intro.js
+    storyText[6].size = STORY_FONT_SIZE; //intro.js
+    storyText[7].size = STORY_FONT_SIZE; //intro.js
+    storyText[8].size = STORY_FONT_SIZE; //intro.js
+    storyText[9].size = STORY_FONT_SIZE; //intro.js
+    storyText[10].size = STORY_FONT_SIZE; //intro.js
+    storyText[11].size = STORY_FONT_SIZE; //intro.js
+    storyText[12].size = STORY_FONT_SIZE; //intro.js
     setupMouseEvents();
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
