@@ -65,6 +65,8 @@ function setKeyHoldState(thisKey, setTo) {
   if(isIntro && thisKey === KEY_P) {
     // goToGame();
     canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
+    canvasContext.font = "10px Helvetica";
+    canvasContext.fillStyle = "white";
     isIntro = false;
     gameScreen = true;
     editorScreen = false;

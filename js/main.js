@@ -49,8 +49,10 @@ function startGame(){
     initMissile();
 //    loadGameObject(projectiles,projectilePic,1); //load single projectile in to 
 // Sound.play("cavernambient", true, 0.4);
-    Sound.play("shipengine",true, 0.3);
-    Sound.play("aliencavern1", true, 0.2);
+    Sound.play("music_loop_slow", false, 0.1);
+//    Sound.play("music_loop_action", false, 0.1);
+    Sound.play("shipengine",true, 0.1);
+//    Sound.play("aliencavern1", true, 0.2);
     initInput();
     playerReset();    
 }
@@ -76,6 +78,9 @@ function updateAll() {
         if (projectiles[0].alive){
             checkMissleCollisions();
             moveMissile();
+        }
+        if (!Sound.isPlaying("music_loop_slow")&& !Sound.isPlaying("music_loop_action")){
+            Sound.play("music_loop_action", true, 0.1);
         }
         drawAll();
     }
