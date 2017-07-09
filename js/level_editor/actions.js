@@ -1,3 +1,27 @@
+var current_row;
+var current_column;
+var selectedBrickIndex;
+var moveMode = false;
+var showControlPanel = false;
+var draggedY = 0;
+
+const TOOL_W = 30;
+const TOOL_H = 30;
+var currentToolTile = alienSquidPic;
+var currentToolTileType = ALIEN_SQUID;
+
+var toolState = { GAMEOBJECTS : 0 , CAVERNONE : 1};
+var currentTool = toolState.GAMEOBJECTS; 
+
+var toolOrder = [
+    ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
+    CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS
+];
+
+var tileNo = 0;
+
+var sizeOftoolset = toolOrder.length;
+
 function decreaseLevelHeight() {
     cavernGrid = cavernGrid.slice(0, -14)
 }
@@ -6,7 +30,6 @@ function increaseLevelHeight() {
     var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
     cavernGrid = cavernGrid.concat(row);
 }
-
 
 function copyLevel() {
     window.prompt("Your level:", JSON.stringify(cavernGrid));
@@ -22,6 +45,18 @@ function loadLevel() {
 function resetLevel() {
     drawDefaultCavern();
     clearObjects();
+}
+
+function checkKeysToChangeTile (keyCode){
+    
+    for (var i = 0; i < editorKeyToTile.length; i++)
+    {
+        if (keyCode == editorKeyToTile[i].press){
+            removeImgFromBrick();
+            cavernGrid[selectedBrickIndex] = editorKeyToTile[i].tile;
+        }
+    }
+
 }
 
 function change_tile(changeTo) {
@@ -46,5 +81,28 @@ function change_tile(changeTo) {
         cavernGrid[selectedBrickIndex] = 31;
     } else {
         cavernGrid[selectedBrickIndex] = 0;
+    }
+}
+
+function selectTool(){
+
+       if (isMouseInPalette(toolOrder.length)){
+        var toolIndex = toolIndexAt(currentMousePos.x, currentMousePos.y - TOOL_H);
+
+
+        if (currentTool == toolState.GAMEOBJECTS){
+            tileNo = 0;
+            imageList.forEach(function(element){
+                if(element.theTileNum == toolOrder[toolIndex]){
+                    currentToolTile = element.varName;
+                    currentToolTileType = element.theTileNum;
+                }
+            });
+            }
+        else if (currentTool == toolState.CAVERNONE){
+           currentToolTile = cavernTileSheet;
+           currentToolTileType = toolOrder[toolIndex];
+           tileNo = toolIndex;
+        }
     }
 }

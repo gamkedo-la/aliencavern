@@ -52,16 +52,22 @@ function setKeyHoldState(thisKey, setTo) {
     window.location.reload() // Find better way to reset game after exit from editor
     gameScreen = true;
     editorScreen = false;
+    isIntro = false;
   }
 
   if(thisKey === F2) {
     levelEditorInitialization();
     gameScreen = false;
     editorScreen = true;
+    isIntro = false;
   }
 
   if(isIntro && thisKey === KEY_P) {
-    goToGame();
+    // goToGame();
+    canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
+    isIntro = false;
+    gameScreen = true;
+    editorScreen = false;
   }
 
 

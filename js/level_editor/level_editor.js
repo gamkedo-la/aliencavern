@@ -1,22 +1,101 @@
-var current_row;
-var current_column;
-var mouse_up = true;
-var selectedBrickIndex;
-var moveMode = false;
-var showControlPanel = false;
-var draggedY = 0;
-//mouseEvenets();
-
 function levelEditorInitialization() {
     preventRightClickToDisplayContextMenu();
     colorRect(0, 0, screen.width, screen.height, 'black');
     drawDefaultCavern();
     setCamera();
     initKeybindings();
-    clearObjects();
 }
 
-function drawMiniMap(){  
+function drawTools(){
+    var xPos = 0;
+    var yPos = TOOL_H;
+    var delta = 0;
+    colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(0, 0, 64, 0.8)");
+
+    if (currentTool == toolState.GAMEOBJECTS){
+        toolOrder = [];
+        toolOrder = [
+            ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
+            CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS
+        ];
+        for (var i = 0; i < toolOrder.length; i++){
+            var tileKindHere = toolOrder[i];
+            var isEven = i % 2;
+            imageList.forEach(function(element){
+                if (element.theTileNum != undefined && tileKindHere == element.theTileNum){
+                canvasContext.drawImage(element.varName, 0,0, BRICK_W, BRICK_H, xPos + camPanX + delta, yPos + 
+                    camPanY, TOOL_W , TOOL_H);
+                }
+            });
+
+            if (isEven == 0 ){
+                delta = TOOL_W;
+            }
+            else{            
+                delta = 0;
+                yPos = yPos + TOOL_H;
+            }
+
+        }
+    } else if (currentTool == toolState.CAVERNONE){
+        // create an array of numbers from cavern grid length
+        toolOrder = [];
+        for (var i = 0; i < 10; i++){
+            toolOrder[i] = i + 1;
+        }
+
+        for (var i = 0; i < toolOrder.length; i++){
+        var tileKindHere = toolOrder[i];
+        var isEven = i % 2;
+        canvasContext.drawImage(cavernTileSheet, i * BRICK_W, 0, BRICK_W, BRICK_H, xPos + camPanX + delta, yPos + 
+            camPanY, TOOL_W - 1, TOOL_H - 1);
+
+            if (isEven == 0 ){
+                delta = TOOL_W;
+            }
+            else{            
+                delta = 0;
+                yPos = yPos + TOOL_H;
+            }
+        }
+    }
+}
+        
+
+function drawTilesOnScreen(){
+
+    var tileImg = document.createElement("img");
+ // what are the top-left most col and row visible on canvas?
+    var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
+    var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
+    // how many columns and rows of tiles fit on one screenful of area?
+    var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W);
+    var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H);
+    // finding the rightmost and bottommost tiles to draw.
+    // the +1 and + 2 on each pushes the new tile popping in off visible area
+    // +2 for columns since BRICK_W doesn't divide evenly into canvas.width
+    var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 1;
+    var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 2 ; 
+    for(var eachCol=cameraLeftMostCol; eachCol<cameraRightMostCol; eachCol++) {
+      for(var eachRow=cameraTopMostRow; eachRow<cameraBottomMostRow; eachRow++) {                   
+          var brickLeftEdgeX = eachCol * BRICK_W;
+          var brickTopEdgeY = eachRow * BRICK_H;
+          var tileKindHere = cavernGrid[brickTileToIndex(eachCol, eachRow)];
+          if (tileKindHere >= TILE_FIRST_NON_WALL){
+            imageList.forEach(function(element){
+                if (element.theTileNum != undefined && tileKindHere == element.theTileNum){
+                    canvasContext.drawImage(element.varName, 0, 0, BRICK_W, BRICK_H, 
+                        brickLeftEdgeX, brickTopEdgeY, BRICK_W, BRICK_H);
+                }
+            });
+          }
+
+        canvasContext.drawImage(cavernTileSheet, (tileKindHere -1) * BRICK_W, 0, BRICK_W, BRICK_H, brickLeftEdgeX, brickTopEdgeY, BRICK_W, BRICK_H);
+      } // end of for eachRow
+    } // end of for eachCol
+  } // end of drawBricks()
+
+function drawMiniMap(){
     var colCount = 0;
     var rowCount = 0;
     var tileX = canvas.width - (BRICK_COLS * 3) - 10;
@@ -48,31 +127,25 @@ function drawLevelEditor() {
     canvasContext.save();
     canvasContext.translate(-camPanX, -camPanY);
     drawOnlyCavernOnScreen();
+    drawTilesOnScreen();
     drawMiniMap();
-    drawObjects();
+    drawTools();
     drawHint();
-    if (showControlPanel == false){
+    if (showControlPanel == false && !outOfBounds() ){
         drawHighlightRect(current_row, current_column);
+        canvasContext.drawImage(currentToolTile, tileNo * BRICK_W , 0, BRICK_W, BRICK_H, current_row, current_column, BRICK_W, BRICK_H);
+    }
+    else if (showControlPanel == false && currentMousePos.x < BRICK_W)
+    {
+       drawHighlightCircle(currentMousePos.x, currentMousePos.y, 6, "magenta");
     }
     canvasContext.restore();
+    
     if (showControlPanel) {
         new initControlPanel(50, 50);
     }  
 }
 
-
-function drawObjects() {
-	drawGameObjects(squiddies);
-	drawGameObjects(biters);
-    drawGameObjects(alienPlants);
-    drawGameObjects(crew);
-    drawGameObjects(shipParts);
-	loadGameObjects(squiddies, alienSquidPic, ALIEN_SQUID);
-	loadGameObjects(biters, alienBiterPic, ALIEN_BITER);
-    loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT);
-    loadGameObjects(crew, crewPic, CREW);
-    loadGameObjects(shipParts, shipPartPic, SHIP_PART);
-}
 
 function drawDefaultCavern() {
     var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
@@ -92,15 +165,15 @@ function drawHighlightRect(x, y) {
     canvasContext.strokeRect(x, y, BRICK_W, BRICK_H);
 }
 
+function drawHighlightCircle(x, y){
+    colorCircle( x, y, 4, "yellow");
+
+}
+
 function drawHint() {
-    canvasContext.font = "20px Comic Sans MS";
+    canvasContext.font = "20px Helvetica";
     canvasContext.fillStyle = "white";
     canvasContext.fillText("Press TAB to show control panel", 10, 20 + camPanY);
-    // var heightOfLevel = getVisibleLevelHeightInPx();
-//     var percDepth = Math.floor(100 * camPanY / heightOfLevel);
-//     var tileDepth = Math.floor((camPanY + canvas.height) / BRICK_H);
-//     canvasContext.fillText("Tile depth row " + tileDepth + " " + percDepth + "%", 5, 40 + camPanY);
-    
 }
 
 function setCamera() {
@@ -108,13 +181,6 @@ function setCamera() {
     camPanY = 0;
 }
 
-function clearObjects() {
-	squiddies = [];
-	biters = [];
-    alienPlants = [];
-    crew = [];
-    shipParts = [];
-}
 
 
 

@@ -30,7 +30,7 @@ function drawLevelHeight(x, y) {
             elem_y: y,
             elem_height: 24,
             draw: function () {
-                canvasContext.font = this.elem_height + "px Comic Sans MS";
+                canvasContext.font = this.elem_height + "px Helvetica";
                 canvasContext.fillStyle = "white";
                 canvasContext.fillText("Level height:", this.elem_x, this.elem_y);
             }
@@ -67,7 +67,7 @@ function drawLevelHeight(x, y) {
             elem_width: 60,
             elem_height: 30,
             draw: function () {
-                canvasContext.font = this.elem_height + "px Comic Sans MS";
+                canvasContext.font = this.elem_height + "px Helvetica";
                 canvasContext.fillStyle = "white";
                 canvasContext.fillText(cavernGrid.length / 14, this.elem_x + this.elem_width / 5, this.elem_y + this.elem_height);
             }

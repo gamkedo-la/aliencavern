@@ -21,7 +21,7 @@ function drawButton(prevItem, topText, bottomText, action, x_offset) {
         },
         draw: function () {
             drawBorder();
-            canvasContext.font = this.elem_height + "px Comic Sans MS";
+            canvasContext.font = this.elem_height + "px Helvetica";
             canvasContext.fillStyle = "red";
             canvasContext.fillText(topText, this.elem_x + this.elem_width / 5 + x_offset || 0, this.elem_y + 22);
             canvasContext.fillText(bottomText, this.elem_x + this.elem_width / 5, this.elem_y + 22 + this.elem_height);

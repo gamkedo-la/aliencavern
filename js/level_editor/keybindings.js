@@ -19,6 +19,13 @@ const key_t = 84;
 const key_y = 89;
 const key_up_arrow = 38;
 const key_down_arrow = 40;
+const KEY_S = 83;
+
+var editorKeyToTile = [
+    {press: key_q, tile: ALIEN_SQUID},
+    {press: key_w, tile: ALIEN_PLANT}
+    ];
+    
 
 function initKeybindings() {
     document.addEventListener('keydown', keyDownBindings);
@@ -27,6 +34,7 @@ function initKeybindings() {
 
 function keyDownBindings(evt) {
     var key = evt.keyCode;
+    checkKeysToChangeTile(key);
     switch(key) {
         case key_0:
             change_tile(0);
@@ -52,15 +60,15 @@ function keyDownBindings(evt) {
         case key_7:
             change_tile(7);
             return;
-        case key_q:
-            change_tile(20);
-            return;
+        // case key_q:
+        //     change_tile(20);
+        //     return;
 		case key_v:
 			change_tile(24);
 			return;
-        case key_w:
-            change_tile(21);
-            return;
+        // case key_w:
+        //     change_tile(21);
+        //     return;
         case key_e:
             change_tile(30);
             return;
@@ -79,7 +87,9 @@ function keyDownBindings(evt) {
         case key_down_arrow:
             scrollCamera(500000);
             return;
-        
+        case KEY_S:
+            currentTool = !currentTool; // FIX ME: this is a quick hack to toggle the pallett
+            return; 
     }
 }
 

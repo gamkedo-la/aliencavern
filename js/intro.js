@@ -98,6 +98,7 @@ function goToGame(){
     canvasContext.font = "10px Comic Sans MS"; //resets the font size for the game
     isIntro = false;
     gameScreen = true;
+    editorScreen = false;
 }
 
 function introScreen(){

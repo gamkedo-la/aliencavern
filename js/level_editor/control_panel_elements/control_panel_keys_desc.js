@@ -11,7 +11,7 @@ function drawKeysDescription(prevElement, y) {
             var keys = keysDescription();
             keys.map(function (key, index) {
                 var margin = index > 0 ? this.bottom_margin : 0;
-                canvasContext.font = this.elem_height + "px Comic Sans MS";
+                canvasContext.font = this.elem_height + "px Helvetica";
                 canvasContext.fillStyle = "white";
                 canvasContext.fillText(key, x, y + index * this.elem_height + margin);
             }.bind(this));

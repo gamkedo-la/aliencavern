@@ -119,7 +119,7 @@ function drawAll() {
     // FIXME: turn into proper GUI elements
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
     colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
-    canvasContext.font = "24px Comic Sans MS";
+    canvasContext.font = "24px Helvetica";
     canvasContext.fillStyle = "RED";
     canvasContext.fillText("Z and X to move, M to fire, SPACE for boosters", 20, 30);
     canvasContext.fillStyle = "WHITE";

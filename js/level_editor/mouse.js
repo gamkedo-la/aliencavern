@@ -1,13 +1,12 @@
 var currentMousePos;
 var iconActionToTake;
+var mouse_up = true;
 const LEFT_CLICK = 0;
 const RIGHT_CLICK = 2;
-
 function setupMouseEvents() {
     onMouseMove();
     onMouseDown();
     onMouseUp();
-    // onScroll();
 }
 
 function resetMouse() {
@@ -47,16 +46,16 @@ function onMouseMove() {
 
 function onMouseDown() {
    	canvas.addEventListener('mousedown', function (evt) {
-		if(window.editorScreen == true) {
-       		if (evt.button === LEFT_CLICK && mouse_up) {
-           		LeftMouseActions();
-           		draggedY = currentMousePos.y;
-       		}
+        if(window.editorScreen == true){
+            if (evt.button === LEFT_CLICK && mouse_up) {
+                LeftMouseActions();
+                draggedY = currentMousePos.y;
+            }
 
-       		if (evt.button === RIGHT_CLICK) {
-           		change_tile(0);
-       		}
-		}
+            if (evt.button === RIGHT_CLICK && !outOfBounds() ){
+                change_tile(BKGND_ROCK);
+            }
+        }
    	});
 }
 
@@ -97,10 +96,13 @@ function dragScrollLevel() {
 
 function LeftMouseActions() {
     mouse_up = false;
-    if (!showControlPanel && !moveMode) {
-        change_tile();
+    if (!showControlPanel && !outOfBounds()) {
+        change_tile(currentToolTileType);
     } else if (showControlPanel && iconActionToTake) {
         iconActionToTake();
+    } else if (!showControlPanel && outOfBounds())
+    {
+        selectTool();
     }
 }
 
