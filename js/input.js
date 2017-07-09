@@ -10,6 +10,7 @@ const KEY_M = 77; //fire
 const KEY_Z = 90; //left
 const KEY_X = 88; //right
 const KEY_P = 80; //skip intro
+//const KEY_S = 83; //Silence sound
 
 var holdLeft = false;
 var holdRight = false;
@@ -21,6 +22,8 @@ var usingJetpack = false;
 
 var gameScreen = true;
 var editorScreen = false;
+
+var soundVolume = 0.005;
 
 function initInput() {
   document.addEventListener("keydown", keyPressed);
@@ -47,6 +50,15 @@ function setKeyHoldState(thisKey, setTo) {
     projectiles[0].alive = true;     
     fireMissile();
   }
+  
+  // if (thisKey === KEY_S && editorScreen == false){
+  //   if (soundVolume > 0){
+  //     soundVolume = 0;
+  //   }
+  //   else {
+  //     soundVolume = 0.005;
+  //   }
+  // }
 
   if(thisKey === F1) {
     window.location.reload() // Find better way to reset game after exit from editor

@@ -133,7 +133,7 @@ function checkEveryCollision(objectArray){
         if(checkCollision(element)){
             element.alive = false;
             console.log("picked up crew");
-            Sound.play("rescue", false, 0.5);
+            Sound.play("rescue", false, soundVolume);
             takeDamage(DAMAGE_CREW); // gain health
             rescueAstronaut();
         }
@@ -177,7 +177,7 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, alienPlants);
     twoArrayCollisionDetect(projectiles, crew);
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
-        Sound.play("explosion", false, 0.1)
+        Sound.play("explosion", false, soundVolume);
         screenshake(10);
         projectiles[0].alive = false;
     }

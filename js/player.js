@@ -41,7 +41,7 @@ function groundPlayer() {
     jumping = false;
     usingJetpack = false;
 
-    Sound.play("ground",false,0.5);
+    Sound.play("ground",false,soundVolume);
 
     // particles where the lander feet hit the ground
     party(playerX-24, playerY, PARTICLE_DUST); // left
@@ -59,7 +59,7 @@ function checkFuel() { //Is there enough fuel for this frame? Felt like making t
     if (fuelCheck <= 0) {
         jetpackFuel = 0;
 
-        if (!Sound.isPlaying('outoffuel')) Sound.play('outoffuel',false,0.4);
+        if (!Sound.isPlaying('outoffuel')) Sound.play('outoffuel',false,soundVolume);
 
         return false;
     }
@@ -128,7 +128,7 @@ function playerMove() {
     else // moving
     {
         if (!Sound.isPlaying('scrape'))
-            Sound.play('scrape',true,0.05); // looped and super quiet
+            Sound.play('scrape',true,soundVolume); // looped and super quiet
 
         takeDamage(DAMAGE_SCRAPE);
     }
@@ -175,7 +175,7 @@ function playerMove() {
     if(playerSpeedX < 0 && (isBrickAtPixelCoord(playerX-player_RADIUS, playerY - sideCollisionVertSpread) > 0
      || isBrickAtPixelCoord(playerX-player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;
-      if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+      if (!Sound.isPlaying('bump')) Sound.play('bump',false,soundVolume);
       takeDamage(DAMAGE_BUMP);
 	  playerSpeedX = 0;
     }
@@ -183,7 +183,7 @@ function playerMove() {
     if(playerSpeedX > 0 && (isBrickAtPixelCoord(playerX+player_RADIUS, playerY - sideCollisionVertSpread) > 0
      || isBrickAtPixelCoord(playerX+player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (1+Math.floor( playerX / BRICK_W )) * BRICK_W - player_RADIUS;
-      if (!Sound.isPlaying('bump')) Sound.play('bump',false,0.01);
+      if (!Sound.isPlaying('bump')) Sound.play('bump',false, soundVolume);
       takeDamage(DAMAGE_BUMP);
 	  playerSpeedX = 0;
     }
@@ -200,7 +200,7 @@ function playerMove() {
         playerSpeedY -= JETPACK_UPTHRUST;
         jetpackFuel -= JETPACK_CONSUMPTION; //floating point numbers shouldn't be an issue here
 
-        if (!Sound.isPlaying("thrust")) Sound.play("thrust", true, 0.4); // FIXME: should be looped and we change the volume
+        if (!Sound.isPlaying("thrust")) Sound.play("thrust", true, soundVolume); // FIXME: should be looped and we change the volume
 
         // thruster particles w wobble
         party(playerX+28+(Math.random()*4-2),playerY+26+(Math.random()*4-2),PARTICLE_THRUST); // right
