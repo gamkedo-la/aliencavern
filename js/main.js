@@ -12,19 +12,11 @@ window.onload = function() {
     storyText[0].y = STORY_Y; //intro.js
     STORY_X = canvas.width / 2; //intro.js
     isIntro = true; //intro.js
-    storyText[0].size = STORY_FONT_SIZE; //intro.js
-    storyText[1].size = STORY_FONT_SIZE; //intro.js
-    storyText[2].size = STORY_FONT_SIZE; //intro.js
-    storyText[3].size = STORY_FONT_SIZE; //intro.js
-    storyText[4].size = STORY_FONT_SIZE; //intro.js
-    storyText[5].size = STORY_FONT_SIZE; //intro.js
-    storyText[6].size = STORY_FONT_SIZE; //intro.js
-    storyText[7].size = STORY_FONT_SIZE; //intro.js
-    storyText[8].size = STORY_FONT_SIZE; //intro.js
-    storyText[9].size = STORY_FONT_SIZE; //intro.js
-    storyText[10].size = STORY_FONT_SIZE; //intro.js
-    storyText[11].size = STORY_FONT_SIZE; //intro.js
-    storyText[12].size = STORY_FONT_SIZE; //intro.js
+
+    for (var i = 0 ; i < 13 ; i++){
+        storyText[i].size = STORY_FONT_SIZE; //intro.js
+    }
+
     setupMouseEvents();
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
@@ -91,6 +83,23 @@ function updateAll() {
     }
 }
 
+// function draw3Dtxt(text, fontSize, frontColor, backColor, fontStyle, xPos, yPos)
+// {
+//     this.text = text;
+//     this.fontSize = fontSize;
+//     this.frontColor = frontColor;
+//     this.backColor = backColor;
+//     this.fontstyle = fontStyle;
+//     this.xPos = xPos;
+//     this.yPos = yPos;
+
+//     canvasContext.font = this.fontSize + "px " + this.fontStyle;
+//     canvasContext.fillStyle = this.backColor;
+//     canvasContext.fillText(this.text, this.xPos, this.xPos);
+//     canvasContext.fillStyle = this.frontColor;
+//     canvasContext.fillText(this.text, this.xPos+2, this.yPos+2);
+//}
+
 function drawAll() {
     // drawing black to erase previous frame, doing before .translate() since
     // its coordinates are not supposed to scroll when the camera view does
@@ -124,6 +133,9 @@ function drawAll() {
     // FIXME: turn into proper GUI elements
     colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
     colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
+    
+ //   draw3Dtxt("Z and X to move, M to fire, SPACE for boosters", 24, "WHITE", "RED", "Helvetica", 20, 30);
+    
     canvasContext.font = "24px Helvetica";
     canvasContext.fillStyle = "RED";
     canvasContext.fillText("Z and X to move, M to fire, SPACE for boosters", 20, 30);
