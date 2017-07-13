@@ -2,6 +2,8 @@
  // var canvas, canvasContext; 
     
   var picsToLoad = 0; // set with imageList
+  var titlePic = document.createElement("img");
+  var logoPic = document.createElement("img");
   var shipPic = document.createElement("img");
   var alienSquidPic = document.createElement("img");
   var alienBiterPic = document.createElement("img");
@@ -17,6 +19,8 @@
   var geyserPic = document.createElement("img");
 
   var imageList = [
+  	{varName: titlePic, theFile: "./graphics/titleScreen.png"},
+	{varName: logoPic, theFile: "./graphics/logo.png"},
     {varName: shipPic, theFile: "./graphics/alternateship.png"},
     {varName: alienSquidPic, theFile: "./graphics/squidSheet.png", theTileNum: ALIEN_SQUID},
     {varName: alienBiterPic, theFile: "./graphics/biterSheet.png", theTileNum: ALIEN_BITER},

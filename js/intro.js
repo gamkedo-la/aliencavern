@@ -10,6 +10,9 @@ var storyX;
 var storyMinSize;
 var storyMinY;
 var isIntro; //= true;
+var startCrawl = false;
+var introY = 600;
+var logoAlpha = 1;
 var timeElapsed = 0;
 //Constants
 var STORY_FONT_SIZE; //must be initialized in main.js, but is used as a const  // FIX ME: 
@@ -18,6 +21,8 @@ const STORY_MOVEMENT_SPEED = 0.5;
 const STORY_MAX_TIME = 10;
 var STORY_Y; //must be initialized in main.js, but is used as a const // FIX ME:
 const STORY_FONT_COLOR = 'WHITE'; // FIX ME:
+const TITLE_DISPLAY_TIME = 0.5;
+const BG_SCROLL_SPEED = 3;
 
 story = [
 "It is the year 2045 on the planet Mars.", 
@@ -52,6 +57,16 @@ function setStoryFont(size, font, color){
     canvasContext.font = size + "px " + font;
     canvasContext.fillStyle = color;
     canvasContext.textAlign = 'center';
+}
+
+function drawTitleBackGround() {
+	canvasContext.drawImage(titlePic, 0, introY, titlePic.width, titlePic.height, 0, 0, titlePic.width, titlePic.height);	
+}
+
+function drawLogo() {
+	canvasContext.globalAlpha = logoAlpha;
+	canvasContext.drawImage(logoPic, canvas.width / 2 - logoPic.width / 2, 4);	
+	canvasContext.globalAlpha = 1;
 }
 
 function displayText(text, x, y){
@@ -93,38 +108,56 @@ function loadStory(){
 }
 
 function introScreen(){
-    fillBlackBG();
-    pressPToSkip();
-    loadStory();
-    for (var i = 1; i <= 12; i++){
-        storyText[i].y = storyText[i - 1].y + LINE_SPACING;
-    }
-    //storyText[1].y = storyText[0].y + LINE_SPACING;
-    displayStory();
-    
+    // fillBlackBG();
+	drawTitleBackGround();
+	pressPToSkip();
+	
+	if(startCrawl) {
+    	loadStory();
+		logoAlpha = Math.max(0, logoAlpha - 0.05);	
+    	for (var i = 1; i <= 12; i++){
+        	storyText[i].y = storyText[i - 1].y + LINE_SPACING;
+    	}
+    	//storyText[1].y = storyText[0].y + LINE_SPACING;
+    	displayStory();
         
-    if (frameCounter == 1){
-        timeElapsed++;
-        console.log('timeElapsed = ' + timeElapsed);
-    }
-    if (timeElapsed >= STORY_MAX_TIME && storyText[12].y <= 0){ // Kind of convoluted but it works... for now.
-        goToGame();
-    }
-    if (timeElapsed % 0.5 == 0 && storyText[12].y > 0){
-        storyText[0].y-=STORY_MOVEMENT_SPEED;
-        storyText[0].size-=SIZE_CHANGE;
+    	if (frameCounter == 1){
+        	timeElapsed++;
+        	console.log('timeElapsed = ' + timeElapsed);
+    	}
+    	if (timeElapsed >= STORY_MAX_TIME && storyText[12].y <= 0){ // Kind of convoluted but it works... for now.
+        	goToGame();
+    	}
+    	if (timeElapsed % 0.5 == 0 && storyText[12].y > 0){
+        	storyText[0].y-=STORY_MOVEMENT_SPEED;
+        	storyText[0].size-=SIZE_CHANGE;
 
-        for (var i = 1; i < storyText.length; i++){
-            if (storyText[i].y < canvas.height){
-                storyText[i].size-=SIZE_CHANGE;
-            }
-        }
-    }
+        	for (var i = 1; i < storyText.length; i++){
+            	if (storyText[i].y < canvas.height){
+                	storyText[i].size-=SIZE_CHANGE;
+            	}
+        	}
+    	}
 
-    for (var i = 0 ; i < storyText.length; i++){
-       if (storyText[i].size < 0){
-         storyText[i].size = 0;
-        }   
-    }
+    	for (var i = 0 ; i < storyText.length; i++){
+       		if (storyText[i].size < 0){
+         		storyText[i].size = 0;
+        	}   
+    	}
+	}
+	else {
+    	if (frameCounter == 1){
+        	timeElapsed++;
+        	console.log('timeElapsed = ' + timeElapsed);
+    	}
+		if(timeElapsed > TITLE_DISPLAY_TIME && timeElapsed % 0.5 === 0) {
+			introY = Math.max(0, introY - BG_SCROLL_SPEED);
+			if(timeElapsed > 4) {
+				timeElapsed = 0;
+				startCrawl = true;	
+			}
+		}
+	}
+	drawLogo();
 }
 

@@ -11,7 +11,7 @@ window.onload = function() {
     STORY_FONT_SIZE = 30; //intro.js
     storyText[0].y = STORY_Y; //intro.js
     STORY_X = canvas.width / 2; //intro.js
-    isIntro = true; //intro.js
+	isIntro = true;
 
     for (var i = 0 ; i < 13 ; i++){
         storyText[i].size = STORY_FONT_SIZE; //intro.js
