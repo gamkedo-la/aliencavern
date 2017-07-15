@@ -8,7 +8,7 @@ const INTRO_NONE = 0,
 	STORY_FONT = "Helvetica", 
 	STORY_FONT_SIZE = 32,
 	STORY_FONT_COLOR = "WHITE",
-	STORY_FONT_SIZE_CHANGE = 0.01,
+	STORY_FONT_SIZE_CHANGE = 0.015,
 	STORY_MIN_FONT_SIZE = 12,
 	STORY_MOVEMENT_SPEED = 0.5,
 	BLOCK_SPACE = 100,
@@ -124,11 +124,11 @@ function displayText(text, x, y){
     canvasContext.fillStyle = "WHITE";
 }
 
-function pressESCToSkip(){
+function pressStuffToWhatever(key, action){
     canvasContext.font = "18px Helvetica";
     canvasContext.textAlign = 'start';
     canvasContext.fillStyle = "YELLOW"
-    canvasContext.fillText("Press ESC to SKIP", 10, canvas.height - 10);
+    canvasContext.fillText("Press " + key + " to " + action, 10, canvas.height - 10);
     canvasContext.fillStyle = "WHITE";
 
 }
@@ -178,7 +178,8 @@ function introScreen() {
 		}
 
 		drawFrontCaverns();
-		if(introState !== INTRO_MENU) pressESCToSkip();
+		if(introState !== INTRO_MENU) pressStuffToWhatever("ESC", "SKIP");
+		else pressStuffToWhatever("P", "PLAY");
 		drawLogo();
 	}
 }
