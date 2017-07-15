@@ -7,21 +7,20 @@ window.onload = function() {
     }
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-    STORY_Y = canvas.height; //intro.js
-    STORY_FONT_SIZE = 30; //intro.js
-    storyText[0].y = STORY_Y; //intro.js
-    STORY_X = canvas.width / 2; //intro.js
-	isIntro = true;
-
-    for (var i = 0 ; i < 13 ; i++){
-        storyText[i].size = STORY_FONT_SIZE; //intro.js
-    }
-
     setupMouseEvents();
+	
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
     loadImages();
+	
+	// intro.js variables & function calls
+	midY = canvas.height / 2;
+	midX = canvas.width / 2;
+	bgMidY = titleBG.height / 2;
+	loadStory();
+	introState = INTRO_CRAWL;
+	
     init_particles();
 }
 
@@ -56,7 +55,7 @@ function updateAll() {
     if (frameCounter > framesPerSecond){
         frameCounter = 1;
     }
-    if (isIntro){
+    if (introState > INTRO_NONE){
         gameScreen = false;
         editorScreen = false;
         introScreen();

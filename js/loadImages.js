@@ -2,7 +2,8 @@
  // var canvas, canvasContext; 
     
   var picsToLoad = 0; // set with imageList
-  var titlePic = document.createElement("img");
+  var titleBG = document.createElement("img");
+  var frontCavPic = document.createElement("img");
   var logoPic = document.createElement("img");
   var shipPic = document.createElement("img");
   var alienSquidPic = document.createElement("img");
@@ -19,7 +20,8 @@
   var geyserPic = document.createElement("img");
 
   var imageList = [
-  	{varName: titlePic, theFile: "./graphics/titleScreen.png"},
+  	{varName: titleBG, theFile: "./graphics/titleBackGround.png"},
+	{varName: frontCavPic, theFile: "./graphics/frontCaverns.png"},
 	{varName: logoPic, theFile: "./graphics/logo.png"},
     {varName: shipPic, theFile: "./graphics/alternateship.png"},
     {varName: alienSquidPic, theFile: "./graphics/squidSheet.png", theTileNum: ALIEN_SQUID},

@@ -1,163 +1,185 @@
-//Variables
-var storyText = [new storyLineOfText(), new storyLineOfText(),
-                 new storyLineOfText(), new storyLineOfText(),
-                 new storyLineOfText(), new storyLineOfText(),
-                 new storyLineOfText(), new storyLineOfText(),
-                 new storyLineOfText(), new storyLineOfText(),
-                 new storyLineOfText(), new storyLineOfText(),
-                 new storyLineOfText()];
-var storyX;
-var storyMinSize;
-var storyMinY;
-var isIntro; //= true;
-var startCrawl = false;
-var introY = 600;
-var logoAlpha = 1;
-var timeElapsed = 0;
-//Constants
-var STORY_FONT_SIZE; //must be initialized in main.js, but is used as a const  // FIX ME: 
-const STORY_FONT = 'Helvetica';
-const STORY_MOVEMENT_SPEED = 0.5;
-const STORY_MAX_TIME = 10;
-var STORY_Y; //must be initialized in main.js, but is used as a const // FIX ME:
-const STORY_FONT_COLOR = 'WHITE'; // FIX ME:
-const TITLE_DISPLAY_TIME = 0.5;
-const BG_SCROLL_SPEED = 3;
+// Constants
+const INTRO_NONE = 0,
+	INTRO_CRAWL = 1,
+	INTRO_LOGO = 2,
+	INTRO_MENU = 3,
+	
+	STORY_MAX_TIME = 5; 
+	STORY_FONT = "Helvetica", 
+	STORY_FONT_SIZE = 32,
+	STORY_FONT_COLOR = "WHITE",
+	STORY_FONT_SIZE_CHANGE = 0.01,
+	STORY_MIN_FONT_SIZE = 12,
+	STORY_MOVEMENT_SPEED = 0.5,
+	BLOCK_SPACE = 100,
+	LINE_SPACE = 40,
+	BG_SCROLL_SPEED = 2;
 
-story = [
-"It is the year 2045 on the planet Mars.", 
-"Disaster has struck during a routine agroforestry expedition.",
-"Miles away from E.C. (Earth Colony) Evalos, hundreds of",
-"sinkholes have appeared, swallowing a number of your",
-"colleagues.  Luckily, some of them are still alive!",
-"The survivors have reported via radio transmission that",
-"not only do the sinkholes run deep, but some have",
-"reported spotting alien life, and they don't seem friendly.",
-"As the captain and sole crew member of the STS Cydonia,",
-"you have been tasked with rescuing as many survivors as",
-"you possibly can.  You are their only hope!",
-"",
-"Good luck and godspeed!"];
 
-var LINE_SPACING = 50;
-var STORY_X; //must be initialized in main.js, but is used as a const
-const SIZE_CHANGE = 0.018;
+// Variables
+var introState = INTRO_NONE,
+	timeElapsed = 0,
+	startScroll = false,
+	midY = 300,
+	midX = 448,
+	logoAlpha = 0,
 
-function storyLineOfText(line){ // Defined as a class.
-    this.y = STORY_Y;
+	bgMidY = 600,
+	bgStartY = 0,
+	
+	storyText = [],				 
+	story = [
+		["It is the year 2045 on the planet Mars."], 
+		["Disaster has struck during a routine agroforestry expedition."],
+		["Miles away from E.C. (Earth Colony) Evalos, hundreds of",
+			"sinkholes have appeared, swallowing a number of your",
+			"colleagues."],  
+		["Luckily, some of them are still alive!"],
+		["The survivors have reported via radio transmission that",
+			"not only do the sinkholes run deep, but some have",
+			"reported spotting alien life, and they don't seem friendly."],
+		["As the captain and sole crew member of the STS Cydonia,",
+			"you have been tasked with rescuing as many survivors as",
+			"you possibly can."],
+		["You are their only hope!"],
+		["Good luck and godspeed!"]];
+
+
+// Line Object Constructor
+function storyLineOfText(theLine, theY){
+    this.line = theLine;
+    this.y = theY;
     this.size = STORY_FONT_SIZE;
-    this.line = line;
+	this.speed = STORY_MOVEMENT_SPEED;
 }
 
-function fillBlackBG(){
-    colorRect(0,0,canvas.width,canvas.height,'black');
+function loadStory() {
+	var i = 1,
+		j = 0,
+		y = 0,
+		lastY = 0,
+		lineSpaces = 0;
+		
+	// first line of the story is special b/c of y value
+	storyText.push(new storyLineOfText(story[0][0], 0));
+	
+	// rest of the story lines
+	for(i; i < story.length; i++) {
+		lineSpaces = story[i].length - 1;
+		y = lastY - (BLOCK_SPACE + (lineSpaces * LINE_SPACE));
+		lastY = y;
+	
+		do {
+			if(j > 0) y += LINE_SPACE;	
+			storyText.push(new storyLineOfText(story[i][j], y));
+			j++;
+		} while(j < story[i].length);
+		j = 0;
+	}		
 }
 
+function goToGame(){
+    canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
+    canvasContext.font = "10px Comic Sans MS"; //resets the font size for the game
+	canvasContext.fillStyle = "white";
+    introState = INTRO_NONE;
+    gameScreen = true;
+    editorScreen = false;
+}
+
+// Font settings
 function setStoryFont(size, font, color){
     canvasContext.font = size + "px " + font;
     canvasContext.fillStyle = color;
     canvasContext.textAlign = 'center';
 }
 
+function displayStory(){
+    for (var i = 0; i < storyText.length; i++){
+        setStoryFont(storyText[i].size, STORY_FONT, STORY_FONT_COLOR);
+		displayText(storyText[i].line, midX, storyText[i].y);	
+    }
+}
+
+// Draw functions
 function drawTitleBackGround() {
-	canvasContext.drawImage(titlePic, 0, introY, titlePic.width, titlePic.height, 0, 0, titlePic.width, titlePic.height);	
+	canvasContext.drawImage(titleBG, 0, bgStartY, titleBG.width, titleBG.height, 0, 0, titleBG.width, titleBG.height);
+}
+
+function drawFrontCaverns() {
+	canvasContext.drawImage(frontCavPic, 0, (canvas.height - frontCavPic.height) + (bgMidY - bgStartY));	
 }
 
 function drawLogo() {
 	canvasContext.globalAlpha = logoAlpha;
-	canvasContext.drawImage(logoPic, canvas.width / 2 - logoPic.width / 2, 4);	
+	canvasContext.drawImage(logoPic, midX - logoPic.width / 2, 4);	
 	canvasContext.globalAlpha = 1;
 }
 
 function displayText(text, x, y){
-    canvasContext.fillStyle = "ORANGE"
-    canvasContext.fillText(text, x, y);
-    canvasContext.fillStyle = "RED";
-    canvasContext.fillText(text, x + 2, y + 1);
+    canvasContext.fillStyle = "#ea4f45"
+    canvasContext.fillText(text, x, y);	
+    canvasContext.fillStyle = "#89f59c"
+    canvasContext.fillText(text, x + 1, y + 1);
     canvasContext.fillStyle = "WHITE";
 }
 
-function pressPToSkip(){
-    canvasContext.font = "24px Helvetica";
+function pressESCToSkip(){
+    canvasContext.font = "18px Helvetica";
     canvasContext.textAlign = 'start';
     canvasContext.fillStyle = "YELLOW"
-    canvasContext.fillText("Press P to PLAY", 10, 25);
+    canvasContext.fillText("Press ESC to SKIP", 10, canvas.height - 10);
     canvasContext.fillStyle = "WHITE";
 
 }
 
-function displayStory(){
-
-    for (var i = 0; i < storyText.length; i++){
-        setStoryFont(storyText[i].size, STORY_FONT, STORY_FONT_COLOR);
-        displayText(storyText[i].line, STORY_X, storyText[i].y);
-    }
-}
-
-function goToGame(){
-    canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
-    canvasContext.font = "10px Comic Sans MS"; //resets the font size for the game
-    isIntro = false;
-    gameScreen = true;
-    editorScreen = false;
-}
-
-function loadStory(){
-    for (var i = 0 ; i < story.length; i++)
-    storyText[i].line = story[i];
-}
-
-function introScreen(){
-    // fillBlackBG();
-	drawTitleBackGround();
-	pressPToSkip();
+function introScreen() {
+	if(introState > INTRO_NONE) {
+		drawTitleBackGround();
 	
-	if(startCrawl) {
-    	loadStory();
-		logoAlpha = Math.max(0, logoAlpha - 0.05);	
-    	for (var i = 1; i <= 12; i++){
-        	storyText[i].y = storyText[i - 1].y + LINE_SPACING;
-    	}
-    	//storyText[1].y = storyText[0].y + LINE_SPACING;
-    	displayStory();
-        
-    	if (frameCounter == 1){
-        	timeElapsed++;
-        	console.log('timeElapsed = ' + timeElapsed);
-    	}
-    	if (timeElapsed >= STORY_MAX_TIME && storyText[12].y <= 0){ // Kind of convoluted but it works... for now.
-        	goToGame();
-    	}
-    	if (timeElapsed % 0.5 == 0 && storyText[12].y > 0){
-        	storyText[0].y-=STORY_MOVEMENT_SPEED;
-        	storyText[0].size-=SIZE_CHANGE;
+   		if (frameCounter == 1){
+       		timeElapsed++;
+       		console.log('timeElapsed = ' + timeElapsed);
+   		}
+   		if (timeElapsed >= STORY_MAX_TIME && storyText[storyText.length - 1].y > canvas.height + STORY_FONT_SIZE){
+       		introState = INTRO_LOGO;
+   		}
+		
+		switch(introState) {
+			case INTRO_CRAWL:
+		   		displayStory();
 
-        	for (var i = 1; i < storyText.length; i++){
-            	if (storyText[i].y < canvas.height){
-                	storyText[i].size-=SIZE_CHANGE;
-            	}
-        	}
-    	}
-
-    	for (var i = 0 ; i < storyText.length; i++){
-       		if (storyText[i].size < 0){
-         		storyText[i].size = 0;
-        	}   
-    	}
-	}
-	else {
-    	if (frameCounter == 1){
-        	timeElapsed++;
-        	console.log('timeElapsed = ' + timeElapsed);
-    	}
-		if(timeElapsed > TITLE_DISPLAY_TIME && timeElapsed % 0.5 === 0) {
-			introY = Math.max(0, introY - BG_SCROLL_SPEED);
-			if(timeElapsed > 4) {
-				timeElapsed = 0;
-				startCrawl = true;	
-			}
+				if (timeElapsed % 0.5 == 0 && storyText[storyText.length - 1].y <= titleBG.height){
+					var storyObject;
+       				for (var i = 0; i < storyText.length; i++){
+						storyObject = storyText[i];
+						if(storyObject.y > midY + midY / 2) {
+							storyObject.speed = Math.min(2.5, storyObject.speed * 1.1);
+							if(i === storyText.length - 5) startScroll = true;
+						}
+						storyObject.y += storyObject.speed;
+						if(storyObject.y > 0) storyObject.size = Math.max(STORY_MIN_FONT_SIZE, storyObject.size - STORY_FONT_SIZE_CHANGE);
+       				}
+				}
+			
+				if(startScroll) {
+					bgStartY = Math.min(bgMidY, bgStartY + BG_SCROLL_SPEED);
+					if(bgStartY === bgMidY) startScroll = false;
+				}
+				pressESCToSkip();
+			break;
+			case INTRO_LOGO:
+				logoAlpha = Math.min(1, logoAlpha + 0.05);
+				if(logoAlpha === 1) introState = INTRO_MENU;
+				pressESCToSkip();
+			break;
+			case INTRO_MENU:
+			bgStartY = bgMidY;
+			logoAlpha = 1;
+			break;	
 		}
-	}
-	drawLogo();
-}
 
+		drawFrontCaverns();
+		drawLogo();
+	}
+}

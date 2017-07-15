@@ -9,7 +9,8 @@ const KEY_SPACE = 32;
 const KEY_M = 77; //fire
 const KEY_Z = 90; //left
 const KEY_X = 88; //right
-const KEY_P = 80; //skip intro
+const KEY_ESC = 27; //skip intro
+const KEY_P = 80;
 //const KEY_S = 83; //Silence sound
 
 var holdLeft = false;
@@ -64,24 +65,22 @@ function setKeyHoldState(thisKey, setTo) {
     window.location.reload() // Find better way to reset game after exit from editor
     gameScreen = true;
     editorScreen = false;
-    isIntro = false;
+	introState = INTRO_NONE;
   }
 
   if(thisKey === F2) {
     levelEditorInitialization();
     gameScreen = false;
     editorScreen = true;
-    isIntro = false;
+    introState = INTRO_NONE;
   }
-
-  if(isIntro && thisKey === KEY_P) {
-    // goToGame();
-    canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
-    canvasContext.font = "10px Helvetica";
-    canvasContext.fillStyle = "white";
-    isIntro = false;
-    gameScreen = true;
-    editorScreen = false;
+  
+  if(introState > INTRO_NONE && thisKey === KEY_P) {
+	  goToGame();
+  }
+  
+  if(introState > INTRO_NONE && thisKey === KEY_ESC) {
+    introState = INTRO_MENU;
   }
 
 
