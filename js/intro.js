@@ -166,12 +166,10 @@ function introScreen() {
 					bgStartY = Math.min(bgMidY, bgStartY + BG_SCROLL_SPEED);
 					if(bgStartY === bgMidY) startScroll = false;
 				}
-				pressESCToSkip();
 			break;
 			case INTRO_LOGO:
 				logoAlpha = Math.min(1, logoAlpha + 0.05);
 				if(logoAlpha === 1) introState = INTRO_MENU;
-				pressESCToSkip();
 			break;
 			case INTRO_MENU:
 			bgStartY = bgMidY;
@@ -180,6 +178,7 @@ function introScreen() {
 		}
 
 		drawFrontCaverns();
+		if(introState !== INTRO_MENU) pressESCToSkip();
 		drawLogo();
 	}
 }
