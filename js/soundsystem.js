@@ -148,6 +148,16 @@ function SoundSystem() {
 	//this.bounce = function() { atlas.play('bounce'+randomInt(1,5), false, 1, 1, -1); }
 	//this.shoe = function() { atlas.play('shoe'+randomInt(1,10)); }
 
+	this.Mute = function() {
+		console.log("muting sound");
+		Howler.mute(true);
+	}
+	
+	this.unMute = function() {
+		console.log("unmuting sound");
+		Howler.mute(false);
+	}
+
 	init();
 
 }
