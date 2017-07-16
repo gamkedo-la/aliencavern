@@ -153,7 +153,11 @@ function twoArrayCollisionDetect(objArr1, objArr2){
 			if(element.gameObjectType == ALIEN_SQUID) {
 				party(element.x + element.radius, element.y + element.radius, 
 					PARTICLE_SQUIDDIE_EXPLOSION);
-			}
+            }
+                
+            else if(element.gameObjectType == CREW) {
+                party(element.x + element.radius, element.y + element.radius, PARTICLE_CREW_DEATH, 0, 0, 0, 6);
+            }
 			
 			else {
 				party(element.x + element.radius, element.y + element.radius, PARTICLE_EXPLOSION);
