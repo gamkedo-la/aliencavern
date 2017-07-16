@@ -156,7 +156,7 @@ function twoArrayCollisionDetect(objArr1, objArr2){
             }
                 
             else if(element.gameObjectType == CREW) {
-                party(element.x + element.radius, element.y + element.radius, PARTICLE_CREW_DEATH, 0, 0, 0, 6);
+                party(element.x + element.radius, element.y + element.radius, PARTICLE_CREW_DEATH_2, 0, 0, 0, 8);
             }
 			
 			else {
