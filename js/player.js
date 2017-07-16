@@ -25,12 +25,12 @@ const DAMAGE_GROUND = 5;
 const DAMAGE_BUMP = 1;
 var playerHealth = MAX_HEALTH;
 
-const RESCUES_REQUIRED = 6; // to complete level
+const RESCUES_REQUIRED = 10; // to complete level
 var rescueCounter = 0; // how many crew rescued?
 
 function playerReset() {
     playerX = canvas.width/2;
-    playerY = 20;
+    playerY = BRICK_H + 10;
     playerHealth = MAX_HEALTH;
     rescueCounter = 0;
 }

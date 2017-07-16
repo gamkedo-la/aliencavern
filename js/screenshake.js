@@ -42,3 +42,10 @@ function updateScreenshake()
 		}
 	}
 }
+
+function resetScreenShake(){
+	screen_shakes = 0; // frames of screenshake used as player feedback for when we take damage
+	screen_shake_pivot_x = 0;
+	screen_shake_pivot_y = 0;
+	screen_shake_me = document.getElementById('gameCanvas');
+}

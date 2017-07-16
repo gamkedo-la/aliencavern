@@ -1,34 +1,26 @@
-// Constants
-const INTRO_NONE = 0,
-	INTRO_CRAWL = 1,
-	INTRO_LOGO = 2,
-	INTRO_MENU = 3,
-	
 	STORY_MAX_TIME = 5; 
 	STORY_FONT = "Helvetica", 
 	STORY_FONT_SIZE = 32,
 	STORY_FONT_COLOR = "WHITE",
 	STORY_FONT_SIZE_CHANGE = 0.015,
 	STORY_MIN_FONT_SIZE = 12,
-	STORY_MOVEMENT_SPEED = 0.5,
+	STORY_MOVEMENT_SPEED = 0.7,
 	BLOCK_SPACE = 100,
 	LINE_SPACE = 40,
 	BG_SCROLL_SPEED = 2;
 
+	var timeElapsed = 0;
+	var startScroll = false;
+	var midY = 300;
+	var midX = 448;
+	var logoAlpha = 0;
 
-// Variables
-var introState = INTRO_NONE,
-	timeElapsed = 0,
-	startScroll = false,
-	midY = 300,
-	midX = 448,
-	logoAlpha = 0,
+	var bgMidY = 600;
+	var bgStartY = 0;
 
-	bgMidY = 600,
-	bgStartY = 0,
-	
-	storyText = [],				 
-	story = [
+	var storyText = [];			 
+
+	var story = [
 		["It is the year 2045 on the planet Mars."], 
 		["Disaster has struck during a routine agroforestry expedition."],
 		["Miles away from E.C. (Earth Colony) Evalos, hundreds of",
@@ -82,9 +74,6 @@ function goToGame(){
     canvasContext.textAlign = 'start'; //This un-centers the text before going back to the game.
     canvasContext.font = "10px Comic Sans MS"; //resets the font size for the game
 	canvasContext.fillStyle = "white";
-    introState = INTRO_NONE;
-    gameScreen = true;
-    editorScreen = false;
 }
 
 // Font settings
@@ -134,19 +123,19 @@ function pressStuffToWhatever(key, action){
 }
 
 function introScreen() {
-	if(introState > INTRO_NONE) {
+	if(gameState > INTRO) {
 		drawTitleBackGround();
 	
    		if (frameCounter == 1){
        		timeElapsed++;
-       		console.log('timeElapsed = ' + timeElapsed);
+       		//console.log('timeElapsed = ' + timeElapsed);
    		}
    		if (timeElapsed >= STORY_MAX_TIME && storyText[storyText.length - 1].y > canvas.height + STORY_FONT_SIZE){
-       		introState = INTRO_LOGO;
+			   gameState = DISPLAY_LOGO;
    		}
 		
-		switch(introState) {
-			case INTRO_CRAWL:
+		switch(gameState) {
+			case INTRO_STORY:
 		   		displayStory();
 
 				if (timeElapsed % 0.5 == 0 && storyText[storyText.length - 1].y <= titleBG.height){
@@ -167,19 +156,21 @@ function introScreen() {
 					if(bgStartY === bgMidY) startScroll = false;
 				}
 			break;
-			case INTRO_LOGO:
-				logoAlpha = Math.min(1, logoAlpha + 0.05);
-				if(logoAlpha === 1) introState = INTRO_MENU;
+			case DISPLAY_LOGO:
+				logoAlpha = Math.min(1, logoAlpha + 0.02);
+				if(logoAlpha === 1 && timeElapsed > STORY_MAX_TIME + 10) {
+					gameState = MENU;
+				}
 			break;
-			case INTRO_MENU:
+			case MENU:
 			bgStartY = bgMidY;
 			logoAlpha = 1;
 			break;	
 		}
 
 		drawFrontCaverns();
-		if(introState !== INTRO_MENU) pressStuffToWhatever("ESC", "SKIP");
-		else pressStuffToWhatever("P", "PLAY");
+		if(gameState !== MENU) pressStuffToWhatever("ESC", "SKIP");
+//		else pressStuffToWhatever("P", "PLAY");
 		drawLogo();
 	}
 }

@@ -7,11 +7,12 @@ var draggedY = 0;
 
 const TOOL_W = 30;
 const TOOL_H = 30;
+
 var currentToolTile = alienSquidPic;
 var currentToolTileType = ALIEN_SQUID;
 
-var toolState = { GAMEOBJECTS : 0 , CAVERNONE : 1};
-var currentTool = toolState.GAMEOBJECTS; 
+var toolState = { gameobjects : 0 , cavernone : 1, caverntwo : 2};
+var currentTool = toolState.gameobjects;
 
 var toolOrder = [
     ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
@@ -44,7 +45,7 @@ function loadLevel() {
 
 function resetLevel() {
     drawDefaultCavern();
-    clearObjects();
+//    clearObjects(); objects are not used 
 }
 
 function checkKeysToChangeTile (keyCode){
@@ -90,7 +91,7 @@ function selectTool(){
         var toolIndex = toolIndexAt(currentMousePos.x, currentMousePos.y - TOOL_H);
 
 
-        if (currentTool == toolState.GAMEOBJECTS){
+        if (currentTool == toolState.gameobjects){
             tileNo = 0;
             imageList.forEach(function(element){
                 if(element.theTileNum == toolOrder[toolIndex]){
@@ -99,7 +100,7 @@ function selectTool(){
                 }
             });
             }
-        else if (currentTool == toolState.CAVERNONE){
+        else if (currentTool == toolState.cavernone){
            currentToolTile = cavernTileSheet;
            currentToolTileType = toolOrder[toolIndex];
            tileNo = toolIndex;

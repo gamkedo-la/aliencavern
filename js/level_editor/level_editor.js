@@ -1,3 +1,7 @@
+const TOP_LEFT = 0;
+const BOTTOM_RIGHT = 0
+const BOTTOM_LEFT = 0;
+
 function levelEditorInitialization() {
     preventRightClickToDisplayContextMenu();
     colorRect(0, 0, screen.width, screen.height, 'black');
@@ -9,10 +13,11 @@ function levelEditorInitialization() {
 function drawTools(){
     var xPos = 0;
     var yPos = TOOL_H;
-    var delta = 0;
+    var delta = 0; // Allows the tiles to be placed two at a time
+
     colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(0, 0, 64, 0.8)");
 
-    if (currentTool == toolState.GAMEOBJECTS){
+    if (currentTool == toolState.gameobjects){
         toolOrder = [];
         toolOrder = [
             ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
@@ -37,7 +42,7 @@ function drawTools(){
             }
 
         }
-    } else if (currentTool == toolState.CAVERNONE){
+    } else if (currentTool == toolState.cavernone){
         // create an array of numbers from cavern grid length
         toolOrder = [];
         for (var i = 0; i < 10; i++){
