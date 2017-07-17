@@ -31,8 +31,9 @@ window.onload = function() {
     Sound.play("music_loop_slow", false, soundVolume);
     // intro.js variables & function calls TODO: refactor this
     midY = canvas.height / 2;
-	midX = canvas.width / 2;
-	bgMidY = titleBG.height / 2;
+    midX = canvas.width / 2;
+    //console.log(titleBG.height / 2);
+	//bgMidY = titleBG.height / 2;
     loadStory();
     resetGame();
     setInterval(updateAll, 1000/framesPerSecond);

@@ -125,10 +125,6 @@ function pressStuffToWhatever(key, action){
 function introScreen() {
 	if(gameState > INTRO) {
 		drawTitleBackGround();
-	}
-
-	if(gameState > INTRO) {
-		//drawTitleBackGround();
 	
    		if (frameCounter == 1){
        		timeElapsed++;
@@ -167,8 +163,8 @@ function introScreen() {
 				}
 			break;
 			case MENU:
-			bgStartY = bgMidY;
-			logoAlpha = 1;
+				bgStartY = bgMidY;
+				logoAlpha = 1;
 			break;	
 		}
 
