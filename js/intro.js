@@ -127,7 +127,6 @@ function introScreen() {
 		drawTitleBackGround();
 	}
 
-	drawFrontCaverns();
 	if(gameState > INTRO) {
 		//drawTitleBackGround();
 	
@@ -173,7 +172,7 @@ function introScreen() {
 			break;	
 		}
 
-		
+		drawFrontCaverns();
 		if(gameState !== MENU) pressStuffToWhatever("ESC", "SKIP");
 //		else pressStuffToWhatever("P", "PLAY");
 		drawLogo();
