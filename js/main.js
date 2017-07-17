@@ -32,8 +32,6 @@ window.onload = function() {
     // intro.js variables & function calls TODO: refactor this
     midY = canvas.height / 2;
     midX = canvas.width / 2;
-    //console.log(titleBG.height / 2);
-	//bgMidY = titleBG.height / 2;
     loadStory();
     resetGame();
     setInterval(updateAll, 1000/framesPerSecond);

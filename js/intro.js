@@ -96,6 +96,7 @@ function drawTitleBackGround() {
 }
 
 function drawFrontCaverns() {
+	bgMidY = titleBG.height / 2;
 	canvasContext.drawImage(frontCavPic, 0, (canvas.height - frontCavPic.height) + (bgMidY - bgStartY));	
 }
 
@@ -138,7 +139,7 @@ function introScreen() {
 			case INTRO_STORY:
 		   		displayStory();
 
-				if (timeElapsed % 0.5 == 0 && storyText[storyText.length - 1].y <= titleBG.height){
+				if (storyText[storyText.length - 1].y <= titleBG.height){
 					var storyObject;
        				for (var i = 0; i < storyText.length; i++){
 						storyObject = storyText[i];
