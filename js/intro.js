@@ -125,6 +125,11 @@ function pressStuffToWhatever(key, action){
 function introScreen() {
 	if(gameState > INTRO) {
 		drawTitleBackGround();
+	}
+
+	drawFrontCaverns();
+	if(gameState > INTRO) {
+		//drawTitleBackGround();
 	
    		if (frameCounter == 1){
        		timeElapsed++;
@@ -168,7 +173,7 @@ function introScreen() {
 			break;	
 		}
 
-		drawFrontCaverns();
+		
 		if(gameState !== MENU) pressStuffToWhatever("ESC", "SKIP");
 //		else pressStuffToWhatever("P", "PLAY");
 		drawLogo();
