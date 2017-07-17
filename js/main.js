@@ -109,7 +109,7 @@ function menuScreen(){
         Sound.play("cavernambient", true, soundVolume);
     }
 
-    var xPos = (canvas.width / 4) + 10;
+    var xPos = (canvas.width / 4) + 50;
     var yPos = (canvas.height / 4) + 70;
     var menu_text = [
         "[P] Play Game",
@@ -124,12 +124,15 @@ function menuScreen(){
     drawFrontCaverns();
     drawLogo();
 
-    canvasContext.font = "48px monospace";
+    canvasContext.font = "40px ShareTechMono";
     canvas.textAlign = 'start';
-    canvasContext.fillStyle = "YELLOW";
+	canvasContext.drawImage(menuPanel, xPos - 5, yPos - 50);
     for (var i = 0; i < menu_text.length ; i++){
+		canvasContext.fillStyle = "#159781"
         canvasContext.fillText(menu_text[i],xPos,yPos);
-        yPos = yPos + 60;
+	    canvasContext.fillStyle = "WHITE";
+    	canvasContext.fillText(menu_text[i], xPos + 2, yPos + 2);
+		yPos = yPos + 60;
     }
     canvasContext.fillStyle = "WHITE";
 }

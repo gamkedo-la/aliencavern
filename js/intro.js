@@ -114,7 +114,7 @@ function displayText(text, x, y){
 }
 
 function pressStuffToWhatever(key, action){
-    canvasContext.font = "18px Helvetica";
+    canvasContext.font = "18px ShareTechMono";
     canvasContext.textAlign = 'start';
     canvasContext.fillStyle = "YELLOW"
     canvasContext.fillText("Press " + key + " to " + action, 10, canvas.height - 10);
