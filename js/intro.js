@@ -4,7 +4,7 @@
 	STORY_FONT_COLOR = "WHITE",
 	STORY_FONT_SIZE_CHANGE = 0.015,
 	STORY_MIN_FONT_SIZE = 12,
-	STORY_MOVEMENT_SPEED = 0.7,
+	STORY_MOVEMENT_SPEED = 0.5,
 	BLOCK_SPACE = 100,
 	LINE_SPACE = 40,
 	BG_SCROLL_SPEED = 2;
@@ -18,6 +18,7 @@
 	var bgMidY = 600;
 	var bgStartY = 0;
 
+	// Variables
 	var storyText = [];			 
 
 	var story = [
@@ -126,7 +127,6 @@ function pressStuffToWhatever(key, action){
 function introScreen() {
 	if(gameState > INTRO) {
 		drawTitleBackGround();
-	
    		if (frameCounter == 1){
        		timeElapsed++;
        		//console.log('timeElapsed = ' + timeElapsed);

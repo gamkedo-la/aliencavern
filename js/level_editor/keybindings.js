@@ -19,7 +19,6 @@ const key_t = 84;
 const key_y = 89;
 const key_up_arrow = 38;
 const key_down_arrow = 40;
-const KEY_S = 83;
 
 var editorKeyToTile = [
     {press: key_q, tile: ALIEN_SQUID},

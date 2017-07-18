@@ -1,5 +1,5 @@
 const TOP_LEFT = 0;
-const BOTTOM_RIGHT = 0
+const BOTTOM_RIGHT = 0;
 const BOTTOM_LEFT = 0;
 
 function levelEditorInitialization() {
