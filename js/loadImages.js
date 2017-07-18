@@ -11,6 +11,7 @@ var picsToLoad = 0; // set with imageList
 var titleBG = document.createElement("img");
 var frontCavPic = document.createElement("img");
 var logoPic = document.createElement("img");
+var menuPanel = document.createElement("img");
 var shipPic = document.createElement("img");
 var alienSquidPic = document.createElement("img");
 var alienBiterPic = document.createElement("img");
@@ -29,6 +30,7 @@ var imageList = [
     {varName: titleBG, theFile: "./graphics/titleBackGround.png"},
     {varName: frontCavPic, theFile: "./graphics/frontCaverns.png"},
     {varName: logoPic, theFile: "./graphics/logo.png"},
+	{varName: menuPanel, theFile: "./graphics/menuPanel.png"},
     {varName: shipPic, theFile: "./graphics/alternateship.png"},
     {varName: alienSquidPic, theFile: "./graphics/squidSheet.png", theTileNum: ALIEN_SQUID},
     {varName: alienBiterPic, theFile: "./graphics/biterSheet.png", theTileNum: ALIEN_BITER},

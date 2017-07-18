@@ -96,6 +96,7 @@ function drawTitleBackGround() {
 }
 
 function drawFrontCaverns() {
+	bgMidY = titleBG.height / 2;
 	canvasContext.drawImage(frontCavPic, 0, (canvas.height - frontCavPic.height) + (bgMidY - bgStartY));	
 }
 
@@ -114,7 +115,7 @@ function displayText(text, x, y){
 }
 
 function pressStuffToWhatever(key, action){
-    canvasContext.font = "18px Helvetica";
+    canvasContext.font = "18px ShareTechMono";
     canvasContext.textAlign = 'start';
     canvasContext.fillStyle = "YELLOW"
     canvasContext.fillText("Press " + key + " to " + action, 10, canvas.height - 10);
@@ -138,7 +139,7 @@ function introScreen() {
 			case INTRO_STORY:
 		   		displayStory();
 
-				if (timeElapsed % 0.5 == 0 && storyText[storyText.length - 1].y <= titleBG.height){
+				if (storyText[storyText.length - 1].y <= titleBG.height){
 					var storyObject;
        				for (var i = 0; i < storyText.length; i++){
 						storyObject = storyText[i];
@@ -163,8 +164,8 @@ function introScreen() {
 				}
 			break;
 			case MENU:
-			bgStartY = bgMidY;
-			logoAlpha = 1;
+				bgStartY = bgMidY;
+				logoAlpha = 1;
 			break;	
 		}
 
