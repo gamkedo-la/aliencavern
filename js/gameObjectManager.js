@@ -120,8 +120,10 @@ function checkCollision(gameObject){
     var hit = false;
     var dx = playerX - (this.gameObject.x + this.gameObject.radius);
     var dy = playerY - (this.gameObject.y + this.gameObject.radius);
-    var distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < player_RADIUS + this.gameObject.radius && this.gameObject.alive) {
+    var distance = /*Math.sqrt*/(dx * dx + dy * dy);
+    var objRad = player_RADIUS + this.gameObject.radius;
+    var ObjRadSquared = objRad * objRad;
+    if (distance < ObjRadSquared && this.gameObject.alive) {
         console.log("hit object");
         hit = true;
     }
