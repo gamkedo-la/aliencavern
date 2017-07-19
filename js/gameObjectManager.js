@@ -147,8 +147,11 @@ function twoArrayCollisionDetect(objArr1, objArr2){
     this.objArr2.forEach(function(element){
         var dx = this.objArr1[0].x - (element.x + element.radius);
         var dy = this.objArr1[0].y - (element.y + element.radius);
-        var distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < objArr1[0].radius + element.radius && element.alive) {
+        //square root is extremely expensive, so it would be better to compare the squares instead
+        var distance = /*Math.sqrt*/(dx * dx + dy * dy);
+        var objRad = objArr1[0].radius + element.radius;
+        var objRadSquared = objRad * objRad;
+        if (distance < objRadSquared && element.alive) {
             console.log("hit object");
 			if(element.gameObjectType == ALIEN_SQUID) {
 				party(element.x + element.radius, element.y + element.radius, 
@@ -156,6 +159,7 @@ function twoArrayCollisionDetect(objArr1, objArr2){
             }
                 
             else if(element.gameObjectType == CREW) {
+                playerHealth -= MAX_HEALTH/10;
                 party(element.x + element.radius, element.y + element.radius, PARTICLE_CREW_DEATH_2, 0, 0, 0, 8);
             }
 			
