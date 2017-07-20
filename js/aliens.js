@@ -4,10 +4,12 @@
 const ALIEN_MOVE_SPEED = 16; // pixels per second
 const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
 const AI_SEEK_RANGE = 200; // player must be nearby to be noticed
+const WARNING_COOLDOWN = 60;
 
 var ai_timestamp = 0;
 var ai_prev_timestamp = 0;
 var ai_seconds_since_last_update = 0;
+var warningCooldownTimer = 0;
 
 function updateAliens()
 {
@@ -23,7 +25,7 @@ function updateAliens()
 
 function dist(x1,y1,x2,y2)
 {
-	return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+	return /*Math.sqrt*/((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
 
 function alienAI(me)
@@ -57,8 +59,19 @@ function alienAI(me)
 	{
 		var moveDist = 1; // FIXME TODO framarate independent floating point distances: ai_seconds_since_last_update * ALIEN_MOVE_SPEED;
 		// move towards player within a range
-		if ((distanceFromHome < ALIEN_MOVE_RANGE) && (distanceFromPlayer < AI_SEEK_RANGE))
+		if (/*(distanceFromHome < ALIEN_MOVE_RANGE * ALIEN_MOVE_RANGE) && */me.alive && (distanceFromPlayer < AI_SEEK_RANGE * AI_SEEK_RANGE))
 		{
+			console.log(warningCooldownTimer);
+			if(warningCooldownTimer == 0) {
+				warningCooldownTimer++;
+				party(me.x, me.y, PARTICLE_WARNING, 0, 0, 0, 8);
+			} else {
+				warningCooldownTimer++;
+				if(warningCooldownTimer > WARNING_COOLDOWN) {
+					warningCooldownTimer = 0;
+				}
+			}
+			
 			//console.log('AI debug: ALIEN_BITER seeking '+distanceFromPlayer+' until '+distanceFromHome);
 			if (me.x < playerX) {
 				me.x += moveDist;
@@ -68,8 +81,8 @@ function alienAI(me)
 				me.x -= moveDist;
 				me.flip = false;
 			}
-			if (me.y < playerY) me.y += moveDist;
-			if (me.y > playerY) me.y -= moveDist;
+			if (me.y < playerY && me.y < playerY + player_RADIUS) me.y += moveDist;
+			if (me.y > playerY && me.y > playerY - player_RADIUS ) me.y -= moveDist;
 		}
 		else // go back home
 		{

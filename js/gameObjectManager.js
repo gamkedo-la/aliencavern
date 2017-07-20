@@ -122,8 +122,9 @@ function checkCollision(gameObject){
     var dy = playerY - (this.gameObject.y + this.gameObject.radius);
     var distance = /*Math.sqrt*/(dx * dx + dy * dy);
     var objRad = player_RADIUS + this.gameObject.radius;
-    var ObjRadSquared = objRad * objRad;
-    if (distance < ObjRadSquared && this.gameObject.alive) {
+    var objRadSquared = objRad * objRad;
+    if (distance < objRadSquared && this.gameObject.alive) {
+        console.log(distance+" , "+objRadSquared);
         console.log("hit object");
         hit = true;
     }
@@ -149,6 +150,8 @@ function twoArrayCollisionDetect(objArr1, objArr2){
     this.objArr2.forEach(function(element){
         var dx = this.objArr1[0].x - (element.x + element.radius);
         var dy = this.objArr1[0].y - (element.y + element.radius);
+        //var dx = this.objArr1[0].x - (element.x/* + element.radius*/);
+        //var dy = this.objArr1[0].y - (element.y/* + element.radius*/);
         //square root is extremely expensive, so it would be better to compare the squares instead
         var distance = /*Math.sqrt*/(dx * dx + dy * dy);
         var objRad = objArr1[0].radius + element.radius;
