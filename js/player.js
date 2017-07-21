@@ -163,11 +163,15 @@ function playerMove() {
       playerSpeedY = 0;
     }
     
-    if(playerSpeedY > 0 && isBrickAtPixelCoord(playerX, playerY + player_RADIUS) > 0) {
+    var horizCollisionFootSpread = 14;
+    if(playerSpeedY > 0 && 
+        (isBrickAtPixelCoord(playerX-horizCollisionFootSpread, playerY + player_RADIUS) > 0 || 
+          isBrickAtPixelCoord(playerX+horizCollisionFootSpread, playerY + player_RADIUS) > 0)) {
       playerY = (1+Math.floor( playerY / BRICK_H )) * BRICK_H - player_RADIUS;
       groundPlayer();
       playerSpeedY = 0;
-    } else if(isBrickAtPixelCoord(playerX,playerY+player_RADIUS+2) == 0) {
+    } else if(isBrickAtPixelCoord(playerX-horizCollisionFootSpread,playerY+player_RADIUS+2) == 0 &&
+              isBrickAtPixelCoord(playerX+horizCollisionFootSpread,playerY+player_RADIUS+2) == 0) {
       playerOnGround = false;
     }
     
