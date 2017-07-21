@@ -186,7 +186,6 @@ function updateAll() {
             pauseGame();
             break;
         case LEVEL_EDITOR:
-            levelEditorInitialization();
             drawLevelEditor();
             break;
         default: 

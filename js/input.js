@@ -41,6 +41,7 @@ switch (gameState){
   case MENU:
     if (thisKey === KEY_L){
       gameState = LEVEL_EDITOR;
+      levelEditorInitialization();
     }
   break;
 }

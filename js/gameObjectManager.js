@@ -124,8 +124,8 @@ function checkCollision(gameObject){
     var objRad = player_RADIUS + this.gameObject.radius;
     var objRadSquared = objRad * objRad;
     if (distance < objRadSquared && this.gameObject.alive) {
-        console.log(distance+" , "+objRadSquared);
-        console.log("hit object");
+        // console.log(distance+" , "+objRadSquared);
+        // console.log("hit object");
         hit = true;
     }
 return hit;}

@@ -59,5 +59,4 @@ function scrollCamera(y) {
     } else if(camPanY < 0){
         camPanY = 0;
     }
-    
 }

@@ -13,7 +13,7 @@ function levelEditorInitialization() {
 function drawTools(){
     var xPos = 0;
     var yPos = TOOL_H;
-    var delta = 0; // Allows the tiles to be placed two at a time
+    var delta = 0; // Allows odd and even tiles to be placed next to each other
 
     colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(0, 0, 64, 0.8)");
 
