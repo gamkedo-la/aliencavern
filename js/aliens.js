@@ -5,11 +5,15 @@ const ALIEN_MOVE_SPEED = 16; // pixels per second
 const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
 const AI_SEEK_RANGE = 200; // player must be nearby to be noticed
 const WARNING_COOLDOWN = 60;
+const ENEMY_DAMAGE_RANGE = 100;
+const ENEMY_DAMAGE_AMOUNT = 10;
+const DAMAGE_COOLDOWN_TIMER = 1000;
 
 var ai_timestamp = 0;
 var ai_prev_timestamp = 0;
 var ai_seconds_since_last_update = 0;
 var warningCooldownTimer = 0;
+var damageCooldownTimer = 0;
 
 function updateAliens()
 {
@@ -46,6 +50,16 @@ function alienAI(me)
 	var distanceFromPlayer = dist(me.x,me.y,playerX,playerY);
 	//console.log('AI debug: distanceFromPlayer='+distanceFromPlayer)
 
+	//ensure that the cooldown timer runs regardless of whether the player is near to the enemy or not
+	if(damageCooldownTimer > 0) {
+		damageCooldownTimer++;
+		if(damageCooldownTimer > DAMAGE_COOLDOWN_TIMER) {
+			damageCooldownTimer = 0;
+		}
+		//console.log(damageCooldownTimer);
+	}
+	
+
 	if (me.gameObjectType == ALIEN_SQUID)
 	{
 		var oldX = me.x;
@@ -61,7 +75,7 @@ function alienAI(me)
 		// move towards player within a range
 		if (/*(distanceFromHome < ALIEN_MOVE_RANGE * ALIEN_MOVE_RANGE) && */me.alive && (distanceFromPlayer < AI_SEEK_RANGE * AI_SEEK_RANGE))
 		{
-			console.log(warningCooldownTimer);
+			//console.log(distanceFromPlayer);
 			if(warningCooldownTimer == 0) {
 				warningCooldownTimer++;
 				party(me.x, me.y, PARTICLE_WARNING, 0, 0, 0, 8);
@@ -83,6 +97,16 @@ function alienAI(me)
 			}
 			if (me.y < playerY && me.y < playerY + player_RADIUS) me.y += moveDist;
 			if (me.y > playerY && me.y > playerY - player_RADIUS ) me.y -= moveDist;
+
+			if(distanceFromPlayer <= ENEMY_DAMAGE_RANGE) {
+				if(damageCooldownTimer === 0) {
+					takeDamage(ENEMY_DAMAGE_AMOUNT);
+					//playerHealth -= ENEMY_DAMAGE_AMOUNT;
+					//temporarily using this sound to indicate taking damage from alien
+					if (!Sound.isPlaying('bump')) Sound.play('bump',false,soundVolume);
+					damageCooldownTimer++;
+				}
+			}
 		}
 		else // go back home
 		{
