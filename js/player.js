@@ -163,7 +163,7 @@ function playerMove() {
       playerSpeedY = 0;
     }
     
-    var horizCollisionFootSpread = 14;
+    var horizCollisionFootSpread = 25;
     if(playerSpeedY > 0 && 
         (isBrickAtPixelCoord(playerX-horizCollisionFootSpread, playerY + player_RADIUS) > 0 || 
           isBrickAtPixelCoord(playerX+horizCollisionFootSpread, playerY + player_RADIUS) > 0)) {
