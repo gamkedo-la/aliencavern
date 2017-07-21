@@ -171,7 +171,7 @@ function playerMove() {
       playerOnGround = false;
     }
     
-    var sideCollisionVertSpread = 15;
+    var sideCollisionVertSpread = 10;
     if(playerSpeedX < 0 && (isBrickAtPixelCoord(playerX-player_RADIUS, playerY - sideCollisionVertSpread) > 0
      || isBrickAtPixelCoord(playerX-player_RADIUS, playerY + sideCollisionVertSpread) > 0)) {
       playerX = (Math.floor( playerX / BRICK_W )) * BRICK_W + player_RADIUS;

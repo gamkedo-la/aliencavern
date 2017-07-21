@@ -3,6 +3,7 @@ var iconActionToTake;
 var mouse_up = true;
 const LEFT_CLICK = 0;
 const RIGHT_CLICK = 2;
+var mouseClickLeft = 0;
 function setupMouseEvents() {
     onMouseMove();
     onMouseDown();
@@ -46,9 +47,9 @@ function onMouseMove() {
 
 function onMouseDown() {
    	canvas.addEventListener('mousedown', function (evt) {
-        if(window.editorScreen == true){
+        if(gameState == LEVEL_EDITOR){
             if (evt.button === LEFT_CLICK && mouse_up) {
-                LeftMouseActions();
+                leftMouseActions();
                 draggedY = currentMousePos.y;
             }
 
@@ -94,10 +95,12 @@ function dragScrollLevel() {
 //     console.log("function drag scroll camera " + heightOfLevel);
 }
 
-function LeftMouseActions() {
+function leftMouseActions() {
     mouse_up = false;
+            console.log("mouse clicked times - ", mouseClickLeft++);
     if (!showControlPanel && !outOfBounds()) {
         change_tile(currentToolTileType);
+
     } else if (showControlPanel && iconActionToTake) {
         iconActionToTake();
     } else if (!showControlPanel && outOfBounds())

@@ -61,6 +61,7 @@ function checkKeysToChangeTile (keyCode){
 }
 
 function change_tile(changeTo) {
+    console.log("change to ", changeTo );
     removeImgFromBrick();
     
     if (typeof changeTo !== 'undefined') {
