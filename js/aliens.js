@@ -5,7 +5,7 @@ const ALIEN_MOVE_SPEED = 16; // pixels per second
 const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
 const AI_SEEK_RANGE = 200; // player must be nearby to be noticed
 const WARNING_COOLDOWN = 60;
-const ENEMY_DAMAGE_RANGE = 100;
+const ENEMY_DAMAGE_RANGE = 600;
 const ENEMY_DAMAGE_AMOUNT = 10;
 const DAMAGE_COOLDOWN_TIMER = 1000;
 
@@ -40,6 +40,9 @@ function alienAI(me)
 		me.ai_spawnX = me.x;
 		me.ai_spawnY = me.y;
 	}
+	//why update if alien is dead ;)
+	if(!me.alive)
+		return;
 
 	//console.log('AI debug: me.gameObjectType='+me.gameObjectType);
 
@@ -47,7 +50,9 @@ function alienAI(me)
 	var distanceFromHome = dist(me.x,me.y,me.ai_spawnX,me.ai_spawnY);
 	//console.log('AI debug: distanceFromHome='+distanceFromHome)
 
-	var distanceFromPlayer = dist(me.x,me.y,playerX,playerY);
+	//for some reason the squiddie require increment of its own radius, whereas biter need not
+	var distanceFromPlayer = Math.min(dist(me.x + me.radius,me.y + me.radius,playerX,playerY),
+										dist(me.x, me.y, playerX, playerY));
 	//console.log('AI debug: distanceFromPlayer='+distanceFromPlayer)
 
 	//ensure that the cooldown timer runs regardless of whether the player is near to the enemy or not
@@ -59,9 +64,25 @@ function alienAI(me)
 		//console.log(damageCooldownTimer);
 	}
 	
+	//check for distance between player and aliens, assuming player gets damage regardless of alien type
+	if(distanceFromPlayer <= ENEMY_DAMAGE_RANGE) {
+		if(damageCooldownTimer === 0) {
+			//console.log("player x, y "+playerX+" , "+playerY+" my x,y "+me.x+" , "+me.y);
+			takeDamage(ENEMY_DAMAGE_AMOUNT);
+			//temporarily using this sound to indicate taking damage from alien
+			if (!Sound.isPlaying('bump')) Sound.play('bump',false,soundVolume);
+			damageCooldownTimer++;
+		}
+	}
+	if(warningCooldownTimer == 0) {
+		//console.log("player x, y "+playerX+" , "+playerY+" my x,y "+me.x+" , "+me.y);
+		//onsole.log(distanceFromPlayer);
+	}
 
 	if (me.gameObjectType == ALIEN_SQUID)
 	{
+		
+		//console.log(distanceFromPlayer);
 		var oldX = me.x;
 		// console.log('AI debug: ALIEN_SQUID wobble!');
 		// simple sin wave back and forth, with offset so they don't move in phase
@@ -73,7 +94,7 @@ function alienAI(me)
 	{
 		var moveDist = 1; // FIXME TODO framarate independent floating point distances: ai_seconds_since_last_update * ALIEN_MOVE_SPEED;
 		// move towards player within a range
-		if (/*(distanceFromHome < ALIEN_MOVE_RANGE * ALIEN_MOVE_RANGE) && */me.alive && (distanceFromPlayer < AI_SEEK_RANGE * AI_SEEK_RANGE))
+		if (/*(distanceFromHome < ALIEN_MOVE_RANGE * ALIEN_MOVE_RANGE) && *//*me.alive &&*/ (distanceFromPlayer < AI_SEEK_RANGE * AI_SEEK_RANGE))
 		{
 			//console.log(distanceFromPlayer);
 			if(warningCooldownTimer == 0) {
@@ -98,7 +119,7 @@ function alienAI(me)
 			if (me.y < playerY && me.y < playerY + player_RADIUS) me.y += moveDist;
 			if (me.y > playerY && me.y > playerY - player_RADIUS ) me.y -= moveDist;
 
-			if(distanceFromPlayer <= ENEMY_DAMAGE_RANGE) {
+			/*if(distanceFromPlayer <= ENEMY_DAMAGE_RANGE) {
 				if(damageCooldownTimer === 0) {
 					takeDamage(ENEMY_DAMAGE_AMOUNT);
 					//playerHealth -= ENEMY_DAMAGE_AMOUNT;
@@ -106,7 +127,7 @@ function alienAI(me)
 					if (!Sound.isPlaying('bump')) Sound.play('bump',false,soundVolume);
 					damageCooldownTimer++;
 				}
-			}
+			}*/
 		}
 		else // go back home
 		{
