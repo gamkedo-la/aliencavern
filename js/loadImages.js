@@ -2,10 +2,12 @@
 var shipPicLoaded = false;
  // var canvas, canvasContext; 
 
-var levelOne = document.createElement("img");
-var levelTwo = document.createElement("img");
-var levelThree = document.createElement("img");
-var levelFour = document.createElement("img");
+var cavernPics = []; // loading all pics in to an array
+
+var levelOneTilePic = document.createElement("img");
+var levelTwoTilePic = document.createElement("img");
+var levelThreeTilePic = document.createElement("img");
+var levelFourTilePic = document.createElement("img");
 
 var picsToLoad = 0; // set with imageList
 var titleBG = document.createElement("img");
@@ -38,15 +40,14 @@ var imageList = [
     {varName: alienPlantPic2, theFile: "./graphics/alienPlant2.png", theTileNum: ALIEN_PLANT_2},
     {varName: crewPic, theFile: "./graphics/crewNeedsHelp.png", theTileNum: CREW},
     {varName: shipPartPic, theFile: "./graphics/rocketpart.png", theTileNum: SHIP_PART},
-    {varName: levelOne,theFile: "./graphics/alien-cavern-tile-sheetV2.png"},
-    {varName: levelTwo, theFile: "./graphics/tilesets/ice_tiles.png"},
-    {varName: levelThree, theFile: "./graphics/tilesets/green_fade_tilesV2.png"},
-    {varName: levelFour, theFile: "./graphics/tilesets/purpletombtiles.png"},
+    {varName: levelOneTilePic,theFile: "./graphics/alien-cavern-tile-sheetV2.png"},
+    {varName: levelTwoTilePic, theFile: "./graphics/tilesets/ice_tiles.png"},
+    {varName: levelThreeTilePic, theFile: "./graphics/tilesets/green_fade_tiles.png"},
+    {varName: levelFourTilePic, theFile: "./graphics/tilesets/purpletombtiles.png"},
     {cavernType: 0, theFile: "./graphics/backgroundRock2.png"},
-    {cavernType: 1, theFile: "./graphics/tilesets/brownbackground.png"},
+    {cavernType: 1, theFile: "./graphics/tilesets/icebackground.png"},
     {cavernType: 2, theFile: "./graphics/tilesets/darkbackground.png"},
-    {cavernType: 3, theFile: "./graphics/tilesets/icebackground.png"},
-    {cavernType: 4, theFile: "./graphics/tilesets/tombbackground.png"},
+    {cavernType: 3, theFile: "./graphics/tilesets/tombbackground.png"},
     {varName: projectilePic, theFile: "./graphics/missile1.png"},
     {varName: fuelPic, theFile: "./graphics/fuel_pickup.png", theTileNum: FUEL},
     {varName: spikePic, theFile: "./graphics/spikes.png", theTileNum: SPIKES},
@@ -54,13 +55,12 @@ var imageList = [
     {varName: geyserPic, theFile: "./graphics/steam-geyserNoBgnd.png", theTileNum: GEYSERS}
 ];
 
-var cavernPics = []; // loading all pics in to an array
+
 
     function countLoadedImagesAndLaunchIfReady(){
         picsToLoad-- ;
         console.log(picsToLoad);
         if (picsToLoad == 0){
-        debug(cavernPics);
         startGame();
         }
     }

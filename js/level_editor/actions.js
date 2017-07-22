@@ -44,7 +44,7 @@ function loadLevel() {
 }
 
 function resetLevel() {
-    drawDefaultCavern();
+    setLevelForEditor();
 //    clearObjects(); objects are not used 
 }
 

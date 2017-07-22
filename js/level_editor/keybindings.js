@@ -35,52 +35,31 @@ function initKeybindings() {
 function keyDownBindings(evt) {
     var key = evt.keyCode;
     checkKeysToChangeTile(key);
+    if (gameState != LEVEL_EDITOR){
+        return;
+    }
     switch(key) {
         // case key_0:
         //     change_tile(0);
         //     return;
         case key_1:
-            change_tile(1);
+            currentLevel = LEVEL_ONE;
+            setLevelForEditor();
             return;
         case key_2:
-            change_tile(2);
+            currentLevel = LEVEL_TWO;
+            setLevelForEditor();
             return;
         case key_3:
-            change_tile(3);
+            currentLevel = LEVEL_THREE;
+            setLevelForEditor();
             return;
         case key_4:
-            change_tile(4);
-            return;
-        case key_5:
-            change_tile(5);
-            return;
-        case key_6:
-            change_tile(6);
-            return;
-        case key_7:
-            change_tile(7);
-            return;
-        // case key_q:
-        //     change_tile(20);
-        //     return;
-		case key_v:
-			change_tile(24);
-			return;
-        // case key_w:
-        //     change_tile(21);
-        //     return;
-        case key_e:
-            change_tile(30);
-            return;
-        case key_r:
-            change_tile(31);
-            return;
-        case shift:
-            moveMode = true;
+            currentLevel = LEVEL_FOUR;
+            setLevelForEditor();
             return;
         case tab: 
             showHelp();
-            //showControlPanel = true;
             return;
         case key_up_arrow:
             scrollCamera(-500000);

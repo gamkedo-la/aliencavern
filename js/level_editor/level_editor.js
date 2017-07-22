@@ -5,7 +5,7 @@ const BOTTOM_LEFT = 0;
 function levelEditorInitialization() {
     preventRightClickToDisplayContextMenu();
     colorRect(0, 0, screen.width, screen.height, 'black');
-    drawDefaultCavern();
+    setLevelForEditor();
     setCamera();
     initKeybindings();
 }
@@ -15,7 +15,7 @@ function drawTools(){
     var yPos = TOOL_H;
     var delta = 0; // Allows odd and even tiles to be placed next to each other
 
-    colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(0, 0, 64, 0.8)");
+    colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(153, 0, 51, 0.5)");
 
     if (currentTool == toolState.gameobjects){
         toolOrder = [];
@@ -151,18 +151,18 @@ function drawLevelEditor() {
     }  
 }
 
+// NOW USING setLevelForEditor in levelSwitcher.js
+// function drawDefaultCavern() {
+//     var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+//     var rows = BRICK_ROWS;
+//     var cavern = [];
 
-function drawDefaultCavern() {
-    var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-    var rows = BRICK_ROWS;
-    var cavern = [];
+//     for (var i = 0; i < rows; i++) {
+//         cavern = cavern.concat(row);
+//     }
 
-    for (var i = 0; i < rows; i++) {
-        cavern = cavern.concat(row);
-    }
-
-    cavernGrid = cavern;
-}
+//     cavernGrid = cavern;
+// }
 
 function drawHighlightRect(x, y) {
     canvasContext.strokeStyle = '#FFFF00';

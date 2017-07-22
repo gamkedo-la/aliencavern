@@ -16,7 +16,6 @@ var gameState = INTRO;
 
 var canvas, canvasContext;
 var framesPerSecond = 60;
-var level = 1;
 
 window.onload = function() {
     if (cheatsOn){
@@ -25,7 +24,7 @@ window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
     setupMouseEvents();
-    cavernTileSheet = levelOne;	
+    cavernTileSheet = levelOneTilePic;	
     // Draw Loading Screen
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
@@ -61,8 +60,8 @@ function resetAlienAIvariables(){
 }
 
 function resetGame(){
-    cavernGrid = [];
-    cavernGrid = levelGrids[currentLevel];
+    currentLevel = LEVEL_ONE;
+    setTheLevel();
     getGameObjectsReadyforGame();
     resetAlienAIvariables();
     resetScreenShake();
