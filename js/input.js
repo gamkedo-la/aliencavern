@@ -16,6 +16,8 @@ const KEY_L = 76;
 const KEY_V = 86;
 const KEY_B = 66;
 const KEY_S = 83; //Silence sound
+const KEY_D = 68;
+const KEY_C = 67;
 
 var holdLeft = false;
 var holdRight = false;

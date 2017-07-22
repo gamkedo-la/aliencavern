@@ -40,7 +40,7 @@ var imageList = [
     {varName: shipPartPic, theFile: "./graphics/rocketpart.png", theTileNum: SHIP_PART},
     {varName: levelOne,theFile: "./graphics/alien-cavern-tile-sheetV2.png"},
     {varName: levelTwo, theFile: "./graphics/tilesets/ice_tiles.png"},
-    {varName: levelThree, theFile: "./graphics/tilesets/green_fade_tiles.png"},
+    {varName: levelThree, theFile: "./graphics/tilesets/green_fade_tilesV2.png"},
     {varName: levelFour, theFile: "./graphics/tilesets/purpletombtiles.png"},
     {cavernType: 0, theFile: "./graphics/backgroundRock2.png"},
     {cavernType: 1, theFile: "./graphics/tilesets/brownbackground.png"},

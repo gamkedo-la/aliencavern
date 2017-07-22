@@ -47,3 +47,7 @@ initControlPanel.prototype = {
 
 }
 
+function showHelp(){
+    console.log("Display Help Screen placeholder");
+}
+

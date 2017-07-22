@@ -3,7 +3,6 @@ var iconActionToTake;
 var mouse_up = true;
 const LEFT_CLICK = 0;
 const RIGHT_CLICK = 2;
-var mouseClickLeft = 0;
 function setupMouseEvents() {
     onMouseMove();
     onMouseDown();
@@ -100,7 +99,6 @@ function dragScrollLevel() {
 
 function leftMouseActions() {
     mouse_up = false;
-            console.log("mouse clicked times - ", mouseClickLeft++);
     if (!showControlPanel && !outOfBounds()) {
         change_tile(currentToolTileType);
 
