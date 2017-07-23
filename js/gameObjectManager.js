@@ -8,6 +8,7 @@ var geysers = [];
 var spikes = [];
 var lava = [];
 var fuelCans = [];
+var planktonFroggy = [];
 
 
 var frameCounter = 1;

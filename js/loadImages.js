@@ -27,6 +27,7 @@ var fuelPic = document.createElement("img");
 var spikePic = document.createElement("img");
 var lavaPic = document.createElement("img");
 var geyserPic = document.createElement("img");
+var planktonFroggyPic = document.createElement("img");
 
 var imageList = [
     {varName: titleBG, theFile: "./graphics/titleBackGround.png"},
@@ -52,7 +53,8 @@ var imageList = [
     {varName: fuelPic, theFile: "./graphics/fuel_pickup.png", theTileNum: FUEL},
     {varName: spikePic, theFile: "./graphics/spikes.png", theTileNum: SPIKES},
     {varName: lavaPic, theFile: "./graphics/lava.png", theTileNum: LAVA},
-    {varName: geyserPic, theFile: "./graphics/steam-geyserNoBgnd.png", theTileNum: GEYSERS}
+    {varName: geyserPic, theFile: "./graphics/steam-geyserNoBgnd.png", theTileNum: GEYSERS},
+    {varName: planktonFroggyPic, theFile: "./graphics/planktonFroggy.png", theTileNum: PLANKTON_FROGGY}
 ];
 
 

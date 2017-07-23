@@ -62,7 +62,6 @@ function onMouseDown() {
 
 function onMouseUp() {
     canvas.addEventListener('mouseup', function (evt) {
-        //    if(window.editorScreen == true) resetMouse();
            if (gameState == LEVEL_EDITOR) {
                resetMouse();
            }

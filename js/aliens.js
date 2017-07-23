@@ -17,7 +17,7 @@ var damageCooldownTimer = 0;
 
 function updateAliens()
 {
-	if (!window.squiddies && !window.biters) return; // sanity check
+	if (!window.squiddies && !window.biters && !window.planktonFroggy) return; // sanity check
 
 	ai_timestamp = performance.now();
 	ai_seconds_since_last_update = ai_timestamp - ai_prev_timestamp;
@@ -25,6 +25,7 @@ function updateAliens()
 
 	squiddies.forEach(alienAI);
 	biters.forEach(alienAI);
+	planktonFroggy.forEach(alienAI);
 }
 
 function dist(x1,y1,x2,y2)

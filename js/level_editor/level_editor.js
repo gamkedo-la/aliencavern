@@ -21,7 +21,7 @@ function drawTools(){
         toolOrder = [];
         toolOrder = [
             ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
-            CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS
+            CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS, PLANKTON_FROGGY
         ];
         for (var i = 0; i < toolOrder.length; i++){
             var tileKindHere = toolOrder[i];

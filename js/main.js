@@ -49,6 +49,7 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(lava, lavaPic,LAVA, true, 2,10,64,64);
     loadGameObjects(spikes, spikePic, SPIKES, true);
     loadGameObjects(fuelCans, fuelPic, FUEL, true, 8, 12, 64, 64);
+    loadGameObjects(planktonFroggy, planktonFroggyPic, PLANKTON_FROGGY, false, 2, 4, 64, 64);
 }
 
 function resetAlienAIvariables(){
@@ -70,10 +71,11 @@ function clearAllGameObjects(){
     spikes = [];
     lava = [];
     fuelCans = [];
+    planktonFroggy = [];
 }
 
 function resetGame(){
-    currentLevel = LEVEL_ONE;
+    currentLevel = LEVEL_TWO;
     setTheLevel();
     resetAlienAIvariables();
     resetScreenShake();
@@ -86,7 +88,7 @@ function resetGame(){
 
 function startGame(){
     gameState = INTRO;
-    getGameObjectsReadyforGame();
+    //getGameObjectsReadyforGame();
     initMissile();
     initInput();
     playerReset();    
@@ -256,6 +258,7 @@ function drawAll() {
     drawGameObjects(lava);
     drawGameObjects(spikes);
     drawGameObjects(fuelCans);
+    drawGameObjects(planktonFroggy);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
     
