@@ -41,7 +41,8 @@ function initInput() {
 function setKeyHoldState(thisKey, setTo) {
 console.log("Keyscanner" + thisKey);
 if (thisKey === KEY_ESC){
-      gameState = MENU;
+    resetGame();
+    gameState = MENU;
 }
 
 if (thisKey === KEY_A) {

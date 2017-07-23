@@ -59,12 +59,27 @@ function resetAlienAIvariables(){
     damageCooldownTimer = 0;
 }
 
+function clearAllGameObjects(){
+    squiddies = [];
+    biters = [];
+    alienPlants = [];
+    crew = [];
+    shipParts = [];
+    projectiles = [];
+    geysers = [];
+    spikes = [];
+    lava = [];
+    fuelCans = [];
+}
+
 function resetGame(){
     currentLevel = LEVEL_ONE;
     setTheLevel();
+    clearAllGameObjects();
     getGameObjectsReadyforGame();
     resetAlienAIvariables();
     resetScreenShake();
+    init_particles();
     initMissile();
     initInput();
     playerReset();
@@ -117,9 +132,7 @@ function checkSilencePlayAmbient(){
 }
 
 function menuScreen(){
-
     checkSilencePlayAmbient();
-
     var xPos = (canvas.width / 4) + 50;
     var yPos = (canvas.height / 4) + 70;
     var menu_text = [
