@@ -15,9 +15,10 @@ const KEY_E = 69;
 const KEY_L = 76;
 const KEY_V = 86;
 const KEY_B = 66;
-const KEY_S = 83; //Silence sound
+const KEY_S = 83; 
 const KEY_D = 68;
 const KEY_C = 67;
+const KEY_A = 65;
 
 var holdLeft = false;
 var holdRight = false;
@@ -38,81 +39,72 @@ function initInput() {
 }
 
 function setKeyHoldState(thisKey, setTo) {
+console.log("Keyscanner" + thisKey);
+if (thisKey === KEY_ESC){
+      gameState = MENU;
+}
+
+if (thisKey === KEY_A) {
+    Sound.unMute();
+}
+if (thisKey === KEY_S){
+    Sound.Mute();
+}
+
+function checkKeysInGame(){
+    switch(thisKey){
+      case KEY_M:
+        if (!projectiles[0].alive){
+          projectiles[0].alive = true;
+          fireMissile();
+        }
+        break;
+      case KEY_RIGHT_ARROW:
+        holdRight = setTo;
+        break;
+      case KEY_X:
+        holdRight = setTo;
+        break;
+      case KEY_LEFT_ARROW:
+        holdLeft = setTo;
+        break;
+      case KEY_Z:
+        holdLeft = setTo;
+        break;
+      case KEY_SPACE:
+        if(playerOnGround) { //could be made a separate bool for making jumps consumable
+          jumping = setTo;
+        }
+        else if (playerOnGround === false) {
+          usingJetpack = setTo; //if mid-fall, use jetpack!
+        }
+        break;
+    }    
+}   
+
 // TODO : roll up all code below and take actions on gamestate
 switch (gameState){
   case MENU:
     if (thisKey === KEY_L){
-      gameState = LEVEL_EDITOR;
-      levelEditorInitialization();
+        gameState = LEVEL_EDITOR;
+        levelEditorInitialization();
     }
-  break;
-}
-
-if (thisKey === KEY_V) {
-    Sound.unMute();
-}
-
-if (thisKey === KEY_S){
-Sound.Mute();
-}
-
-
-
-  if (gameState == GAME_MY_LEVEL || GAME_STORY_MODE){
-    if(thisKey === KEY_LEFT_ARROW || thisKey ===KEY_Z) {
-      holdLeft = setTo;
+    else if(thisKey === KEY_P) {
+      goToGame();
+      resetGame();
+      gameState = GAME_STORY_MODE;
     }
-    if(thisKey === KEY_RIGHT_ARROW || thisKey === KEY_X) {
-      holdRight = setTo;
-    }
-    if (thisKey === KEY_UP_ARROW || thisKey === KEY_SPACE) {
-
-      if(playerOnGround) { //could be made a separate bool for making jumps consumable
-        jumping = setTo;
-      }
-      else if (playerOnGround === false) {
-        usingJetpack = setTo; //if mid-fall, use jetpack!
-      }
-    }
-    if (thisKey === KEY_M && !projectiles[0].alive) { // fire missile
-      projectiles[0].alive = true;     
-      fireMissile();
-    }
+    break;
+  case INTRO_STORY:
     if (thisKey === KEY_ESC){
-      // TODO: call Are you sure screen?
       gameState = MENU;
     }
-  }
-  // if (thisKey === KEY_S && editorScreen == false){
-  //   if (soundVolume > 0){
-  //     soundVolume = 0;
-  //   }
-  //   else {
-  //     soundVolume = 0.005;
-  //   }
-  // }
-
-  if(thisKey === F1) {
-  //  window.location.reload() // Find better way to reset game after exit from editor
-    
-  gameState = MENU;
-	 introState = INTRO_NONE;
-  }
-
-  if(thisKey === F2) {
-    gameState = LEVEL_EDITOR;
-  }
+    break;
   
-  if(gameState == MENU && thisKey === KEY_P) {
-    goToGame();
-    resetGame();
-    gameState = GAME_STORY_MODE;
+  case GAME_STORY_MODE:  
+    checkKeysInGame();  
+    break;
   }
-  
-  if(gameState == INTRO_STORY && thisKey === KEY_ESC) {
-    gameState = DISPLAY_LOGO;
-  }
-
 }
 
 function keyPressed(evt) {

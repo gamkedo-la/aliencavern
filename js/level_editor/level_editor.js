@@ -147,7 +147,7 @@ function drawLevelEditor() {
     canvasContext.restore();
     
     if (showControlPanel) {
-        new initControlPanel(50, 50);
+        showHelp();
     }  
 }
 
@@ -176,9 +176,14 @@ function drawHighlightCircle(x, y){
 }
 
 function drawHint() {
-    canvasContext.font = "20px Helvetica";
-    canvasContext.fillStyle = "white";
+
+    canvasContext.font = "18px ShareTechMono";
+    canvasContext.fillStyle = "#159781"
     canvasContext.fillText("Press TAB to show control panel", 10, 20 + camPanY);
+    canvasContext.fillStyle = "WHITE";
+    canvasContext.fillText("Press TAB to show control panel", 12, 22 + camPanY);
+
+
 }
 
 function setCamera() {

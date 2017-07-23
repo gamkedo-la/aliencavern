@@ -55,7 +55,7 @@ function drawLevelHeight(x, y) {
             draw: function () {
                 canvasContext.fillStyle = "red";
                 canvasContext.fillRect(this.elem_x, this.elem_y, this.elem_width, this.elem_height);
-                this.onClick()
+                this.onClick();
             }
         }
     }
@@ -86,7 +86,7 @@ function drawLevelHeight(x, y) {
             draw: function () {
                 canvasContext.fillStyle = "green";
                 canvasContext.fillRect(this.elem_x, this.elem_y, this.elem_width, this.elem_height);
-                this.onClick()
+                this.onClick();
             }
         }
     }

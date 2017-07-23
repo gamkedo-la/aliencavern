@@ -47,7 +47,30 @@ initControlPanel.prototype = {
 
 }
 
+// Replaced Control Panel with this code
 function showHelp(){
-    console.log("Display Help Screen placeholder");
+    var xPos = (canvas.width / 4);
+    var yPos = (canvas.height / 4);
+    var menu_text = [
+        "Alien Caverns Level Editor",
+        "[1 to 4] Change Level Style",
+        "[0] & right Mouse - Delete",
+        "[C] Show cavern tiles in pallete",
+        "[B] Upload cavern code to editor",
+        "[N] Save cavern code from editor"
+    ];
+    colorRect(xPos - 24, yPos - 50, 465, 275, "rgba(0,0,0,0.5)");
+    bgStartY = bgMidY;
+	logoAlpha = 1;
+    canvasContext.font = "24px ShareTechMono";
+    canvas.textAlign = 'start';
+    for (var i = 0; i < menu_text.length ; i++){
+		canvasContext.fillStyle = "#159781"
+        canvasContext.fillText(menu_text[i],xPos,yPos);
+	    canvasContext.fillStyle = "WHITE";
+    	canvasContext.fillText(menu_text[i], xPos + 2, yPos + 2);
+		yPos = yPos + 35;
+    }
+    canvasContext.fillStyle = "WHITE";
 }
 

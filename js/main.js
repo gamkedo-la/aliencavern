@@ -172,15 +172,13 @@ function updateAll() {
     //     Sound.play("music_loop_action", true, soundVolume);
     // }
 
-
     switch (gameState) {
         case INTRO:
             gameState = INTRO_STORY;
-
             introScreen();
             break;
         case MENU:
-        //reset sound
+            gameState = MENU;
             menuScreen();
             break;
         case GAME_STORY_MODE:
@@ -257,11 +255,11 @@ function drawAll() {
     
  //   draw3Dtxt("Z and X to move, M to fire, SPACE for boosters", 24, "WHITE", "RED", "Helvetica", 20, 30);
     
-    canvasContext.font = "24px Helvetica";
-    canvasContext.fillStyle = "RED";
-    canvasContext.fillText("Z and X to move, M to fire, SPACE for boosters", 20, 30);
+    canvasContext.font = "18px ShareTechMono";
+    canvasContext.fillStyle = "#159781";
+    canvasContext.fillText("Z and X to move  M to fire  SPACE for boosters  ESC quit", 20, 30);
     canvasContext.fillStyle = "WHITE";
-    canvasContext.fillText("Z and X to move, M to fire, SPACE for boosters", 22, 32);
+    canvasContext.fillText("Z and X to move  M to fire  SPACE for boosters  ESC quit", 22, 32);
 
     // canvasContext.fillStyle = "RED";
     // canvasContext.fillText("Press F2 for level editor", 20, 60);

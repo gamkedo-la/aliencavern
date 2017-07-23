@@ -1,5 +1,4 @@
-const tab = 9;
-const shift = 16;
+const KEY_TAB = 9;
 const key_0 = 48;
 const key_1 = 49;
 const key_2 = 50;
@@ -11,79 +10,91 @@ const key_7 = 55;
 const key_8 = 56;
 const key_9 = 57;
 const key_q = 81;
-const key_v = 86;
-const key_w = 87;
-const key_e = 69;
-const key_r = 82;
-const key_t = 84;
-const key_y = 89;
+const KEY_N = 78;
+// const key_v = 86;
+// const key_w = 87;
+// const key_e = 69;
+// const key_r = 82;
+// const key_t = 84;
+// const key_y = 89;
 const key_up_arrow = 38;
 const key_down_arrow = 40;
 
-var editorKeyToTile = [
-    {press: key_q, tile: ALIEN_SQUID},
-    {press: key_w, tile: ALIEN_PLANT},
-    {press: KEY_D, tile: BKGND_ROCK}
-    ];
+// var editorKeyToTile = [
+//     {press: key_q, tile: ALIEN_SQUID},
+//     {press: key_w, tile: ALIEN_PLANT},
+//     {press: KEY_D, tile: BKGND_ROCK}
+//     ];
     
 
 function initKeybindings() {
     document.addEventListener('keydown', keyDownBindings);
-    document.addEventListener('keyup', keyUpBindings)
+    //document.addEventListener('keyup', keyUpBindings)
 }
 
 function keyDownBindings(evt) {
     var key = evt.keyCode;
-    checkKeysToChangeTile(key);
+    //checkKeysToChangeTile(key);
     if (gameState != LEVEL_EDITOR){
         return;
     }
     switch(key) {
-        // case key_0:
-        //     change_tile(0);
-        //     return;
+        case key_0:
+            change_tile(BKGND_ROCK);
+            break;
         case key_1:
             currentLevel = LEVEL_ONE;
             setLevelForEditor();
-            return;
+            break;
         case key_2:
             currentLevel = LEVEL_TWO;
             setLevelForEditor();
-            return;
+            break;
         case key_3:
             currentLevel = LEVEL_THREE;
             setLevelForEditor();
-            return;
+            break;
         case key_4:
             currentLevel = LEVEL_FOUR;
             setLevelForEditor();
-            return;
-        case tab: 
-            showHelp();
-            return;
+            break;
+        case KEY_TAB:
+            if (showControlPanel){
+                showControlPanel = false;
+            }
+            else {
+                showControlPanel = true;
+            }
+            break;
         case key_up_arrow:
             scrollCamera(-500000);
-            return;
+            break;
         case key_down_arrow:
             scrollCamera(500000);
-            return;
+            break;
         case KEY_C:
-            currentTool = !currentTool; // FIX ME: this is a quick hack to toggle the pallett
-            return; 
+            currentTool = !currentTool;
+            break; 
+        case KEY_B:
+            loadLevel();
+            break;
+        case KEY_N:
+            copyLevel();
+            break;
+
     }
 }
 
-function keyUpBindings(evt) {
-    var key = evt.keyCode;
-
-    switch(key) {
-        case shift:
-            moveMode = false;
-            return;
-        case tab:
-            showControlPanel = false;
-    }
-}
+// function keyUpBindings(evt) {
+//     var key = evt.keyCode;
+//     switch(key) {
+//         case shift:
+//             moveMode = false;
+//             return;
+//         case KEY_TAB:
+//             showControlPanel = false;
+//     }
+// }
 
 function keysDescription() {
     return [

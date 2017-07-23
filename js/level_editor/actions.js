@@ -24,11 +24,11 @@ var tileNo = 0;
 var sizeOftoolset = toolOrder.length;
 
 function decreaseLevelHeight() {
-    cavernGrid = cavernGrid.slice(0, -14)
+    cavernGrid = cavernGrid.slice(0, -14);
 }
 
 function increaseLevelHeight() {
-    var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    var row = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
     cavernGrid = cavernGrid.concat(row);
 }
 
@@ -48,17 +48,17 @@ function resetLevel() {
 //    clearObjects(); objects are not used 
 }
 
-function checkKeysToChangeTile (keyCode){
+// function checkKeysToChangeTile (keyCode){
     
-    for (var i = 0; i < editorKeyToTile.length; i++)
-    {
-        if (keyCode == editorKeyToTile[i].press){
-            removeImgFromBrick();
-            cavernGrid[selectedBrickIndex] = editorKeyToTile[i].tile;
-        }
-    }
+//     for (var i = 0; i < editorKeyToTile.length; i++)
+//     {
+//         if (keyCode == editorKeyToTile[i].press){
+//             removeImgFromBrick();
+//             cavernGrid[selectedBrickIndex] = editorKeyToTile[i].tile;
+//         }
+//     }
 
-}
+// }
 
 function change_tile(changeTo) {
     console.log("change to ", changeTo );
