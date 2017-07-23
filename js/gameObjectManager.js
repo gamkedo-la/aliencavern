@@ -63,7 +63,6 @@ function loadGameObjects(objectArray, objectPic, gameObjectType, solid ,noFrames
                 cavernGrid[i] = BKGND_ROCK;
             }
             this.objectArray.push(new GameObject());
-            console.log(this.objectArray.length);
             var pos = this.objectArray.length - 1;
             var row = Math.floor(i / BRICK_COLS);
             var col = i % BRICK_COLS;

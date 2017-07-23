@@ -75,16 +75,13 @@ function clearAllGameObjects(){
 function resetGame(){
     currentLevel = LEVEL_ONE;
     setTheLevel();
-    clearAllGameObjects();
-    getGameObjectsReadyforGame();
     resetAlienAIvariables();
     resetScreenShake();
     init_particles();
     initMissile();
     initInput();
     playerReset();
-    
-
+    getGameObjectsReadyforGame();
 }
 
 function startGame(){

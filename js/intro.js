@@ -129,7 +129,6 @@ function introScreen() {
 		drawTitleBackGround();
    		if (frameCounter == 1){
        		timeElapsed++;
-       		//console.log('timeElapsed = ' + timeElapsed);
    		}
    		if (timeElapsed >= STORY_MAX_TIME && storyText[storyText.length - 1].y > canvas.height + STORY_FONT_SIZE){
 			   gameState = DISPLAY_LOGO;

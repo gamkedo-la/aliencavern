@@ -12,7 +12,7 @@ function setTheLevel(){
             cavernTileSheet = levelThreeTilePic;
             break;
         case LEVEL_FOUR:
-            cavernTileSheet = levelFourTilePic
+            cavernTileSheet = levelFourTilePic;
             break;
     }
 }

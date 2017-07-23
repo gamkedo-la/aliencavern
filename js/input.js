@@ -39,7 +39,6 @@ function initInput() {
 }
 
 function setKeyHoldState(thisKey, setTo) {
-console.log("Keyscanner" + thisKey);
 if (thisKey === KEY_ESC){
     resetGame();
     gameState = MENU;
@@ -101,7 +100,6 @@ switch (gameState){
       gameState = MENU;
     }
     break;
-  
   case GAME_STORY_MODE:  
     checkKeysInGame();  
     break;
