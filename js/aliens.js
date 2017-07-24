@@ -4,8 +4,8 @@
 const ALIEN_MOVE_SPEED = 16; // pixels per second
 const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
 const AI_SEEK_RANGE = 200; // player must be nearby to be noticed
-const WARNING_COOLDOWN = 60;
-const ENEMY_DAMAGE_RANGE = 600;
+const WARNING_COOLDOWN = 200;
+const ENEMY_DAMAGE_RANGE = 1000;
 const ENEMY_DAMAGE_AMOUNT = 10;
 const DAMAGE_COOLDOWN_TIMER = 1000;
 
@@ -100,7 +100,7 @@ function alienAI(me)
 			//console.log(distanceFromPlayer);
 			if(warningCooldownTimer == 0) {
 				warningCooldownTimer++;
-				party(me.x, me.y, PARTICLE_WARNING, 0, 0, 0, 8);
+				party(me.x, me.y, PARTICLE_WARNING_SMALL, 0, 0, 0, 8);
 			} else {
 				warningCooldownTimer++;
 				if(warningCooldownTimer > WARNING_COOLDOWN) {
