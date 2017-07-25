@@ -13,6 +13,8 @@ var planktonFroggy = [];
 
 var frameCounter = 1;
 
+const SOS_TIMER = 60;
+
 function GameObject(){
     this.pic = document.createElement("img");
     this.alive  = true;
@@ -28,7 +30,9 @@ function GameObject(){
     this.frameHeight = 64;
     this.fps = 0;
     this.solid = false;
-	this.flip = false;
+    this.flip = false;
+    
+    this.timer = 0;
 }
 
 function manageAnimation(spriteObj){
@@ -57,6 +61,8 @@ function loadGameObjects(objectArray, objectPic, gameObjectType, solid ,noFrames
     this.frameW = frameW;
     this.frameH = frameH;
     this.solid = solid;
+
+    this.timer = 0;
 
     for (var i = 0;  i < BRICK_ROWS * BRICK_COLS; i++ ){
         if (cavernGrid[i] == gameObjectType){
@@ -105,6 +111,15 @@ function drawGameObjects(gameObjArr){
             }
 			if(element.flip) flipSprite(element);
             else canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
+
+            if(element.gameObjectType == CREW) {
+                if(element.timer > SOS_TIMER) {
+                    element.timer = 0;
+                    party(element.x + element.radius, element.y, PARTICLE_SOS, 0, 0, 0, 6);
+                } else {
+                    element.timer++;
+                }
+            }
         }
     });
 }
