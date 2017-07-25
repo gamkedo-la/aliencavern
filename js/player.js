@@ -24,6 +24,7 @@ const DAMAGE_CREW = -150; // you GAIN some health! =)
 const DAMAGE_GROUND = 5;
 const DAMAGE_BUMP = 1;
 var playerHealth = MAX_HEALTH;
+const DRAG_FORCE = 0.9;
 
 const RESCUES_REQUIRED = 10; // to complete level
 var rescueCounter = 0; // how many crew rescued?
@@ -148,9 +149,12 @@ function playerMove() {
       playerSpeedX = -RUN_SPEED;
       party(playerX+60,playerY+6,PARTICLE_BOOST_L);
     }
-    if(holdRight) {
+    else if(holdRight) {
       playerSpeedX = RUN_SPEED;
       party(playerX-60,playerY+6,PARTICLE_BOOST_R);
+    }
+    else {
+        playerSpeedX *= DRAG_FORCE;
     }
     
     // testing collision detection
@@ -163,7 +167,7 @@ function playerMove() {
       playerSpeedY = 0;
     }
     
-    var horizCollisionFootSpread = 25;
+    var horizCollisionFootSpread = 23;
     if(playerSpeedY > 0 && 
         (isBrickAtPixelCoord(playerX-horizCollisionFootSpread, playerY + player_RADIUS) > 0 || 
           isBrickAtPixelCoord(playerX+horizCollisionFootSpread, playerY + player_RADIUS) > 0)) {

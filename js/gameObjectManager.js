@@ -190,6 +190,7 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, biters);
     twoArrayCollisionDetect(projectiles, alienPlants);
     twoArrayCollisionDetect(projectiles, crew);
+    twoArrayCollisionDetect(projectiles, planktonFroggy);
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
         Sound.play("explosion", false, soundVolume);
         screenshake(10);
