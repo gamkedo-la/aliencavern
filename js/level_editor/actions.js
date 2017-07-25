@@ -45,23 +45,10 @@ function loadLevel() {
 
 function resetLevel() {
     setLevelForEditor();
-//    clearObjects(); objects are not used 
 }
 
-// function checkKeysToChangeTile (keyCode){
-    
-//     for (var i = 0; i < editorKeyToTile.length; i++)
-//     {
-//         if (keyCode == editorKeyToTile[i].press){
-//             removeImgFromBrick();
-//             cavernGrid[selectedBrickIndex] = editorKeyToTile[i].tile;
-//         }
-//     }
-
-// }
 
 function change_tile(changeTo) {
-    removeImgFromBrick();
     
     if (typeof changeTo !== 'undefined') {
         cavernGrid[selectedBrickIndex] = changeTo;
