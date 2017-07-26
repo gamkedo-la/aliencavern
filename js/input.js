@@ -61,15 +61,19 @@ function checkKeysInGame(){
         break;
       case KEY_RIGHT_ARROW:
         holdRight = setTo;
+        playerFacingRight = true;
         break;
       case KEY_X:
         holdRight = setTo;
+        playerFacingRight = true;
         break;
       case KEY_LEFT_ARROW:
         holdLeft = setTo;
+        playerFacingRight = false;
         break;
       case KEY_Z:
         holdLeft = setTo;
+        playerFacingRight = false;
         break;
       case KEY_SPACE:
         if(playerOnGround) { //could be made a separate bool for making jumps consumable

@@ -12,6 +12,7 @@ var playerX = 75, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
 var player_RADIUS = 30;
+var playerFacingRight = true;
 
 var jetpackFuel = JETPACK_MAX_FUEL;
 
@@ -167,7 +168,7 @@ function playerMove() {
       playerSpeedY = 0;
     }
     
-    var horizCollisionFootSpread = 23;
+    var horizCollisionFootSpread = 20;
     if(playerSpeedY > 0 && 
         (isBrickAtPixelCoord(playerX-horizCollisionFootSpread, playerY + player_RADIUS) > 0 || 
           isBrickAtPixelCoord(playerX+horizCollisionFootSpread, playerY + player_RADIUS) > 0)) {

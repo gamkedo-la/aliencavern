@@ -13,8 +13,9 @@ function fireMissile(){
     projectiles[0].alive = true;
     projectiles[0].x = playerX;
     projectiles[0].y = playerY;
-    if (playerSpeedX < 0 && projectiles[0].x > 0){
-        projectiles[0].speed *= -1;
+    //if (playerSpeedX < 0 && projectiles[0].x > 0){
+    if(!playerFacingRight/* && projectiles[0].x > 0*/) {
+        projectiles[0].speed = -missileSpeedX;//-1;
     }
     else
     {
