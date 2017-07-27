@@ -12,6 +12,24 @@ function setTheLevel(){
             cavernTileSheet = levelThreeTilePic;
             break;
         case LEVEL_FOUR:
+            cavernTileSheet = levelTwoTilePic;
+            break;
+        case LEVEL_FIVE:
+            cavernTileSheet = levelFourTilePic;
+            break;
+        case LEVEL_SIX:
+            cavernTileSheet = levelThreeTilePic;
+            break;
+        case LEVEL_SEVEN:
+            cavernTileSheet = levelFourTilePic;
+            break;
+        case LEVEL_EIGHT:
+            cavernTileSheet = levelFourTilePic;
+            break;
+        case LEVEL_NINE:
+            cavernTileSheet = levelFourTilePic;
+            break;
+        case LEVEL_TEN:
             cavernTileSheet = levelFourTilePic;
             break;
     }
