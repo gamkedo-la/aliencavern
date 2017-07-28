@@ -1,6 +1,6 @@
 function setTheLevel(){
     cavernGrid = []; // clearn cavern Grid
-    cavernGrid = levelGrids[currentLevel];
+    cavernGrid = levelGrids[currentLevel].slice(0);
     switch(currentLevel){
         case LEVEL_ONE:
             cavernTileSheet = levelOneTilePic;

@@ -75,9 +75,13 @@ function clearAllGameObjects(){
 }
 
 function resetGame(){
-    currentLevel = LEVEL_TWO;
-    setTheLevel();
-    resetAlienAIvariables();
+    initMissile();
+    currentLevel = LEVEL_ONE;
+    cavernGrid  = [];
+    cavernGrid = levelGrids[LEVEL_ONE].slice(0);
+    clearAllGameObjects;
+    //setTheLevel();
+    //resetAlienAIvariables();
     resetScreenShake();
     init_particles();
     initMissile();
@@ -89,9 +93,7 @@ function resetGame(){
 function startGame(){
     gameState = INTRO;
     //getGameObjectsReadyforGame();
-    initMissile();
-    initInput();
-    playerReset();    
+    initInput();  
 }
 
 function checkMusicIsOn(){

@@ -40,6 +40,8 @@ function initInput() {
 
 function setKeyHoldState(thisKey, setTo) {
 if (thisKey === KEY_ESC){
+    currentLevel = LEVEL_ONE;
+    setTheLevel();
     resetGame();
     gameState = MENU;
 }
