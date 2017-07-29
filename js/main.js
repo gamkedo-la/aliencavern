@@ -17,6 +17,24 @@ var gameState = INTRO;
 var canvas, canvasContext;
 var framesPerSecond = 60;
 
+function startGame(){
+    gameState = INTRO;
+    //getGameObjectsReadyforGame();
+    initInput();  
+}
+
+function resetGame(){
+    setTheLevel();
+    clearAllGameObjects();
+    getGameObjectsReadyforGame();
+    resetScreenShake();
+    init_particles();
+    playerReset();
+    // initInput();
+}
+
+
+
 window.onload = function() {
     if (cheatsOn){
         console.log("cheats on . fuel infinate");
@@ -29,13 +47,13 @@ window.onload = function() {
     colorRect(0,0, screen.width,screen.height, 'black');
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
     loadImages();
-    init_particles();
+    initMissile();
+    resetGame();
     Sound.play("music_loop_slow", false, soundVolume);
     // intro.js variables & function calls TODO: refactor this
     midY = canvas.height / 2;
     midX = canvas.width / 2;
     loadStory();
-    resetGame();
     setInterval(updateAll, 1000/framesPerSecond);
 }
 
@@ -66,7 +84,7 @@ function clearAllGameObjects(){
     alienPlants = [];
     crew = [];
     shipParts = [];
-    projectiles = [];
+    //projectiles = [];
     geysers = [];
     spikes = [];
     lava = [];
@@ -74,27 +92,7 @@ function clearAllGameObjects(){
     planktonFroggy = [];
 }
 
-function resetGame(){
-    initMissile();
-    currentLevel = LEVEL_ONE;
-    cavernGrid  = [];
-    cavernGrid = levelGrids[LEVEL_ONE].slice(0);
-    clearAllGameObjects;
-    //setTheLevel();
-    //resetAlienAIvariables();
-    resetScreenShake();
-    init_particles();
-    initMissile();
-    initInput();
-    playerReset();
-    getGameObjectsReadyforGame();
-}
 
-function startGame(){
-    gameState = INTRO;
-    //getGameObjectsReadyforGame();
-    initInput();  
-}
 
 function checkMusicIsOn(){
     if (!Sound.isPlaying("music_loop_slow")

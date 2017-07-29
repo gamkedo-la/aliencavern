@@ -94,7 +94,8 @@ function rescueAstronaut()
     {
         // TODO: win the game? finish the level? GAME OVER?
         console.log("Crew rescued! Level complete!")
-        playerReset();
+        currentLevel = currentLevel + 1;
+        resetGame();
     }
 
 }
