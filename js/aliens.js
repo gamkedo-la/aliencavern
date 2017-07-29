@@ -17,13 +17,14 @@ var damageCooldownTimer = 0;
 
 function updateAliens()
 {
-	if (!window.squiddies && !window.biters && !window.planktonFroggy) return; // sanity check
+	if (!window.squiddies && !window.biters && !window.planktonFroggy && window.ballAlien) return; // sanity check
 
 	ai_timestamp = performance.now();
 	ai_seconds_since_last_update = ai_timestamp - ai_prev_timestamp;
 	ai_prev_timestamp = ai_timestamp;
 
 	squiddies.forEach(alienAI);
+	ballAlien.forEach(alienAI);
 	biters.forEach(alienAI);
 	planktonFroggy.forEach(alienAI);
 }
@@ -88,6 +89,16 @@ function alienAI(me)
 		// console.log('AI debug: ALIEN_SQUID wobble!');
 		// simple sin wave back and forth, with offset so they don't move in phase
 		me.x = me.ai_spawnX + (Math.sin(me.ai_spawnY + (ai_timestamp / 314)) * ALIEN_MOVE_SPEED);
+		if(me.x < oldX) me.flip = true;
+		else me.flip = false;
+	}
+	else if (me.gameObjectType == BALL_ALIEN)
+	{
+		//console.log(distanceFromPlayer);
+		var oldX = me.x;
+		// console.log('AI debug: ALIEN_SQUID wobble!');
+		// simple sin wave back and forth, with offset so they don't move in phase
+		me.x = me.ai_spawnX + (Math.sin(me.ai_spawnY + (ai_timestamp / 628)) * (ALIEN_MOVE_SPEED + 70));
 		if(me.x < oldX) me.flip = true;
 		else me.flip = false;
 	}
