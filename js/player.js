@@ -33,6 +33,8 @@ var rescueCounter = 0; // how many crew rescued?
 function playerReset() {
     playerX = canvas.width/2;
     playerY = BRICK_H + 10;
+    camPanX = 30.0;
+    camPanY = 30.0
     playerHealth = MAX_HEALTH;
     rescueCounter = 0;
 }
