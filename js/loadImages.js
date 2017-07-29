@@ -56,7 +56,7 @@ var imageList = [
     {varName: lavaPic, theFile: "./graphics/lava.png", theTileNum: LAVA},
     {varName: geyserPic, theFile: "./graphics/steam-geyserNoBgnd.png", theTileNum: GEYSERS},
     {varName: planktonFroggyPic, theFile: "./graphics/planktonFroggy.png", theTileNum: PLANKTON_FROGGY},
-    {varName: ballAlienPic, theFile: "./graphics/ballAlienSheet.png", theTileNum: BALL_ALIEN}
+    {varName: ballAlienPic, theFile: "./graphics/ballAlienSheetV2.png", theTileNum: BALL_ALIEN}
 ];
 
 
