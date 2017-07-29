@@ -13,6 +13,8 @@ const ALIEN_PLANT_3 = 23;
 const ALIEN_BITER = 24;
 const PLANKTON_FROGGY = 25;
 const BALL_ALIEN = 26;
+const PLANKTON1 = 27;
+const PLANKTON2 = 28;
 const TILE_FIRST_NON_WALL = ALIEN_SQUID;
 
 const CREW = 30;

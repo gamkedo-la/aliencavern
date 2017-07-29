@@ -10,6 +10,8 @@ var lava = [];
 var fuelCans = [];
 var planktonFroggy = [];
 var ballAlien = [];
+var plankton1 = [];
+var plankton2 = [];
 
 
 var frameCounter = 1;
@@ -208,6 +210,8 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, crew);
     twoArrayCollisionDetect(projectiles, planktonFroggy);
     twoArrayCollisionDetect(projectiles, ballAlien);
+    twoArrayCollisionDetect(projectiles, plankton1);
+    twoArrayCollisionDetect(projectiles, plankton2);
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
         Sound.play("explosion", false, soundVolume);
         screenshake(10);

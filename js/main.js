@@ -70,6 +70,8 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(fuelCans, fuelPic, FUEL, true, 8, 12, 64, 64);
     loadGameObjects(planktonFroggy, planktonFroggyPic, PLANKTON_FROGGY, false, 2, 4, 64, 64);
     loadGameObjects(ballAlien, ballAlienPic, BALL_ALIEN, false, 3, 4, 64, 64);
+    loadGameObjects(plankton1, plankton1Pic, PLANKTON1, false, 2, 6, 64, 64);
+    loadGameObjects(plankton2, plankton2Pic, PLANKTON2, false, 2, 6, 64, 64);
 }
 
 function resetAlienAIvariables(){
@@ -92,6 +94,8 @@ function clearAllGameObjects(){
     fuelCans = [];
     planktonFroggy = [];
     ballAlien = [];
+    plankton1 = [];
+    plankton2 = [];
 }
 
 
@@ -261,6 +265,8 @@ function drawAll() {
     drawGameObjects(fuelCans);
     drawGameObjects(planktonFroggy);
     drawGameObjects(ballAlien);
+    drawGameObjects(plankton1);
+    drawGameObjects(plankton2);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
     
