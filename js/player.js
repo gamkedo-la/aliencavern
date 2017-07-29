@@ -8,7 +8,7 @@ const JETPACK_CONSUMPTION = 0.05;
 const JETPACK_BASE_REGEN = 0.025;
 const JETPACK_MAX_FUEL = 10;
 
-var playerX = 75, playerY = 75;
+var playerX = 400, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
 var playerOnGround = false;
 var player_RADIUS = 30;
@@ -95,7 +95,12 @@ function rescueAstronaut()
         // TODO: win the game? finish the level? GAME OVER?
         console.log("Crew rescued! Level complete!")
         currentLevel = currentLevel + 1;
-        resetGame();
+        if (currentLevel == LEVEL_EIGHT){
+            gameState = MENU;
+        }
+        else {
+            resetGame();
+        }
     }
 
 }

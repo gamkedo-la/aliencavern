@@ -30,12 +30,12 @@ function resetGame(){
     resetScreenShake();
     init_particles();
     playerReset();
-    // initInput();
 }
 
 
 
 window.onload = function() {
+    currentLevel = LEVEL_ONE;
     if (cheatsOn){
         console.log("cheats on . fuel infinate");
     }
@@ -84,7 +84,6 @@ function clearAllGameObjects(){
     alienPlants = [];
     crew = [];
     shipParts = [];
-    //projectiles = [];
     geysers = [];
     spikes = [];
     lava = [];
@@ -183,7 +182,6 @@ function updateAll() {
     // if (!Sound.isPlaying("music_loop_slow")&& !Sound.isPlaying("music_loop_action")){
     //     Sound.play("music_loop_action", true, soundVolume);
     // }
-
     switch (gameState) {
         case INTRO:
             gameState = INTRO_STORY;
