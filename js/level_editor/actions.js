@@ -16,7 +16,7 @@ var currentTool = toolState.gameobjects;
 
 var toolOrder = [
     ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
-    CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS
+    CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS, BALL_ALIEN
 ];
 
 var tileNo = 0;

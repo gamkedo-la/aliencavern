@@ -48,6 +48,7 @@ window.onload = function() {
     colorText("Game Loading", canvas.width/2, canvas.height/2, 'white');
     loadImages();
     initMissile();
+    initInput();
     resetGame();
     Sound.play("music_loop_slow", false, soundVolume);
     // intro.js variables & function calls TODO: refactor this
@@ -68,6 +69,7 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(spikes, spikePic, SPIKES, true);
     loadGameObjects(fuelCans, fuelPic, FUEL, true, 8, 12, 64, 64);
     loadGameObjects(planktonFroggy, planktonFroggyPic, PLANKTON_FROGGY, false, 2, 4, 64, 64);
+    loadGameObjects(ballAlien, ballAlienPic, BALL_ALIEN, false, 3, 4, 64, 64);
 }
 
 function resetAlienAIvariables(){
@@ -89,6 +91,7 @@ function clearAllGameObjects(){
     lava = [];
     fuelCans = [];
     planktonFroggy = [];
+    ballAlien = [];
 }
 
 
@@ -257,6 +260,7 @@ function drawAll() {
     drawGameObjects(spikes);
     drawGameObjects(fuelCans);
     drawGameObjects(planktonFroggy);
+    drawGameObjects(ballAlien);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
     
