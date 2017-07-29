@@ -62,6 +62,7 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(squiddies, alienSquidPic , ALIEN_SQUID, false, 2, 3, 64, 64);
 	loadGameObjects(biters, alienBiterPic, ALIEN_BITER, false, 2, 3, 64, 64);
     loadGameObjects(alienPlants, alienPlantPic, ALIEN_PLANT, false);
+    loadGameObjects(alienPlants2,alienPlantPic2, ALIEN_PLANT_2, false);
     loadGameObjects(crew, crewPic, CREW, false, 4, 4 , 64, 64);
     loadGameObjects(shipParts, shipPartPic, SHIP_PART, false);
     loadGameObjects(geysers, geyserPic, GEYSERS, true,  8, 8, 64, 64);
@@ -96,6 +97,7 @@ function clearAllGameObjects(){
     ballAlien = [];
     plankton1 = [];
     plankton2 = [];
+    alienPlants2 = [];
 }
 
 
@@ -267,6 +269,7 @@ function drawAll() {
     drawGameObjects(ballAlien);
     drawGameObjects(plankton1);
     drawGameObjects(plankton2);
+    drawGameObjects(alienPlants2);
     canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
     drawGameObjects(projectiles);
     
