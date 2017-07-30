@@ -19,8 +19,8 @@ var jetpackFuel = JETPACK_MIN_FUEL;
 const MAX_HEALTH = 1000;
 const DAMAGE_SCRAPE = 1;
 const DAMAGE_PLANT = 100;
-const DAMAGE_SPIKE = 150;
-const DAMAGE_LAVA = 200;
+const DAMAGE_CAVERN_OBJ = 25;
+const DAMAGE_LAVA = 25;
 const DAMAGE_CREW = -150; // you GAIN some health! =)
 const DAMAGE_GROUND = 5;
 const DAMAGE_BUMP = 1;
@@ -189,6 +189,11 @@ function playerMove() {
     if (checkEveryCollision (lava)){
         console.log("Hit lava it hurts!!!");
         takeDamage(DAMAGE_LAVA);
+    }
+
+    if (checkEveryCollision(spikes) || checkEveryCollision(geysers)){
+        takeDamage(DAMAGE_CAVERN_OBJ);
+        console.log("damage spike");
     }
 
     if(isBrickAtPixelCoord(playerX, playerY - player_RADIUS) > 0) {
