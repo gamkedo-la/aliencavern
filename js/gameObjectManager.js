@@ -150,16 +150,17 @@ function checkCollision(gameObject){
 return hit;}
 
 function checkEveryCollision(objectArray){
+    var hit = false;
     this.objectArray = objectArray;
     objectArray.forEach(function(element){
         if(checkCollision(element)){
-            element.alive = false;
-            console.log("picked up crew");
-            Sound.play("rescue", false, soundVolume);
-            takeDamage(DAMAGE_CREW); // gain health
-            rescueAstronaut();
+            hit = true;
+            if (element.solid == false) {
+                element.alive =false;
+            }
         }
     });
+    return hit;
 }
 
 //compare collisions between two objects and kill both objects

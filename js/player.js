@@ -4,7 +4,7 @@ const GRAVITY = 0.08;
 const RUN_SPEED = 5.0; // org 4.0
 const JUMP_POWER = 3.0;  // org 4.0
 const JETPACK_UPTHRUST = 0.10;
-const JETPACK_CONSUMPTION = 0.05;
+const JETPACK_CONSUMPTION = 0.02;
 const JETPACK_BASE_REGEN = 0.025;
 const JETPACK_MAX_FUEL = 10;
 
@@ -20,7 +20,7 @@ const MAX_HEALTH = 1000;
 const DAMAGE_SCRAPE = 1;
 const DAMAGE_PLANT = 25;
 const DAMAGE_SPIKE = 25;
-const DAMAGE_LAVA = 25;
+const DAMAGE_LAVA = 200;
 const DAMAGE_CREW = -150; // you GAIN some health! =)
 const DAMAGE_GROUND = 5;
 const DAMAGE_BUMP = 1;
@@ -34,7 +34,7 @@ function playerReset() {
     playerX = canvas.width/2;
     playerY = BRICK_H + 10;
     camPanX = 30.0;
-    camPanY = 30.0
+    camPanY = 30.0;
     playerHealth = MAX_HEALTH;
     rescueCounter = 0;
 }
@@ -167,9 +167,20 @@ function playerMove() {
     }
     
     // testing collision detection
-    checkEveryCollision (crew);
+    if (checkEveryCollision (crew)){
+        console.log("picked up crew");
+        Sound.play("rescue", false, soundVolume);
+        takeDamage(DAMAGE_CREW); // gain health
+        rescueAstronaut(); 
+    }
+
     checkEveryCollision (fuelCans);
     checkEveryCollision (shipParts);
+    
+    if (checkEveryCollision (lava)){
+        console.log("Hit lava it hurts!!!");
+        takeDamage(DAMAGE_LAVA);
+    }
 
     if(isBrickAtPixelCoord(playerX, playerY - player_RADIUS) > 0) {
       playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS + 2;
