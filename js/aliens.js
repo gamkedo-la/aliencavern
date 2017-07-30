@@ -6,7 +6,7 @@ const ALIEN_MOVE_RANGE = 64; // pixels away from spawn location
 const AI_SEEK_RANGE = 200; // player must be nearby to be noticed
 const WARNING_COOLDOWN = 200;
 const ENEMY_DAMAGE_RANGE = 1000;
-const ENEMY_DAMAGE_AMOUNT = 10;
+const ENEMY_DAMAGE_AMOUNT = 100;
 const DAMAGE_COOLDOWN_TIMER = 1000;
 
 var ai_timestamp = 0;

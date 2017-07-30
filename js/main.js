@@ -68,7 +68,7 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(geysers, geyserPic, GEYSERS, true,  8, 8, 64, 64);
     loadGameObjects(lava, lavaPic,LAVA, true, 2,10,64,64);
     loadGameObjects(spikes, spikePic, SPIKES, true);
-    loadGameObjects(fuelCans, fuelPic, FUEL, true, 8, 12, 64, 64);
+    loadGameObjects(fuelCans, fuelPic, FUEL, false, 8, 12, 64, 64);
     loadGameObjects(planktonFroggy, planktonFroggyPic, PLANKTON_FROGGY, false, 2, 4, 64, 64);
     loadGameObjects(ballAlien, ballAlienPic, BALL_ALIEN, false, 3, 4, 64, 64);
     loadGameObjects(plankton1, plankton1Pic, PLANKTON1, false, 2, 6, 64, 64);
