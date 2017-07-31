@@ -1,6 +1,7 @@
 var squiddies = [];
 var biters = [];
 var alienPlants = [];
+var alienPlants2 = [];
 var crew = [];
 var shipParts = [];
 var projectiles = [];
@@ -10,6 +11,8 @@ var lava = [];
 var fuelCans = [];
 var planktonFroggy = [];
 var ballAlien = [];
+var plankton1 = [];
+var plankton2 = [];
 
 
 var frameCounter = 1;
@@ -147,16 +150,17 @@ function checkCollision(gameObject){
 return hit;}
 
 function checkEveryCollision(objectArray){
+    var hit = false;
     this.objectArray = objectArray;
     objectArray.forEach(function(element){
         if(checkCollision(element)){
-            element.alive = false;
-            console.log("picked up crew");
-            Sound.play("rescue", false, soundVolume);
-            takeDamage(DAMAGE_CREW); // gain health
-            rescueAstronaut();
+            hit = true;
+            if (element.solid == false) {
+                element.alive =false;
+            }
         }
     });
+    return hit;
 }
 
 //compare collisions between two objects and kill both objects
@@ -208,6 +212,10 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, crew);
     twoArrayCollisionDetect(projectiles, planktonFroggy);
     twoArrayCollisionDetect(projectiles, ballAlien);
+    twoArrayCollisionDetect(projectiles, plankton1);
+    twoArrayCollisionDetect(projectiles, plankton2);
+    twoArrayCollisionDetect(projectiles, alienPlants2);
+    
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
         Sound.play("explosion", false, soundVolume);
         screenshake(10);

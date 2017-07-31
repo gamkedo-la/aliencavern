@@ -4,9 +4,9 @@ const GRAVITY = 0.08;
 const RUN_SPEED = 5.0; // org 4.0
 const JUMP_POWER = 3.0;  // org 4.0
 const JETPACK_UPTHRUST = 0.10;
-const JETPACK_CONSUMPTION = 0.05;
+const JETPACK_CONSUMPTION = 0.02;
 const JETPACK_BASE_REGEN = 0.025;
-const JETPACK_MAX_FUEL = 10;
+const JETPACK_MIN_FUEL = 10;
 
 var playerX = 400, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
@@ -14,12 +14,12 @@ var playerOnGround = false;
 var player_RADIUS = 30;
 var playerFacingRight = true;
 
-var jetpackFuel = JETPACK_MAX_FUEL;
+var jetpackFuel = JETPACK_MIN_FUEL;
 
 const MAX_HEALTH = 1000;
 const DAMAGE_SCRAPE = 1;
-const DAMAGE_PLANT = 25;
-const DAMAGE_SPIKE = 25;
+const DAMAGE_PLANT = 100;
+const DAMAGE_CAVERN_OBJ = 25;
 const DAMAGE_LAVA = 25;
 const DAMAGE_CREW = -150; // you GAIN some health! =)
 const DAMAGE_GROUND = 5;
@@ -33,8 +33,11 @@ var rescueCounter = 0; // how many crew rescued?
 function playerReset() {
     playerX = canvas.width/2;
     playerY = BRICK_H + 10;
+    camPanX = 30.0;
+    camPanY = 30.0;
     playerHealth = MAX_HEALTH;
     rescueCounter = 0;
+    jetpackFuel = JETPACK_MIN_FUEL;
 }
 
 function groundPlayer() {
@@ -71,9 +74,8 @@ function checkFuel() { //Is there enough fuel for this frame? Felt like making t
 }
 
 function fuelRegen(regenAmount) { //made it a function for eventual regen power-ups
-    jetpackFuel += regenAmount;
-    if (jetpackFuel > JETPACK_MAX_FUEL){ //clamp max fuel
-        jetpackFuel = JETPACK_MAX_FUEL;
+    if (jetpackFuel < JETPACK_MIN_FUEL){
+        jetpackFuel += regenAmount; 
     }
 }
 
@@ -121,7 +123,7 @@ function takeDamage(amount)
 
 function playerMove() {
    if (cheatsOn){
-       jetpackFuel = JETPACK_MAX_FUEL;
+       jetpackFuel = JETPACK_MIN_FUEL;
    }
    if(playerOnGround) {
        playerSpeedX *= GROUND_FRICTION;
@@ -164,10 +166,35 @@ function playerMove() {
         playerSpeedX *= DRAG_FORCE;
     }
     
-    // testing collision detection
-    checkEveryCollision (crew);
-    checkEveryCollision (fuelCans);
+    // PLAYER COLLISION DETECTION WITH GAME OBJECTS 
+    // ON RETURN BOOL TAKE ACTION
+    //
+    if (checkEveryCollision (crew)){
+        console.log("picked up crew");
+        Sound.play("rescue", false, soundVolume);
+        takeDamage(DAMAGE_CREW); // gain health
+        rescueAstronaut(); 
+    }
+
+    if (checkEveryCollision (fuelCans)){
+        jetpackFuel = jetpackFuel + 100;
+    }
+
     checkEveryCollision (shipParts);
+    if (checkEveryCollision(alienPlants) || checkEveryCollision (alienPlants2)){
+        takeDamage(DAMAGE_PLANT);
+        console.log("alien plant hit");
+    }
+    
+    if (checkEveryCollision (lava)){
+        console.log("Hit lava it hurts!!!");
+        takeDamage(DAMAGE_LAVA);
+    }
+
+    if (checkEveryCollision(spikes) || checkEveryCollision(geysers)){
+        takeDamage(DAMAGE_CAVERN_OBJ);
+        console.log("damage spike");
+    }
 
     if(isBrickAtPixelCoord(playerX, playerY - player_RADIUS) > 0) {
       playerY = (Math.floor( playerY / BRICK_H )) * BRICK_H + player_RADIUS + 2;
