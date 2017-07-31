@@ -94,6 +94,15 @@ function alienAI(me)
 	}
 	else if (me.gameObjectType == BALL_ALIEN)
 	{
+		/* 
+		What I intend to try for the ball alien:
+		* Ball alien initializes as dormant.  Eyes and mouth closed.
+		* Player reaches a specific distance in the ball alien's outer radius and then the ball alien
+			opens its eyes; startled.
+		* Player comes even closer to a specific distance from the ball alien and it opens its eyes, growls, begins a spin-loop, and aggressively chases the player.
+		- Dana
+		*/
+
 		//console.log(distanceFromPlayer);
 		var oldX = me.x;
 		// console.log('AI debug: ALIEN_SQUID wobble!');
