@@ -27,7 +27,8 @@ const DAMAGE_BUMP = 1;
 var playerHealth = MAX_HEALTH;
 const DRAG_FORCE = 0.9;
 
-const RESCUES_REQUIRED = 10; // to complete level
+//const RESCUES_REQUIRED = 10; // to complete level
+var totalCrew = 0;
 var rescueCounter = 0; // how many crew rescued?
 
 function playerReset() {
@@ -90,9 +91,9 @@ function rescueAstronaut()
 {
     rescueCounter++;
 
-    console.log("rescueAstronaut " + rescueCounter + " of " + RESCUES_REQUIRED);
+    console.log("rescueAstronaut " + rescueCounter + " of " + totalCrew);
 
-    if (rescueCounter>=RESCUES_REQUIRED)
+    if (rescueCounter>=totalCrew)
     {
         // TODO: win the game? finish the level? GAME OVER?
         console.log("Crew rescued! Level complete!")

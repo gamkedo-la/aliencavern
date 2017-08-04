@@ -19,6 +19,8 @@ const KEY_S = 83;
 const KEY_D = 68;
 const KEY_C = 67;
 const KEY_A = 65;
+const KEY_LEFT_SQ_BRACKET = 219;
+const KEY_RIGHT_SQ_BRACKET = 221;
 
 var holdLeft = false;
 var holdRight = false;

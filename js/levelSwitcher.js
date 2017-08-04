@@ -4,33 +4,43 @@ function setTheLevel(){
     switch(currentLevel){
         case LEVEL_ONE:
             cavernTileSheet = levelOneTilePic;
+            backgroundPicNum = 0;
             break;
         case LEVEL_TWO:
             cavernTileSheet = levelTwoTilePic;
+            backgroundPicNum = 1;
             break;
         case LEVEL_THREE:
             cavernTileSheet = levelOneTilePic;
+            backgroundPicNum = 0;
             break;
         case LEVEL_FOUR:
             cavernTileSheet = levelTwoTilePic;
+            backgroundPicNum = 1;
             break;
         case LEVEL_FIVE:
             cavernTileSheet = levelFourTilePic;
+            backgroundPicNum = 3;
             break;
         case LEVEL_SIX:
             cavernTileSheet = levelThreeTilePic;
+            backgroundPicNum = 2;
             break;
         case LEVEL_SEVEN:
             cavernTileSheet = levelFourTilePic;
+            backgroundPicNum = 3;
             break;
         case LEVEL_EIGHT:
             cavernTileSheet = levelFourTilePic;
+            backgroundPicNum = 3;
             break;
         case LEVEL_NINE:
             cavernTileSheet = levelFourTilePic;
+            backgroundPicNum = 3;
             break;
         case LEVEL_TEN:
             cavernTileSheet = levelFourTilePic;
+            backgroundPicNum = 3;
             break;
     }
 }

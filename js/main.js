@@ -73,6 +73,12 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(ballAlien, ballAlienPic, BALL_ALIEN, false, 3, 4, 64, 64);
     loadGameObjects(plankton1, plankton1Pic, PLANKTON1, false, 2, 6, 64, 64);
     loadGameObjects(plankton2, plankton2Pic, PLANKTON2, false, 2, 6, 64, 64);
+    // rescue 70% of crew
+    totalCrew = crew.length;
+    if (totalCrew > 3)
+        {
+            totalCrew = Math.floor(totalCrew * 7/10);
+        }
 }
 
 function resetAlienAIvariables(){
@@ -303,7 +309,7 @@ function drawAll() {
     colorRect(15,canvas.height-35,(canvas.width-30)*(playerHealth/MAX_HEALTH),20,"rgba(255,00,00,0.4)"); // hp
 
     // draw the astronaut rescue counter
-    for (var crewloop=0; crewloop<RESCUES_REQUIRED; crewloop++)
+    for (var crewloop=0; crewloop < totalCrew; crewloop++)
     {
         if (rescueCounter > crewloop)
             crewfill = "rgba(255,255,255,0.5)";

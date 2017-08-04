@@ -1,4 +1,5 @@
 var USE_PARALLAX_BACKGROUND = true;
+var backgroundPicNum = 0;
 
 function brickTileToIndex(tileCol, tileRow) {
   return (tileCol + BRICK_COLS*tileRow);
@@ -48,7 +49,7 @@ function drawOnlyCavernOnScreen() {
           var brickLeftEdgeX = eachCol * BRICK_W;
           var brickTopEdgeY = eachRow * BRICK_H;
           var tileKindHere = cavernGrid[brickTileToIndex(eachCol, eachRow)];
-          var useImg = cavernPics[currentLevel];
+          var useImg = cavernPics[backgroundPicNum];
           if (tileKindHere != BKGND_ROCK){          
             canvasContext.drawImage(cavernTileSheet, (tileKindHere -1) * BRICK_W, 0, BRICK_W, BRICK_H, brickLeftEdgeX, brickTopEdgeY, BRICK_W, BRICK_H);
           }
@@ -75,7 +76,8 @@ function drawParallaxBackground() {
   var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H) + 2;
   for (var tileX=0; tileX<colsThatFitOnScreen; tileX++) {
     for (var tileY=0; tileY<rowsThatFitOnScreen; tileY++) {
-      canvasContext.drawImage(cavernPics[currentLevel], camPanX+(tileX*BRICK_W)-offsetX, camPanY+(tileY*BRICK_H)-offsetY);
+      console.log(currentLevel);
+      canvasContext.drawImage(cavernPics[backgroundPicNum], camPanX+(tileX*BRICK_W)-offsetX, camPanY+(tileY*BRICK_H)-offsetY);
     }
   }
 }  
