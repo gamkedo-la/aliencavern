@@ -33,6 +33,8 @@ var usingJetpack = false;
 var gameScreen = true;
 var editorScreen = false;
 
+var gamePaused = false;
+
 var soundVolume = 0.05;
 
 function initInput() {
@@ -84,6 +86,11 @@ function checkKeysInGame(){
         else if (playerOnGround === false) {
           usingJetpack = setTo; //if mid-fall, use jetpack!
         }
+        break;
+        //Used for testing pause
+        case KEY_L:
+          //gamePaused = !gamePaused;
+          gameState = LOSE_SCREEN;
         break;
     }    
 }   

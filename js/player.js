@@ -80,11 +80,18 @@ function fuelRegen(regenAmount) { //made it a function for eventual regen power-
     }
 }
 
+function SetGameOver()
+{
+    gameState = LOSE_SCREEN;
+}
+
 function playerDie()
 {
     console.log("Player DIED!");
 	party(playerX, playerY, PARTICLE_SHIP_EXPLOSION,null,null,null,10); // 10 fps
-    playerReset();
+    //playerReset();
+    setInterval(SetGameOver, 1000);
+    gamePaused = true;
 }
 
 function rescueAstronaut()

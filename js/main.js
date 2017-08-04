@@ -10,6 +10,7 @@ const GAME_PAUSED = 7;
 const LEVEL_EDITOR  = 8;
 const INTRO_PAN = 9;
 const CREDITS = 10;
+const LOSE_SCREEN = 11;
 
 var currentLevel = LEVEL_ONE;
 
@@ -126,7 +127,9 @@ function gameStoryMode(){
     updateScreenshake(); // "juice it...
     updateParticles(); // ...or lose it!" =)
     updateAliens();
-    playerMove();
+    if(!gamePaused) {
+        playerMove();
+    }
     cameraFollow();
     if (projectiles[0].alive){
         checkMissleCollisions();
@@ -224,6 +227,10 @@ function updateAll() {
             break;
         case CREDITS:
             creditsScreen();
+            break;
+        case LOSE_SCREEN:
+            canvasContext.drawImage(loseScreenImg, canvas.width /4, 
+                canvas.height/3);
             break;
         default: 
             introScreen();
