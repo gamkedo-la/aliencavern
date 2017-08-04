@@ -76,7 +76,6 @@ function drawParallaxBackground() {
   var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H) + 2;
   for (var tileX=0; tileX<colsThatFitOnScreen; tileX++) {
     for (var tileY=0; tileY<rowsThatFitOnScreen; tileY++) {
-      console.log(currentLevel);
       canvasContext.drawImage(cavernPics[backgroundPicNum], camPanX+(tileX*BRICK_W)-offsetX, camPanY+(tileY*BRICK_H)-offsetY);
     }
   }

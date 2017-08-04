@@ -10,7 +10,7 @@ const GAME_PAUSED = 7;
 const LEVEL_EDITOR  = 8;
 const INTRO_PAN = 9;
 const CREDITS = 10;
-const LOSE_SCREEN = 11;
+//const LOSE_SCREEN = 11;
 
 var currentLevel = LEVEL_ONE;
 
@@ -106,6 +106,7 @@ function clearAllGameObjects(){
     plankton1 = [];
     plankton2 = [];
     alienPlants2 = [];
+    particles = [];
 }
 
 
@@ -182,10 +183,6 @@ function playMyLevel(){
 
 }
 
-function gameOverScreen(){
-
-}
-
 function pauseGame(){
 
 }
@@ -228,10 +225,10 @@ function updateAll() {
         case CREDITS:
             creditsScreen();
             break;
-        case LOSE_SCREEN:
-            canvasContext.drawImage(loseScreenImg, canvas.width /4, 
-                canvas.height/3);
-            break;
+        // case LOSE_SCREEN:
+        //     canvasContext.drawImage(loseScreenImg, canvas.width /4, 
+        //         canvas.height/3);
+        //     break;
         default: 
             introScreen();
     }
@@ -287,12 +284,15 @@ function drawAll() {
     drawGameObjects(plankton1);
     drawGameObjects(plankton2);
     drawGameObjects(alienPlants2);
-    canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
-    drawGameObjects(projectiles);
+    if (gameState != GAME_OVER){
+        canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);
+        drawGameObjects(projectiles);
+        colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
+        colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
+    }
     
     // FIXME: turn into proper GUI elements
-    colorText("Fuel: "+jetpackFuel.toFixed(2), playerX+28, playerY+10, "white");
-    colorText("Shields: "+playerHealth, playerX+28, playerY+18, "red");
+
     
  //   draw3Dtxt("Z and X to move, M to fire, SPACE for boosters", 24, "WHITE", "RED", "Helvetica", 20, 30);
     

@@ -7,7 +7,7 @@ function creditsText(){
         "Title, intro, alien art, programming - Jo Liegh Evans",
         "Game Story and code, alien art, Sound FX - Dana Alcala",
         "Game animation FX, Programming - Ezovex Goh",
-        "Alien art, ship art - Andy King",
+        "Alien art, ship art, cavern sound FX - Andy King",
         "Level Editor v2 Zak Ali - original by Artur Slomowski",
         "Alien AI, sound, particles, juicing code - Christer Kaitila",
         "Original core code, team mentor and coach - Chris Deleon",
@@ -38,7 +38,7 @@ function creditsScreen(){
     colorRect(0,0, canvas.width,canvas.height, 'black');
     drawTitleBackGround();
     drawLogo();
-    colorRect(100, (canvas.height / 4) + 5, 710,430, "rgba(00,00,00,0.4)" );
+    colorRect(100, (canvas.height / 4) + 5, 710,430, "rgba(00,00,00,0.4)");
     creditsText();
 }
 

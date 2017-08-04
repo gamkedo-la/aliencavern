@@ -111,13 +111,13 @@ switch (gameState){
       gameState = CREDITS;
     }
     break;
-  case INTRO_STORY:
+  case INTRO_STORY || GAME_OVER:
     if (thisKey === KEY_ESC){
       gameState = MENU;
     }
     break;
   case GAME_STORY_MODE:  
-    checkKeysInGame();  
+    checkKeysInGame();
     break;
   // case CREDITS:
   //   if (thisKey === KEY_ESC){
