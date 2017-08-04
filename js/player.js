@@ -89,9 +89,7 @@ function playerDie()
 {
     console.log("Player DIED!");
     party(playerX, playerY, PARTICLE_SHIP_EXPLOSION,null,null,null,10); // 10 fps
-    //playerReset();
-    //setInterval(gameOver, 1000);
-    //gamePaused = true;
+    Sound.play("explosion", false, soundVolume);
     gameState = GAME_OVER;
 }
 
