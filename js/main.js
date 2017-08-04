@@ -9,6 +9,7 @@ const GAME_OVER = 6;
 const GAME_PAUSED = 7;
 const LEVEL_EDITOR  = 8;
 const INTRO_PAN = 9;
+const CREDITS = 10;
 
 var currentLevel = LEVEL_ONE;
 
@@ -220,6 +221,9 @@ function updateAll() {
             break;
         case LEVEL_EDITOR:
             drawLevelEditor();
+            break;
+        case CREDITS:
+            creditsScreen();
             break;
         default: 
             introScreen();
