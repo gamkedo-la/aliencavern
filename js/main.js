@@ -77,6 +77,8 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(plankton2, plankton2Pic, PLANKTON2, false, 2, 6, 64, 64);
     loadGameObjects(plankton3, plankton3Pic, PLANKTON3, false, 2, 6, 64, 64);
     loadGameObjects(plankton4, plankton4Pic, PLANKTON4, false, 2, 6, 64, 64);
+    loadGameObjects(planktonFroggy2, planktonFroggy2Pic, PLANKTON_FROGGY2, false, 2, 4, 64, 64);
+
     // rescue 70% of crew
     totalCrew = crew.length;
     if (totalCrew > 3)
@@ -104,6 +106,7 @@ function clearAllGameObjects(){
     lava = [];
     fuelCans = [];
     planktonFroggy = [];
+    planktonFroggy2 = [];
     ballAlien = [];
     plankton1 = [];
     plankton2 = [];
@@ -281,6 +284,7 @@ function drawAll() {
     drawGameObjects(spikes);
     drawGameObjects(fuelCans);
     drawGameObjects(planktonFroggy);
+    drawGameObjects(planktonFroggy2);
     drawGameObjects(ballAlien);
     drawGameObjects(plankton1);
     drawGameObjects(plankton2);

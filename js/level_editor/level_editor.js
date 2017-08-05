@@ -15,13 +15,13 @@ function drawTools(){
     var yPos = TOOL_H;
     var delta = 0; // Allows odd and even tiles to be placed next to each other
 
-    colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(153, 0, 51, 0.5)");
+    colorRect(camPanX, (TOOL_H - 8) + camPanY, BRICK_W + 2, (TOOL_H * (toolOrder.length / 2)) + 16, "rgba(0, 0, 0, 0.8)"); //"rgba(153, 0, 51, 0.5)"
 
     if (currentTool == toolState.gameobjects){
         toolOrder = [];
         toolOrder = [
             ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
-            CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS, PLANKTON_FROGGY, BALL_ALIEN, PLANKTON1, PLANKTON2, PLANKTON3, PLANKTON4
+            CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS, PLANKTON_FROGGY, PLANKTON_FROGGY2 ,BALL_ALIEN, PLANKTON1, PLANKTON2, PLANKTON3, PLANKTON4
         ];
         for (var i = 0; i < toolOrder.length; i++){
             var tileKindHere = toolOrder[i];

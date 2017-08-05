@@ -15,6 +15,7 @@ var plankton1 = [];
 var plankton2 = [];
 var plankton3 = [];
 var plankton4 = [];
+var planktonFroggy2 = [];
 
 var frameCounter = 1;
 
@@ -212,9 +213,12 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, alienPlants);
     twoArrayCollisionDetect(projectiles, crew);
     twoArrayCollisionDetect(projectiles, planktonFroggy);
+    twoArrayCollisionDetect(projectiles, planktonFroggy2);
     twoArrayCollisionDetect(projectiles, ballAlien);
     twoArrayCollisionDetect(projectiles, plankton1);
     twoArrayCollisionDetect(projectiles, plankton2);
+    twoArrayCollisionDetect(projectiles, plankton3);
+    twoArrayCollisionDetect(projectiles, plankton4);
     twoArrayCollisionDetect(projectiles, alienPlants2);
     
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
