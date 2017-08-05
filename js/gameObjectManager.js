@@ -13,6 +13,8 @@ var planktonFroggy = [];
 var ballAlien = [];
 var plankton1 = [];
 var plankton2 = [];
+var plankton3 = [];
+var plankton4 = [];
 
 var frameCounter = 1;
 

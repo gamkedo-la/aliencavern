@@ -75,6 +75,8 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(ballAlien, ballAlienPic, BALL_ALIEN, false, 3, 4, 64, 64);
     loadGameObjects(plankton1, plankton1Pic, PLANKTON1, false, 2, 6, 64, 64);
     loadGameObjects(plankton2, plankton2Pic, PLANKTON2, false, 2, 6, 64, 64);
+    loadGameObjects(plankton3, plankton3Pic, PLANKTON3, false, 2, 6, 64, 64);
+    loadGameObjects(plankton4, plankton4Pic, PLANKTON4, false, 2, 6, 64, 64);
     // rescue 70% of crew
     totalCrew = crew.length;
     if (totalCrew > 3)
@@ -105,6 +107,8 @@ function clearAllGameObjects(){
     ballAlien = [];
     plankton1 = [];
     plankton2 = [];
+    plankton3 = [];
+    plankton4 = [];
     alienPlants2 = [];
     particles = [];
 }
@@ -280,6 +284,8 @@ function drawAll() {
     drawGameObjects(ballAlien);
     drawGameObjects(plankton1);
     drawGameObjects(plankton2);
+    drawGameObjects(plankton3);
+    drawGameObjects(plankton4);
     drawGameObjects(alienPlants2);
     if (gameState != GAME_OVER){
         canvasContext.drawImage(shipPic, playerX - shipPic.width/2, playerY - shipPic.height/2);

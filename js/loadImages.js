@@ -31,6 +31,8 @@ var planktonFroggyPic = document.createElement("img");
 var ballAlienPic = document.createElement("img");
 var plankton1Pic = document.createElement("img");
 var plankton2Pic = document.createElement("img");
+var plankton3Pic = document.createElement("img");
+var plankton4Pic = document.createElement("img");
 
 var loseScreenImg = document.createElement("img");
 
@@ -66,7 +68,8 @@ var imageList = [
     {varName: ballAlienPic, theFile: "./graphics/ballAlienSheetV2.png", theTileNum: BALL_ALIEN},
     {varName: plankton1Pic, theFile: "./graphics/plankton1.png", theTileNum: PLANKTON1},
     {varName: plankton2Pic, theFile: "./graphics/plankton2.png", theTileNum: PLANKTON2},
-    {varName: loseScreenImg, theFile: "./graphics/GameOver.png"}
+    {varName: plankton3Pic, theFile: "./graphics/plankton3.png", theTileNum: PLANKTON3},
+    {varName: plankton4Pic, theFile: "./graphics/plankton4.png", theTileNum: PLANKTON4}
 ];
 
 
