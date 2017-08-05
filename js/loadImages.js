@@ -19,6 +19,9 @@ var alienSquidPic = document.createElement("img");
 var alienBiterPic = document.createElement("img");
 var alienPlantPic = document.createElement("img");
 var alienPlantPic2 = document.createElement("img");
+var alienPlantPic3 = document.createElement("img");
+var alienPlantPic4 = document.createElement("img");
+
 var crewPic = document.createElement("img");
 var shipPartPic = document.createElement("img");
 var cavernTileSheet = document.createElement("img");
@@ -71,7 +74,9 @@ var imageList = [
     {varName: plankton2Pic, theFile: "./graphics/plankton2.png", theTileNum: PLANKTON2},
     {varName: plankton3Pic, theFile: "./graphics/plankton3.png", theTileNum: PLANKTON3},
     {varName: plankton4Pic, theFile: "./graphics/plankton4.png", theTileNum: PLANKTON4},
-    {varName: planktonFroggy2Pic, theFile: "./graphics/planktonFroggy2.png", theTileNum: PLANKTON_FROGGY2}
+    {varName: planktonFroggy2Pic, theFile: "./graphics/planktonFroggy2.png", theTileNum: PLANKTON_FROGGY2},
+    {varName: alienPlantPic3, theFile: "./graphics/alienPlant3.png", theTileNum: ALIEN_PLANT_3},
+    {varName: alienPlantPic4, theFile: "./graphics/alienPlant4.png", theTileNum: ALIEN_PLANT_4}
 ];
 
 

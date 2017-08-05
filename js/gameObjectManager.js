@@ -2,6 +2,8 @@ var squiddies = [];
 var biters = [];
 var alienPlants = [];
 var alienPlants2 = [];
+var alienPlants3 = [];
+var alienPlants4 = [];
 var crew = [];
 var shipParts = [];
 var projectiles = [];
@@ -220,6 +222,8 @@ function checkMissleCollisions(){
     twoArrayCollisionDetect(projectiles, plankton3);
     twoArrayCollisionDetect(projectiles, plankton4);
     twoArrayCollisionDetect(projectiles, alienPlants2);
+    twoArrayCollisionDetect(projectiles, alienPlants3);
+    twoArrayCollisionDetect(projectiles, alienPlants4);
     
     if (isBrickAtPixelCoord (projectiles[0].x, projectiles[0].y)){
         Sound.play("explosion", false, soundVolume);

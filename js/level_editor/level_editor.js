@@ -20,7 +20,7 @@ function drawTools(){
     if (currentTool == toolState.gameobjects){
         toolOrder = [];
         toolOrder = [
-            ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2,
+            ALIEN_SQUID, ALIEN_BITER, ALIEN_PLANT, ALIEN_PLANT_2, ALIEN_PLANT_3, ALIEN_PLANT_4,
             CREW, SHIP_PART, FUEL, LAVA, SPIKES, GEYSERS, PLANKTON_FROGGY, PLANKTON_FROGGY2 ,BALL_ALIEN, PLANKTON1, PLANKTON2, PLANKTON3, PLANKTON4
         ];
         for (var i = 0; i < toolOrder.length; i++){
