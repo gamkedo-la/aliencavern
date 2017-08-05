@@ -11,12 +11,6 @@ const key_8 = 56;
 const key_9 = 57;
 const key_q = 81;
 const KEY_N = 78;
-// const key_v = 86;
-// const key_w = 87;
-// const key_e = 69;
-// const key_r = 82;
-// const key_t = 84;
-// const key_y = 89;
 const key_up_arrow = 38;
 const key_down_arrow = 40;
 

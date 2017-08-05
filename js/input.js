@@ -110,6 +110,13 @@ switch (gameState){
     else if(thisKey === KEY_C) {
       gameState = CREDITS;
     }
+    else if(thisKey === KEY_M){
+      currentLevel = MY_LEVEL;
+      goToGame();
+      resetGame();
+      
+      gameState = GAME_STORY_MODE;
+    }
     break;
   case INTRO_STORY || GAME_OVER:
     if (thisKey === KEY_ESC){
@@ -119,11 +126,6 @@ switch (gameState){
   case GAME_STORY_MODE:  
     checkKeysInGame();
     break;
-  // case CREDITS:
-  //   if (thisKey === KEY_ESC){
-  //     gameState = MENU;
-  //   }
-  //   break;
   }
 }
 

@@ -118,7 +118,7 @@ function checkMusicIsOn(){
     {
         console.log("no sound so play something");
         Sound.stop("cavernambient");
-        Sound.play("music_loop_action", true, soundVolume);
+        Sound.play("music_loop_action", true, soundVolume + 0.1);
     }
 }
 
@@ -209,9 +209,6 @@ function updateAll() {
             break;
         case GAME_STORY_MODE:
             gameStoryMode();
-            break;
-        case GAME_MY_LEVEL:
-            playMyLevel();
             break;
         case GAME_OVER:
             gameOverScreen();

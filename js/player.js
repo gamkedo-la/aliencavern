@@ -104,7 +104,8 @@ function rescueAstronaut()
         // TODO: win the game? finish the level? GAME OVER?
         console.log("Crew rescued! Level complete!")
         currentLevel = currentLevel + 1;
-        if (currentLevel == LEVEL_EIGHT){
+        if (currentLevel > levelGrids.length ){
+            currentLevel = LEVEL_ONE;
             gameState = MENU;
         }
         else {

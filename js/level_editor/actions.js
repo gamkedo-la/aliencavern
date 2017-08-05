@@ -33,7 +33,11 @@ function increaseLevelHeight() {
 }
 
 function copyLevel() {
+    // save changes to mylevel too
+    myLevel = cavernGrid.slice(0);
+    myLevelNumber = currentLevel;
     window.prompt("Your level:", JSON.stringify(cavernGrid));
+
 }
 
 function loadLevel() {

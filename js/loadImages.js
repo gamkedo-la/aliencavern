@@ -34,6 +34,8 @@ var plankton2Pic = document.createElement("img");
 
 var loseScreenImg = document.createElement("img");
 
+var myLevelBackgroundPic = document.createElement("img");
+
 
 var imageList = [
     {varName: titleBG, theFile: "./graphics/titleBackGround.png"},
@@ -73,6 +75,7 @@ var imageList = [
         picsToLoad-- ;
         console.log(picsToLoad);
         if (picsToLoad == 0){
+        myLevelBackgroundPic = cavernPics[LEVEL_ONE];
         startGame();
         }
     }

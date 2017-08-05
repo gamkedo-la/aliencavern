@@ -14,7 +14,6 @@ var ballAlien = [];
 var plankton1 = [];
 var plankton2 = [];
 
-
 var frameCounter = 1;
 
 const SOS_TIMER = 60;
