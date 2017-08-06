@@ -21,7 +21,7 @@ function fireMissile(){
     {
         projectiles[0].speed = missileSpeedX;
     }
-    Sound.play("weaponFire", false, soundVolume);
+    Sound.play("weaponFire", false, soundVolume * 0.6);
 }
 
 function moveMissile(){

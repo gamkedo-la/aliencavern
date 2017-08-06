@@ -37,7 +37,7 @@ function resetGame(){
 window.onload = function() {
     currentLevel = LEVEL_ONE;
     if (cheatsOn){
-        console.log("cheats on . fuel infinate");
+        soundVolume = 0.01;
     }
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
@@ -95,6 +95,8 @@ function getGameObjectsReadyforGame(){
     if (totalFuelPods > 10){
         totalFuelPods = 10;
     }
+
+
 }
 
 function resetAlienAIvariables(){
@@ -133,7 +135,7 @@ function checkMusicIsOn(){
     {
         console.log("no sound so play something");
         Sound.stop("cavernambient");
-        Sound.play("music_loop_action", true, soundVolume + 0.1);
+        Sound.play("music_loop_action", true, soundVolume);
     }
 }
 
@@ -159,7 +161,7 @@ function checkSilencePlayAmbient(){
             && !Sound.isPlaying("cavernambient")
             )
     {
-        Sound.play("cavernambient", true, soundVolume);
+        Sound.play("cavernambient", true, soundVolume * 10);
     }
 }
 

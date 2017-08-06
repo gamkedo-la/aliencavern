@@ -51,6 +51,13 @@ function playerReset() {
     rescuePartsCounter = 0;
     fuelPodCounter = 0;
     jetpackFuel = JETPACK_MIN_FUEL;
+    if (cheatsOn == true){
+        console.log("Cheat mode");
+        // only have to collect a crew member to win
+        rescueCounter = totalCrew - 1;
+        fuelPodCounter = totalFuelPods;
+        rescuePartsCounter = totalShipParts;
+    }
 }
 
 function groundPlayer() {
