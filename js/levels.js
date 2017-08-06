@@ -43,6 +43,8 @@ const LEVEL_NINE = 8;
 const LEVEL_TEN = 9;
 const MY_LEVEL = 10000;
 
+const LAST_LEVEL = LEVEL_EIGHT;
+
 // Note tiles 0 - 9 are all cavern tiles
 // 0 = Background
 // for demo / pitch only

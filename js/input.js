@@ -93,6 +93,10 @@ function checkKeysInGame(){
           //gamePaused = !gamePaused;
           gameState = LOSE_SCREEN;
         break;
+        // case KEY_RIGHT_SQ_BRACKET:
+        //   currentLevel++;
+        //   resetGame();
+        // break;
     }    
 }   
 
