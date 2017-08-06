@@ -34,8 +34,6 @@ function resetGame(){
     playerReset();
 }
 
-
-
 window.onload = function() {
     currentLevel = LEVEL_ONE;
     if (cheatsOn){
@@ -128,8 +126,6 @@ function clearAllGameObjects(){
     particles = [];
 }
 
-
-
 function checkMusicIsOn(){
     if (!Sound.isPlaying("music_loop_slow")
             && !Sound.isPlaying("music_loop_action")
@@ -140,7 +136,6 @@ function checkMusicIsOn(){
         Sound.play("music_loop_action", true, soundVolume + 0.1);
     }
 }
-
 
 function gameStoryMode(){
     checkMusicIsOn();

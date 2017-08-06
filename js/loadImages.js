@@ -53,8 +53,8 @@ var imageList = [
     {varName: shipPic, theFile: "graphics/alternateship.png"},
     {varName: alienSquidPic, theFile: "graphics/squidSheet.png", theTileNum: ALIEN_SQUID},
     {varName: alienBiterPic, theFile: "graphics/biterSheet.png", theTileNum: ALIEN_BITER},
-    {varName: alienPlantPic, theFile: "graphics/alienPlant1.png", theTileNum: ALIEN_PLANT},
-    {varName: alienPlantPic2, theFile: "graphics/alienPlant2.png", theTileNum: ALIEN_PLANT_2},
+    {varName: alienPlantPic, theFile: "graphics/alienplant1.png", theTileNum: ALIEN_PLANT},
+    {varName: alienPlantPic2, theFile: "graphics/alienplant2.png", theTileNum: ALIEN_PLANT_2},
     {varName: crewPic, theFile: "graphics/crewNeedsHelp.png", theTileNum: CREW},
     {varName: shipPartPic, theFile: "graphics/rocketpart.png", theTileNum: SHIP_PART},
     {varName: levelOneTilePic,theFile: "graphics/alien-cavern-tile-sheetV2.png"},
@@ -77,8 +77,8 @@ var imageList = [
     {varName: plankton3Pic, theFile: "graphics/plankton3.png", theTileNum: PLANKTON3},
     {varName: plankton4Pic, theFile: "graphics/plankton4.png", theTileNum: PLANKTON4},
     {varName: planktonFroggy2Pic, theFile: "graphics/planktonFroggy2.png", theTileNum: PLANKTON_FROGGY2},
-    {varName: alienPlantPic3, theFile: "graphics/alienPlant3.png", theTileNum: ALIEN_PLANT_3},
-    {varName: alienPlantPic4, theFile: "graphics/alienPlant4.png", theTileNum: ALIEN_PLANT_4},
+    {varName: alienPlantPic3, theFile: "graphics/alienplant3.png", theTileNum: ALIEN_PLANT_3},
+    {varName: alienPlantPic4, theFile: "graphics/alienplant4.png", theTileNum: ALIEN_PLANT_4},
     {varName: fuelPickupUIpic, theFile: "graphics/FuelUI.png"}
 ];
 
