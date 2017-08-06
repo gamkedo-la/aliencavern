@@ -334,12 +334,20 @@ function drawAll() {
     // draw the astronaut rescue counter
     for (var crewloop=0; crewloop < totalCrew; crewloop++)
     {
-        if (rescueCounter > crewloop)
-            crewfill = "rgba(255,255,255,0.5)";
-        else
+        if (rescueCounter > crewloop){
             crewfill = "rgba(255,0,0,0.2)";
-       
-        colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+            colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+            canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-80, canvas.height-100, 32, 32);
+        }
+        else
+        {
+            crewfill = "rgba(255,0,0,0.2)";
+            colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+        }
+        
+        // canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
+        // canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
+        //void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
     }
 
 }

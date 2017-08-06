@@ -5,7 +5,7 @@ const RUN_SPEED = 5.0; // org 4.0
 const JUMP_POWER = 3.0;  // org 4.0
 const JETPACK_UPTHRUST = 0.10;
 const JETPACK_CONSUMPTION = 0.02;
-const JETPACK_BASE_REGEN = 0.025;
+const JETPACK_BASE_REGEN = 0.005;
 const JETPACK_MIN_FUEL = 10;
 
 var playerX = 400, playerY = 75;
@@ -30,6 +30,7 @@ const DRAG_FORCE = 0.9;
 //const RESCUES_REQUIRED = 10; // to complete level
 var totalCrew = 0;
 var rescueCounter = 0; // how many crew rescued?
+var regenAmount = 20;
 
 function playerReset() {
     playerX = canvas.width/2;

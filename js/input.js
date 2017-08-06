@@ -15,7 +15,8 @@ const KEY_E = 69;
 const KEY_L = 76;
 const KEY_V = 86;
 const KEY_B = 66;
-const KEY_S = 83; 
+const KEY_S = 83;
+const KEY_T = 84; 
 const KEY_D = 68;
 const KEY_C = 67;
 const KEY_A = 65;
@@ -114,8 +115,10 @@ switch (gameState){
       currentLevel = MY_LEVEL;
       goToGame();
       resetGame();
-      
       gameState = GAME_STORY_MODE;
+    }
+    else if(thisKey === KEY_T){
+      introScreen();
     }
     break;
   case INTRO_STORY || GAME_OVER:
