@@ -30,6 +30,7 @@ const DRAG_FORCE = 0.9;
 
 //const RESCUES_REQUIRED = 10; // to complete level
 var totalCrew = 0;
+var remainingCrew = 0; // used to test fail condition if player kills too many crew members
 var rescueCounter = 0; // how many crew rescued?
 var regenAmount = 20;
 
@@ -109,9 +110,8 @@ function rescueAstronaut()
 function testWinLogic(){
 // to win level you must pick up 70% of total parts and crew
     if (rescueCounter>=totalCrew && rescuePartsCounter>= totalShipParts){
-        // TODO: win the game? finish the level? GAME OVER?
-        console.log("Crew rescued! Level complete!")
         currentLevel = currentLevel + 1;
+        // if myLevel then just go back to the menu
         if (currentLevel > levelGrids.length ){
             currentLevel = LEVEL_ONE;
             gameState = MENU;
@@ -119,6 +119,11 @@ function testWinLogic(){
         else {
             resetGame();
         }
+    }
+
+    if (remainingCrew < totalCrew){
+        console.log("GAME FAIL YOU KILLED TOO MANY PEEPS")
+        gameState = GAME_OVER;
     }
 }
 
@@ -194,7 +199,7 @@ function playerMove() {
         console.log("picked up crew");
         Sound.play("rescue", false, soundVolume);
         takeDamage(DAMAGE_CREW); // gain health
-        rescueAstronaut(); 
+        rescueAstronaut();
     }
 
     if (checkEveryCollision (fuelCans)){

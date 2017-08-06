@@ -83,6 +83,7 @@ function getGameObjectsReadyforGame(){
 
     // rescue 70% of crew and parts
     totalCrew = crew.length;
+    remainingCrew = totalCrew;
     if (totalCrew > 3){
         totalCrew = Math.floor(totalCrew * 7/10);
     }

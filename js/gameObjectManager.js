@@ -190,6 +190,7 @@ function twoArrayCollisionDetect(objArr1, objArr2){
             else if(element.gameObjectType == CREW) {
                 //playerHealth -= MAX_HEALTH/10;
                 takeDamage(MAX_HEALTH/10);
+                remainingCrew--;
                 party(element.x + element.radius, element.y + element.radius, PARTICLE_CREW_DEATH_2, 0, 0, 0, 8);
             }
 			
