@@ -45,6 +45,7 @@ function playerReset() {
     camPanY = 30.0;
     playerHealth = MAX_HEALTH;
     rescueCounter = 0;
+    rescuePartsCounter = 0;
     jetpackFuel = JETPACK_MIN_FUEL;
 }
 
