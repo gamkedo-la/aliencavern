@@ -6,7 +6,7 @@ function creditsText(){
         "Cavern artwork, animation - Cameron Button",
         "Title, intro, alien art, programming - Jo Liegh Evans",
         "Game Story and code, alien art, Sound FX - Dana Alcala",
-        "Game animation FX, Programming - Ezovex Goh",
+        "Game animation FX, Programming - Ezovex Dickson Goh",
         "Alien art, ship art, cavern sound FX - Andy King",
         "Level Editor v2 Zak Ali - original by Artur Slomowski",
         "Alien AI, sound, particles, juicing code - Christer Kaitila",
