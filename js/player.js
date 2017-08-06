@@ -7,6 +7,7 @@ const JETPACK_UPTHRUST = 0.10;
 const JETPACK_CONSUMPTION = 0.02;
 const JETPACK_BASE_REGEN = 0.005;
 const JETPACK_MIN_FUEL = 10;
+const FUEL_POD_PICKUP = 20;
 
 var playerX = 400, playerY = 75;
 var playerSpeedX = 0, playerSpeedY = 0;
@@ -31,6 +32,10 @@ const DRAG_FORCE = 0.9;
 var totalCrew = 0;
 var rescueCounter = 0; // how many crew rescued?
 var regenAmount = 20;
+
+// Pick up parts counters
+var totalShipParts = 0;
+var rescuePartsCounter = 0;
 
 function playerReset() {
     playerX = canvas.width/2;
@@ -130,6 +135,11 @@ function takeDamage(amount)
 
 }
 
+function pickUpPart(){
+    console.log("Pick up SHIP PART");
+    rescuePartsCounter++;
+}
+
 function playerMove() {
    if (cheatsOn){
        jetpackFuel = JETPACK_MIN_FUEL;
@@ -186,10 +196,15 @@ function playerMove() {
     }
 
     if (checkEveryCollision (fuelCans)){
-        jetpackFuel = jetpackFuel + 100;
+        jetpackFuel = jetpackFuel + FUEL_POD_PICKUP;
     }
 
-    checkEveryCollision (shipParts);
+    if (checkEveryCollision (shipParts)){
+        pickUpPart();
+    }
+
+
+
     if (checkEveryCollision(alienPlants) || checkEveryCollision (alienPlants2)){
         takeDamage(DAMAGE_PLANT);
         console.log("alien plant hit");

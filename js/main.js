@@ -81,12 +81,16 @@ function getGameObjectsReadyforGame(){
     loadGameObjects(alienPlants3,alienPlantPic3, ALIEN_PLANT_3, false);
     loadGameObjects(alienPlants4,alienPlantPic4, ALIEN_PLANT_4, false, 4, 8, 64, 64);
 
-    // rescue 70% of crew
+    // rescue 70% of crew and parts
     totalCrew = crew.length;
-    if (totalCrew > 3)
-        {
-            totalCrew = Math.floor(totalCrew * 7/10);
-        }
+    if (totalCrew > 3){
+        totalCrew = Math.floor(totalCrew * 7/10);
+    }
+
+    totalShipParts = shipParts.length;
+    if (totalShipParts> 3){
+        totalShipParts = Math.floor(totalShipParts * 7/10);
+    }
 }
 
 function resetAlienAIvariables(){
@@ -258,6 +262,47 @@ function updateAll() {
 //     canvasContext.fillText(this.text, this.xPos+2, this.yPos+2);
 //}
 
+function drawShipPickupCounter(){
+for (var i=0; i < totalShipParts; i++)
+{
+    if (rescuePartsCounter > i){
+        crewfill = "rgba(255,0,255,0.2)";
+        colorCircle(canvas.width-(i*32)-64,canvas.height-40,16,crewfill);
+        canvasContext.drawImage(shipPartPic, 0, 0, 64, 64, canvas.width-(i*32)-80, canvas.height-64, 32, 32);
+    }
+    else
+    {
+        crewfill = "rgba(255,0,255,0.2)";
+        colorCircle(canvas.width-(i*32)-64,canvas.height-40,16,crewfill);
+    }
+
+// canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
+// canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
+//void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+}
+}
+
+function drawRescueCounter(){
+for (var crewloop=0; crewloop < totalCrew; crewloop++)
+{
+    if (rescueCounter > crewloop){
+        crewfill = "rgba(255,0,0,0.2)";
+        colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+        canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-80, canvas.height-100, 32, 32);
+    }
+    else
+    {
+        crewfill = "rgba(255,0,0,0.2)";
+        colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
+    }
+
+// canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
+// canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
+//void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+}
+}
+
+
 function drawAll() {
     // drawing black to erase previous frame, doing before .translate() since
     // its coordinates are not supposed to scroll when the camera view does
@@ -314,11 +359,6 @@ function drawAll() {
     canvasContext.fillStyle = "WHITE";
     canvasContext.fillText("Z and X to move  M to fire  SPACE for boosters  ESC quit", 22, 32);
 
-    // canvasContext.fillStyle = "RED";
-    // canvasContext.fillText("Press F2 for level editor", 20, 60);
-    // canvasContext.fillStyle = "YELLOW";
-    // canvasContext.fillText("Press F2 for level editor", 22, 62);
-
     canvasContext.restore(); // undoes the .translate() used for cam scroll
     
     // doing this after .restore() so it won't scroll with the camera pan
@@ -328,26 +368,11 @@ function drawAll() {
     //debug shootProjectile(200, 30, canvas.width / 2, canvas.height / 2, 20, 2, 5, 100);
 
     // draw the health bar
-    colorRect(10,canvas.height-40,canvas.width-20,30,"rgba(66,00,00,0.4)"); // border
-    colorRect(15,canvas.height-35,(canvas.width-30)*(playerHealth/MAX_HEALTH),20,"rgba(255,00,00,0.4)"); // hp
-
+    colorRect(10,canvas.height-20,canvas.width-20,15,"rgba(66,00,00,0.4)"); // border
+    colorRect(15,canvas.height-16,(canvas.width-30)*(playerHealth/MAX_HEALTH),10,"rgba(255,00,00,0.4)"); // hp
+    //x, y, with, Hei 
     // draw the astronaut rescue counter
-    for (var crewloop=0; crewloop < totalCrew; crewloop++)
-    {
-        if (rescueCounter > crewloop){
-            crewfill = "rgba(255,0,0,0.2)";
-            colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
-            canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-80, canvas.height-100, 32, 32);
-        }
-        else
-        {
-            crewfill = "rgba(255,0,0,0.2)";
-            colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
-        }
-        
-        // canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
-        // canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
-        //void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-    }
+    drawRescueCounter();
+    drawShipPickupCounter()
 
 }
