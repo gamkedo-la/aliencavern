@@ -38,6 +38,9 @@ var regenAmount = 20;
 var totalShipParts = 0;
 var rescuePartsCounter = 0;
 
+var fuelPodCounter = 0;
+var totalFuelPods = 0;
+
 function playerReset() {
     playerX = canvas.width/2;
     playerY = BRICK_H + 10;
@@ -46,6 +49,7 @@ function playerReset() {
     playerHealth = MAX_HEALTH;
     rescueCounter = 0;
     rescuePartsCounter = 0;
+    fuelPodCounter = 0;
     jetpackFuel = JETPACK_MIN_FUEL;
 }
 
@@ -123,7 +127,6 @@ function testWinLogic(){
     }
 
     if (remainingCrew < totalCrew){
-        console.log("GAME FAIL YOU KILLED TOO MANY PEEPS")
         gameState = GAME_OVER;
     }
 }
@@ -205,6 +208,7 @@ function playerMove() {
 
     if (checkEveryCollision (fuelCans)){
         jetpackFuel = jetpackFuel + FUEL_POD_PICKUP;
+        fuelPodCounter++;
     }
 
     if (checkEveryCollision (shipParts)){

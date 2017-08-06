@@ -92,6 +92,11 @@ function getGameObjectsReadyforGame(){
     if (totalShipParts> 3){
         totalShipParts = Math.floor(totalShipParts * 7/10);
     }
+
+    totalFuelPods = fuelCans.length;
+    if (totalFuelPods > 10){
+        totalFuelPods = 10;
+    }
 }
 
 function resetAlienAIvariables(){
@@ -263,16 +268,36 @@ function updateAll() {
 //     canvasContext.fillText(this.text, this.xPos+2, this.yPos+2);
 //}
 
+
+function drawFuelPickupCounter(){
+for (var i=0; i < totalFuelPods; i++)
+{
+    if (fuelPodCounter > i){
+        crewfill = "rgba(255,255,255,0.2)";
+        colorCircle((i*32)+48,canvas.height-40,16,crewfill);
+        canvasContext.drawImage(fuelPickupUIpic, 0, 0, 64, 64, (i*32)+34, canvas.height-52, 48, 48);
+    }
+    else
+    {
+        crewfill = "rgba(255,255,255,0.2)";
+        colorCircle((i*32)+48,canvas.height-40,16,crewfill);
+    }
+
+// canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
+// canvasContext.drawImage(element.pic, ((element.frameNum - 1) * element.frameWidth), 0, element.frameWidth, element.frameHeight, element.x, element.y, element.frameWidth, element.frameHeight);
+//void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+}
+}
+
 function drawShipPickupCounter(){
 for (var i=0; i < totalShipParts; i++)
 {
     if (rescuePartsCounter > i){
         crewfill = "rgba(255,0,255,0.2)";
-        colorCircle(canvas.width-(i*32)-64,canvas.height-40,16,crewfill);
+        colorCircle(canvas.width-(i*32)-64,canvas.height-40,16, crewfill);
         canvasContext.drawImage(shipPartPic, 0, 0, 64, 64, canvas.width-(i*32)-80, canvas.height-64, 32, 32);
     }
-    else
-    {
+    else{
         crewfill = "rgba(255,0,255,0.2)";
         colorCircle(canvas.width-(i*32)-64,canvas.height-40,16,crewfill);
     }
@@ -374,6 +399,7 @@ function drawAll() {
     //x, y, with, Hei 
     // draw the astronaut rescue counter
     drawRescueCounter();
-    drawShipPickupCounter()
+    drawShipPickupCounter();
+    drawFuelPickupCounter();
 
 }

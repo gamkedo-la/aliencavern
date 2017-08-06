@@ -104,6 +104,7 @@ switch (gameState){
         levelEditorInitialization();
     }
     else if(thisKey === KEY_P) {
+      currentLevel = LEVEL_ONE;
       goToGame();
       resetGame();
       gameState = GAME_STORY_MODE;

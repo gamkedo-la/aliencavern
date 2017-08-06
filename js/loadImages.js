@@ -42,6 +42,8 @@ var loseScreenImg = document.createElement("img");
 
 var myLevelBackgroundPic = document.createElement("img");
 
+var fuelPickupUIpic = document.createElement("img");
+
 
 var imageList = [
     {varName: titleBG, theFile: "./graphics/titleBackGround.png"},
@@ -76,7 +78,8 @@ var imageList = [
     {varName: plankton4Pic, theFile: "./graphics/plankton4.png", theTileNum: PLANKTON4},
     {varName: planktonFroggy2Pic, theFile: "./graphics/planktonFroggy2.png", theTileNum: PLANKTON_FROGGY2},
     {varName: alienPlantPic3, theFile: "./graphics/alienPlant3.png", theTileNum: ALIEN_PLANT_3},
-    {varName: alienPlantPic4, theFile: "./graphics/alienPlant4.png", theTileNum: ALIEN_PLANT_4}
+    {varName: alienPlantPic4, theFile: "./graphics/alienPlant4.png", theTileNum: ALIEN_PLANT_4},
+    {varName: fuelPickupUIpic, theFile: "./graphics/FuelUI.png"}
 ];
 
 
