@@ -104,9 +104,11 @@ function rescueAstronaut()
     rescueCounter++;
 
     console.log("rescueAstronaut " + rescueCounter + " of " + totalCrew);
+}
 
-    if (rescueCounter>=totalCrew)
-    {
+function testWinLogic(){
+// to win level you must pick up 70% of total parts and crew
+    if (rescueCounter>=totalCrew && rescuePartsCounter>= totalShipParts){
         // TODO: win the game? finish the level? GAME OVER?
         console.log("Crew rescued! Level complete!")
         currentLevel = currentLevel + 1;
@@ -118,8 +120,8 @@ function rescueAstronaut()
             resetGame();
         }
     }
-
 }
+
 
 function takeDamage(amount)
 {
@@ -282,4 +284,5 @@ function playerMove() {
     }
     playerY += playerSpeedY;
     //console.log(jetpackFuel);
+    testWinLogic();
 }
