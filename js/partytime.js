@@ -182,8 +182,17 @@ function draw_particles(camerax,cameray)
 	if (!camerax) camerax = 0;
 	if (!cameray) cameray = 0;
 
-	particles.forEach(
-		function (p) {
+	// old SLOW version:
+	//particles.forEach(
+	//	function (p) {
+		
+	// new oldschool version
+	// runs much faster
+	for (var loop=0, p=0, max=particles.length; loop<max; loop++)
+	{
+		p = particles[loop];
+		
+		
 			if (!p.inactive) // and visible in screen bbox
 			{
 				if (window.canvasContext) // sanity check
@@ -207,8 +216,9 @@ function draw_particles(camerax,cameray)
 					particle_w * p.scale, particle_h * p.scale);
 				}
 			}
-		}
-	);
+		// } // old ver
+	//);
+	}
 }
 
 function init_particles()
