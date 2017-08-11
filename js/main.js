@@ -1,4 +1,5 @@
 // game states
+// hello world
 const INTRO = 0;
 const DISPLAY_LOGO = 1;
 const INTRO_STORY = 2;
