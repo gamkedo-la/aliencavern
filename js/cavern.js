@@ -65,18 +65,35 @@ function drawOnlyCavernOnScreen() {
     } // end of for eachCol
   } // end of drawBricks()
 
+var cachedBackground = null;
+  
 function drawParallaxBackground() {
-  var parallax_ratio = 0.5; // half speed
-  // offsets drawing by up to one tile worth only
-  // then modulo (%) resets the offset to 0
-  // this gives appearence the bg scrolls at half speed
-  var offsetX = Math.round(camPanX * parallax_ratio) % BRICK_H; 
-  var offsetY = Math.round(camPanY * parallax_ratio) % BRICK_W;
-  var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W) +2;
-  var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H) + 2;
-  for (var tileX=0; tileX<colsThatFitOnScreen; tileX++) {
-    for (var tileY=0; tileY<rowsThatFitOnScreen; tileY++) {
-      canvasContext.drawImage(cavernPics[backgroundPicNum], camPanX+(tileX*BRICK_W)-offsetX, camPanY+(tileY*BRICK_H)-offsetY);
-    }
-  }
+	var parallax_ratio = 0.5; // half speed
+	// offsets drawing by up to one tile worth only
+	// then modulo (%) resets the offset to 0
+	// this gives appearence the bg scrolls at half speed
+	var offsetX = Math.round(camPanX * parallax_ratio) % BRICK_H; 
+	var offsetY = Math.round(camPanY * parallax_ratio) % BRICK_W;
+
+	if (!cachedBackground)
+	{
+		console.log('generating background image for reuse...');
+		cachedBackground = document.createElement('canvas');
+		cachedBackground.width = canvas.width + BRICK_W + BRICK_W;
+		cachedBackground.height = canvas.height + BRICK_H + BRICK_H;
+		var bgctx = cachedBackground.getContext('2d');
+
+		var colsThatFitOnScreen = Math.floor(canvas.width / BRICK_W) +2;
+		var rowsThatFitOnScreen = Math.floor(canvas.height / BRICK_H) + 2;
+		for (var tileX=0; tileX<colsThatFitOnScreen; tileX++) {
+			for (var tileY=0; tileY<rowsThatFitOnScreen; tileY++) {
+			  bgctx.drawImage(cavernPics[backgroundPicNum], camPanX+(tileX*BRICK_W)-offsetX, camPanY+(tileY*BRICK_H)-offsetY);
+			}
+		}
+	}
+	else
+	{
+		canvasContext.drawImage(cachedBackground, -BRICK_H + camPanX - offsetX, -BRICK_W + camPanY - offsetY);
+	}
+
 }  
