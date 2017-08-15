@@ -12,7 +12,7 @@ const INTRO_PAN = 9;
 const CREDITS = 10;
 //const LOSE_SCREEN = 11;
 
-const DRAW_CIRCLES_IN_GUI = false; // (turned off because they have a large impact on performance)
+const DRAW_CIRCLES_IN_GUI = false; // if false, draw transparent icons on gui
 
 var currentLevel = LEVEL_ONE;
 
@@ -285,7 +285,13 @@ for (var i=0; i < totalFuelPods; i++)
 		{
 			crewfill = "rgba(255,255,255,0.2)";
 			colorCircle((i*32)+48,canvas.height-40,16,crewfill);
-		}
+        }
+        else
+        {
+            canvasContext.globalAlpha=0.25;
+            canvasContext.drawImage(fuelPickupUIpic, 0, 0, 64, 64, (i*32)+34, canvas.height-52, 48, 48);
+            canvasContext.globalAlpha=1.0;
+        }
     }
 
 // canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
@@ -310,7 +316,13 @@ for (var i=0; i < totalShipParts; i++)
 		{
 			crewfill = "rgba(255,0,255,0.2)";
 			colorCircle(canvas.width-(i*32)-64,canvas.height-40,16,crewfill);
-		}
+        }
+        else
+        {
+            canvasContext.globalAlpha=0.25;
+            canvasContext.drawImage(shipPartPic, 0, 0, 64, 64, canvas.width-(i*32)-80, canvas.height-64, 32, 32);
+            canvasContext.globalAlpha=1.0;
+        }            
     }
 
 // canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
@@ -337,6 +349,12 @@ for (var crewloop=0; crewloop < totalCrew; crewloop++)
 			crewfill = "rgba(255,0,0,0.2)";
 			colorCircle(canvas.width-(crewloop*32)-64,canvas.height-80,16,crewfill);
 		}
+        else
+        {
+            canvasContext.globalAlpha=0.25;
+            canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-80, canvas.height-100, 32, 32);
+            canvasContext.globalAlpha=1.0;
+        }            
     }
 
 // canvasContext.drawImage(crewPic, 0, 0, 64, 64, canvas.width-(crewloop*32)-64, canvas.height-80, 32, 32);
