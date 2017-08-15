@@ -17,6 +17,8 @@ const DRAW_CIRCLES_IN_GUI = false; // if false, draw transparent icons on gui
 var currentLevel = LEVEL_ONE;
 
 var gameState = INTRO;
+const WAIT_FOR_MUSIC_TO_LOAD = true;
+var music_has_loaded = false;
 
 var canvas, canvasContext;
 var framesPerSecond = 60;
@@ -52,12 +54,29 @@ window.onload = function() {
     initMissile();
     initInput();
     resetGame();
-    Sound.play("music_loop_slow", false, soundVolume);
+    
+	// a callback gets fired when the file has loaded
+	if (WAIT_FOR_MUSIC_TO_LOAD)
+	{
+		console.log('Waiting for music to download before starting intro...');
+		Sound.play("music_loop_slow",false,soundVolume,null,null,musicLoaded);
+	}
+	else
+	{
+		Sound.play("music_loop_slow",false,soundVolume);
+	}
+
     // intro.js variables & function calls TODO: refactor this
     midY = canvas.height / 2;
     midX = canvas.width / 2;
     loadStory();
     setInterval(updateAll, 1000/framesPerSecond);
+}
+
+function musicLoaded()
+{
+	console.log('Music has downloaded completely. Intro can begin!');
+	music_has_loaded = true;
 }
 
 function getGameObjectsReadyforGame(){

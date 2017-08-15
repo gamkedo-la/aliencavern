@@ -127,6 +127,10 @@ function pressStuffToWhatever(key, action){
 function introScreen() {
 	if(gameState > INTRO) {
 		drawTitleBackGround();
+		
+		// wait for music to have loaded completely
+		if (WAIT_FOR_MUSIC_TO_LOAD && !music_has_loaded) return;
+		
    		if (frameCounter == 1){
        		timeElapsed++;
    		}

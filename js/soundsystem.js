@@ -17,7 +17,7 @@ function SoundSystem() {
 	var debug_sound = false; // write to console?
 
     // playback function
-	this.play = function(samplename,looping,vol,rate,pan)
+	this.play = function(samplename,looping,vol,rate,pan,onloadcallback)
 	{
         // null variable conditions
 		if (looping==null) looping = false;
@@ -44,6 +44,11 @@ function SoundSystem() {
 				pan: pan
 			});
 		}
+		
+		if (onloadcallback != null)
+			sounds[samplename].once('load',onloadcallback);
+		
+		
 		if (!mute) // we still download even if muted
 			sounds[samplename].play();
 
