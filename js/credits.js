@@ -4,7 +4,7 @@ function creditsText(){
     var credits = [
         "Game concept, design, programming and team lead - Zak Ali",
         "Cavern artwork, animation - Cameron Button",
-        "Title, intro, alien art, programming - Jo Liegh Evans",
+        "Title, intro, alien art, programming - JL Evans",
         "Game Story and code, alien art, Sound FX - Dana Alcala",
         "Game animation FX, Programming - Ezovex Dickson Goh",
         "Alien art, ship art, cavern sound FX - Andy King",
