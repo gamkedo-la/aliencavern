@@ -147,6 +147,8 @@ function clearAllGameObjects(){
     plankton4 = [];
     alienPlants2 = [];
     particles = [];
+    alienPlants3 = [];
+    alienPlants4 =[];
 }
 
 function checkMusicIsOn(){
