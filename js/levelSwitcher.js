@@ -67,6 +67,8 @@ function setTheLevel(){
             break;
     }
 }
+
+
 function setLevelForEditor(){
     var row = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var rows = BRICK_ROWS;

@@ -1,4 +1,4 @@
-var USE_PARALLAX_BACKGROUND = true;
+var USE_PARALLAX_BACKGROUND = false;
 var backgroundPicNum = 0;
 
 function brickTileToIndex(tileCol, tileRow) {
