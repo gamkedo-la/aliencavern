@@ -1,4 +1,4 @@
-var USE_PARALLAX_BACKGROUND = false;
+var USE_PARALLAX_BACKGROUND = true;
 var backgroundPicNum = 0;
 
 function brickTileToIndex(tileCol, tileRow) {
@@ -29,7 +29,7 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
 }
 
 function drawOnlyCavernOnScreen() {
-    
+    var useImg = cavernPics[backgroundPicNum];
     if (USE_PARALLAX_BACKGROUND) // render background first underneath
       drawParallaxBackground();
     
@@ -49,7 +49,7 @@ function drawOnlyCavernOnScreen() {
           var brickLeftEdgeX = eachCol * BRICK_W;
           var brickTopEdgeY = eachRow * BRICK_H;
           var tileKindHere = cavernGrid[brickTileToIndex(eachCol, eachRow)];
-          var useImg = cavernPics[backgroundPicNum];
+
           if (tileKindHere != BKGND_ROCK){          
             canvasContext.drawImage(cavernTileSheet, (tileKindHere -1) * BRICK_W, 0, BRICK_W, BRICK_H, brickLeftEdgeX, brickTopEdgeY, BRICK_W, BRICK_H);
           }
@@ -65,7 +65,7 @@ function drawOnlyCavernOnScreen() {
     } // end of for eachCol
   } // end of drawBricks()
 
-var cachedBackground = null;
+
   
 function drawParallaxBackground() {
 	var parallax_ratio = 0.5; // half speed

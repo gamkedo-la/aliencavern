@@ -14,11 +14,12 @@ function setTheLevel(){
     else {
         cavernGrid = levelGrids[currentLevel].slice(0);
     }
-
+    cachedBackground = null;
     switch(currentLevel){
         case LEVEL_ONE:
             cavernTileSheet = levelOneTilePic;
             backgroundPicNum = 0;
+            
             break;
         case LEVEL_TWO:
             cavernTileSheet = levelTwoTilePic;
@@ -76,6 +77,7 @@ function setLevelForEditor(){
 
     cavernGrid = []; // clearn cavern Grid
     cavernGrid = levelGrids[currentLevel];
+    cachedBackground = null;
     switch(currentLevel){
         case LEVEL_ONE:
             backgroundPicNum = 0;
